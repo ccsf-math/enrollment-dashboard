@@ -1,0 +1,405 @@
+"TermDesc","Department","CRN","Subject","Course","Section","Title","CurrentEnrollment","Capacity","CrosslistID","CrosslistEnrollment","WaitlistEnrollment","WaitlistCapacity","ScheduleMethod","Days","BeginTime","EndTime","Bldg","Room","Center","StartDate","EndDate","Instructor"
+"Fall 2026",Astronomy,73583,ASTR,"  1",001,"Cosmic Evolution",3,49,,,0,10,Lec,W,1510,1825,CHNB,1302,"Chinatown/North Beach",8/31/2026,12/22/2026,Pevyhouse
+"Fall 2026",Astronomy,72081,ASTR,"  1",831,"Cosmic Evolution",49,49,,,3,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Weil
+"Fall 2026",Astronomy,70077,ASTR,"  1",832,"Cosmic Evolution",49,49,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Weil
+"Fall 2026",Astronomy,73823,ASTR,"  1",862,"Cosmic Evolution",22,59,,,0,10,Hyb,"TBA; R; R","TBA; 1810; 1810","TBA; 2100; 2100","TBA; SCIE; SCIE","311; 311",Ocean,8/18/2026,12/22/2026,"Bryja; Staff; Staff"
+"Fall 2026",Astronomy,70083,ASTR,"  4",931,"Life in the Universe",30,49,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,9/28/2026,12/22/2026,Kao
+"Fall 2026",Astronomy,70084,ASTR,"  4",932,"Life in the Universe",23,49,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,9/28/2026,12/22/2026,Kao
+"Fall 2026",Astronomy,72296,ASTR," 16",931,"Observational Astronomy",36,40,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,9/28/2026,12/22/2026,Kao
+"Fall 2026",Astronomy,73514,ASTR," 16",932,"Observational Astronomy",25,40,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,9/28/2026,12/22/2026,Kao
+"Fall 2026",Astronomy,70080,ASTR," 17",931,Planets,49,49,,,1,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Weil
+"Fall 2026",Astronomy,72297,ASTR," 18",961,Stars,11,59,,,0,10,Hyb,"TBA; S; S","TBA; 0910; 0910","TBA; 1200; 1200","TBA; HBB; HBB","398; 398",Ocean,8/31/2026,12/22/2026,"Bryja; Staff; Staff"
+"Fall 2026",Astronomy,70081,ASTR," 19",931,"Galaxies and the Universe",23,49,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Weil
+"Fall 2026",Astronomy,70082,ASTR," 19",932,"Galaxies and the Universe",15,49,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Weil
+"Fall 2026",Auto/Moto/Construction,74178,AUTO," 49",001,"Auto Body Maintenance/Detail",27,28,,,0,10,L/L,"S; S","0810; 0910","0900; 1200","EVANS; EVANS","114; 114",Evans,8/18/2026,12/22/2026,"Brady; Brady"
+"Fall 2026",Auto/Moto/Construction,71551,AUTO," 50",001,"Intro Automotive Mechanics",26,26,,,9,10,L/L,"TR; TR","0910; 1010","1000; 1200","EVANS; EVANS","103; 103",Evans,8/18/2026,12/22/2026,"Rothman; Rothman"
+"Fall 2026",Auto/Moto/Construction,71550,AUTO," 50",321,"Intro Automotive Mechanics",23,28,,,10,10,L/L,"MW; MW","1610; 1710","1700; 1900","EVANS; EVANS","103; 103",Evans,8/18/2026,12/22/2026,"Barone; Barone"
+"Fall 2026",Auto/Moto/Construction,73818,AUTO," 58",001,"Auto Heating &Air-Condition",27,27,,,5,10,L/L,"MW; MW","0910; 1010","1000; 1200","EVANS; EVANS","103; 103",Evans,8/18/2026,12/22/2026,"Rothman; Rothman"
+"Fall 2026",Auto/Moto/Construction,74295,AUTO," 63",001,"Braking Systems",27,27,,,7,10,L/L,"TR; TR","1610; 1740","1725; 1855","EVANS; EVANS","115; 251",Evans,8/18/2026,12/22/2026,"Barone; Barone"
+"Fall 2026",Auto/Moto/Construction,74179,AUTO,202,001,"Welded Panel Replacement",28,28,,,0,10,L/L,"TR; TR","0910; 1010","1000; 1200","EVANS; EVANS","114; 114",Evans,8/18/2026,12/22/2026,"Brady; Brady"
+"Fall 2026",Auto/Moto/Construction,74177,AUTO,204,001,"Body/Frame Straightening/Repai",20,28,,,0,10,L/L,"TR; TR","1810; 1910","1900; 2100","EVANS; EVANS","114; 114",Evans,8/18/2026,12/22/2026,"Brady; Brady"
+"Fall 2026",Auto/Moto/Construction,74180,AUTO,206,001,"Plastic Repair & Refinishing",25,28,,,0,10,L/L,"TR; TR","1310; 1410","1400; 1600","EVANS; EVANS","114; 114",Evans,8/18/2026,12/22/2026,"Brady; Brady"
+"Fall 2026",Auto/Moto/Construction,72543,CNST,100,001,"Intro to Construction",24,28,,,0,10,L/L,"TR; TR","0910; 1010","1000; 1200","EVANS; EVANS","255; 255",Evans,8/18/2026,12/22/2026,"Maximo; Maximo"
+"Fall 2026",Auto/Moto/Construction,73568,CNST,107,001,"Blueprint Reading",26,28,,,0,10,L/L,"TR; TR","1710; 1810","1800; 2000","EVANS; EVANS","255; 255",Evans,8/18/2026,12/22/2026,"Maximo; Maximo"
+"Fall 2026",Auto/Moto/Construction,73819,CNST,111,001,"Carpentry-Rough Framing",21,27,,,0,10,L/L,"TR; TR","1210; 1310","1300; 1500","EVANS; EVANS","255; 255",Evans,8/18/2026,12/22/2026,"Maximo; Maximo"
+"Fall 2026",Auto/Moto/Construction,74175,CNST,112,001,"Carpentry-Advanced Framing",20,28,,,0,10,L/L,"S; S","0810; 1010","1000; 1400","EVANS; EVANS","103; 103",Evans,8/18/2026,12/22/2026,"Hong; Hong"
+"Fall 2026",Auto/Moto/Construction,73161,CNST,113,001,"Finish Carpentry",23,26,,,0,10,L/L,"TR; TR","1810; 1910","1900; 2100","EVANS; EVANS","257; 257",Evans,8/18/2026,12/22/2026,"Cash; Cash"
+"Fall 2026",Auto/Moto/Construction,71559,CNST,116,001,"Furniture Making & Woodworking",18,18,,,6,10,L/L,"MW; MW","1410; 1510","1500; 1700","EVANS; EVANS","257; 257",Evans,8/18/2026,12/22/2026,"Cash; Cash"
+"Fall 2026",Auto/Moto/Construction,73162,CNST,116,002,"Furniture Making & Woodworking",26,26,,,0,10,L/L,"MW; MW","1810; 1910","1900; 2100","EVANS; EVANS","257; 257",Evans,8/18/2026,12/22/2026,"Cash; Cash"
+"Fall 2026",Auto/Moto/Construction,73164,MOTO," 90",001,"Motorcycle Technology Intro",10,26,,,0,10,L/L,"MW; MW; MW; MW","1810; 1810; 1940; 1940","1925; 1925; 2055; 2055","EVANS; EVANS; EVANS; EVANS","115; 115; 115; 115",Evans,8/18/2026,12/22/2026,"Saunders; Simon; Saunders; Simon"
+"Fall 2026",Auto/Moto/Construction,73165,MOTO," 90",002,"Motorcycle Technology Intro",8,28,,,0,10,L/L,"TR; TR","1810; 1940","1925; 2055","EVANS; EVANS","115; 115",Evans,8/18/2026,12/22/2026,"Simon; Simon"
+"Fall 2026",Auto/Moto/Construction,74176,MOTO," 93",001,"Engine & Power Train Repair",15,28,,,0,10,L/L,"S; S","0810; 1110","1100; 1400","EVANS; EVANS","115; 115",Evans,8/18/2026,12/22/2026,"Saunders; Staff"
+"Fall 2026","Biological Sciences",73013,BIO,"  9",001,"Human Biology",32,32,,,10,10,Hyb,"W; TBA","1010; TBA","1300; TBA","STEM; TBA",202,Ocean,8/18/2026,12/22/2026,"Sengupta; Sengupta"
+"Fall 2026","Biological Sciences",74233,BIO,"  9",003,"Human Biology",32,32,,,3,10,L/L,"M; W","1810; 1810","2100; 2100","STEM; STEM","202; 202",Ocean,8/18/2026,12/22/2026,"Morante; Morante"
+"Fall 2026","Biological Sciences",74335,BIO,"  9",004,"Human Biology",32,32,,,3,10,L/L,"M; W","1810; 1810","2100; 2100","MIC; MIC","366; 366",Mission,8/18/2026,12/22/2026,"Al-Dubaie; Al-Dubaie"
+"Fall 2026","Biological Sciences",74234,BIO,"  9",007,"Human Biology",28,28,,,3,10,L/L,"R; T","1510; 1510","1800; 1800","CHNB; CHNB","1402; 1402","Chinatown/North Beach",8/18/2026,12/22/2026,"Siekmann; Siekmann"
+"Fall 2026","Biological Sciences",71965,BIO,"  9",862,"Human Biology",32,32,,,10,10,Hyb,"T; TBA","1810; TBA","2100; TBA","STEM; TBA",202,Ocean,8/18/2026,12/22/2026,"Cannon; Cannon"
+"Fall 2026","Biological Sciences",70209,BIO,"  9",863,"Human Biology",32,32,,,9,10,Hyb,"R; TBA","1010; TBA","1300; TBA","STEM; TBA",204,Ocean,8/18/2026,12/22/2026,"Cannon; Cannon"
+"Fall 2026","Biological Sciences",70206,BIO,"  9",961,"Human Biology",36,36,,,10,10,Hyb,"TBA; TBA; R; R","TBA; TBA; 1910; 1910","TBA; TBA; 2100; 2100","TBA; TBA; STEM; STEM","301; 301",Ocean,8/31/2026,12/22/2026,"Nixon; Staff; Staff; Staff"
+"Fall 2026","Biological Sciences",73899,BIO," 10",001,"Animal Biology",31,32,,,1,10,L/L,"T; R","1410; 1410","1700; 1700","STEM; STEM","318; 318",Ocean,8/18/2026,12/22/2026,"Lauritzen; Lauritzen"
+"Fall 2026","Biological Sciences",70177,BIO," 11",961,"Science of Living Organisms",24,24,,,2,10,Hyb,"W; TBA","0940; TBA","1230; TBA","STEM; TBA",206,Ocean,8/31/2026,12/22/2026,"Woo; Woo"
+"Fall 2026","Biological Sciences",70178,BIO," 11",963,"Science of Living Organisms",24,24,,,4,10,Hyb,"W; TBA","1310; TBA","1600; TBA","STEM; TBA",206,Ocean,8/31/2026,12/22/2026,"Woo; Woo"
+"Fall 2026","Biological Sciences",72557,BIO," 19",861,Ecology,14,32,,,0,10,Hyb,"W; TBA","0910; TBA","1200; TBA","STEM; TBA",204,Ocean,8/18/2026,12/22/2026,"Cannon; Cannon"
+"Fall 2026","Biological Sciences",73012,BIO," 20",931,"Introduction to Ecology",36,36,,,10,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Cannon
+"Fall 2026","Biological Sciences",74299,BIO," 21J",001,Agroecology,20,24,,,0,10,Lec,"M; S","1810; 0830","2100; 1545","STEM; TBA",204,Ocean,8/31/2026,9/19/2026,"Cannon; Staff"
+"Fall 2026","Biological Sciences",73969,BIO," 33",981,"Intro. Conservation Biology",24,24,,,3,10,Onl,"W; TBA","1810; TBA","1900; TBA","ZOOM; TBA",,Online,8/31/2026,12/22/2026,"Traut; Staff"
+"Fall 2026","Biological Sciences",70158,BIO,100A,961,"General Biology",24,24,,,4,10,Hyb,"TR; TR; TBA","1010; 1110; TBA","1100; 1300; TBA","STEM; STEM; TBA","301; 301",Ocean,8/31/2026,12/22/2026,"Nixon; Nixon; Nixon"
+"Fall 2026","Biological Sciences",70160,BIO,100A,962,"General Biology",24,24,,,2,10,Hyb,"TR; TR; TBA","1310; 1410; TBA","1400; 1600; TBA","STEM; STEM; TBA","301; 301",Ocean,8/31/2026,12/22/2026,"Nixon; Nixon; Nixon"
+"Fall 2026","Biological Sciences",70161,BIO,100B,961,"General Biology",24,24,,,10,10,Hyb,"TR; TBA","0940; TBA","1230; TBA","STEM; TBA",303,Ocean,8/31/2026,12/22/2026,"Traut; Traut"
+"Fall 2026","Biological Sciences",70162,BIO,100B,962,"General Biology",24,24,,,10,10,Hyb,"TR; TBA","1310; TBA","1600; TBA","STEM; TBA",303,Ocean,8/31/2026,12/22/2026,"Traut; Traut"
+"Fall 2026","Biological Sciences",74228,BIO,106,631,"Human Anatomy and Physiology",32,32,,,10,10,L/L,"M; W","0910; 0910","1200; 1200","STEM; STEM","306; 306",Ocean,8/18/2026,12/22/2026,"Staff; Staff"
+"Fall 2026","Biological Sciences",73602,BIO,106,861,"Human Anatomy and Physiology",32,32,,,10,10,Hyb,"T; T","1310; 1310","1600; 1600","STEM; STEM","306; 306",Ocean,8/18/2026,12/22/2026,"Katzman; Katzman"
+"Fall 2026","Biological Sciences",74229,BIO,106,862,"Human Anatomy and Physiology",32,32,,,10,10,Hyb,"R; TBA","1310; TBA","1600; TBA","STEM; STEM","306; 306",Ocean,8/18/2026,12/22/2026,"Katzman; Katzman"
+"Fall 2026","Biological Sciences",70169,BIO,108,011,"General Human Anatomy",36,36,,,10,10,L/L,"TR; T","0940; 1210","1055; 1500","STEM; STEM","102; 302",Ocean,8/18/2026,12/22/2026,"Tarpey; Tarpey"
+"Fall 2026","Biological Sciences",70170,BIO,108,012,"General Human Anatomy",36,36,,,10,10,L/L,"TR; R","0940; 1210","1055; 1500","STEM; STEM","102; 302",Ocean,8/18/2026,12/22/2026,"Tarpey; Tarpey"
+"Fall 2026","Biological Sciences",73902,BIO,108,861,"General Human Anatomy",32,32,,,10,10,Hyb,"M; TBA","1410; TBA","1700; TBA","STEM; TBA",302,Ocean,8/18/2026,12/22/2026,"Hanson; Hanson"
+"Fall 2026","Biological Sciences",73903,BIO,108,862,"General Human Anatomy",32,32,,,10,10,Hyb,"TBA; M","TBA; 1810","TBA; 2100","TBA; STEM",302,Ocean,8/18/2026,12/22/2026,"Hanson; Hanson"
+"Fall 2026","Biological Sciences",73904,BIO,108,863,"General Human Anatomy",32,32,,,10,10,Hyb,"TBA; W","TBA; 1410","TBA; 1700","TBA; STEM",302,Ocean,8/18/2026,12/22/2026,"Hanson; Hanson"
+"Fall 2026","Biological Sciences",73905,BIO,108,864,"General Human Anatomy",32,32,,,10,10,Hyb,"TBA; W","TBA; 1810","TBA; 2100","TBA; STEM",302,Ocean,8/18/2026,12/22/2026,"Hanson; Hanson"
+"Fall 2026","Biological Sciences",73906,BIO,112,001,"Intro. Human Physiology",23,32,,,0,10,L/L,"TR; T","0910; 1110","1025; 1400","STEM; STEM","104; 318",Ocean,8/18/2026,12/22/2026,"Lauritzen; Lauritzen"
+"Fall 2026","Biological Sciences",73907,BIO,112,002,"Intro. Human Physiology",18,32,,,0,10,L/L,"TR; R","0910; 1110","1025; 1400","STEM; STEM","104; 318",Ocean,8/18/2026,12/22/2026,"Lauritzen; Lauritzen"
+"Fall 2026","Biological Sciences",70179,BIO,112,861,"Intro. Human Physiology",32,32,,,10,10,Hyb,"M; TBA","1310; TBA","1600; TBA","STEM; TBA",318,Ocean,8/18/2026,12/22/2026,"Reyes; Staff"
+"Fall 2026","Biological Sciences",72582,BIO,112,862,"Intro. Human Physiology",32,32,,,10,10,Hyb,"W; TBA","1310; TBA","1600; TBA","STEM; TBA",318,Ocean,8/18/2026,12/22/2026,"Reyes; Reyes"
+"Fall 2026","Biological Sciences",73646,BIO,112,863,"Intro. Human Physiology",32,32,,,10,10,Hyb,"TBA; T","TBA; 1810","TBA; 2100","TBA; STEM",318,Ocean,8/18/2026,12/22/2026,"Damas; Damas"
+"Fall 2026","Biological Sciences",74230,BIO,112,864,"Intro. Human Physiology",32,32,,,10,10,Hyb,"W; TBA","1810; TBA","2100; TBA","STEM; TBA",318,Ocean,8/18/2026,12/22/2026,"Damas; Damas"
+"Fall 2026","Biological Sciences",70185,BIO,120,001,"Introduction to Microbiology",24,24,,,10,10,L/L,"TR; TR","1310; 1540","1500; 1655","STEM; STEM","316; 102",Ocean,8/18/2026,12/22/2026,"Brown; Brown"
+"Fall 2026","Biological Sciences",73362,BIO,120,002,"Introduction to Microbiology",24,24,,,10,10,L/L,"TR; TR","1540; 1810","1655; 2000","STEM; STEM","102; 316",Ocean,8/18/2026,12/22/2026,"Brown; Brown"
+"Fall 2026","Biological Sciences",70191,BIO,120,862,"Introduction to Microbiology",24,24,,,10,10,Hyb,"MW; TBA","1410; TBA","1600; TBA","STEM; TBA",316,Ocean,8/18/2026,12/22/2026,"Miraglia; Miraglia"
+"Fall 2026","Biological Sciences",73911,BIO,120,864,"Introduction to Microbiology",24,24,,,10,10,Hyb,"MW; TBA","1010; TBA","1200; TBA","STEM; TBA",316,Ocean,8/18/2026,12/22/2026,"Miraglia; Miraglia"
+"Fall 2026","Biological Sciences",73908,BIO,120,865,"Introduction to Microbiology",24,24,,,10,10,Hyb,"MW; TBA","1810; TBA","2000; TBA","STEM; TBA",316,Ocean,8/18/2026,12/22/2026,"Miraglia; Miraglia"
+"Fall 2026","Biological Sciences",70192,BIO,121,931,"Principles of Food Safety",19,36,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,10/25/2026,Miraglia
+"Fall 2026","Biological Sciences",70193,BIO,130,931,"Nutrition and Culinary Arts",36,36,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Tran
+"Fall 2026","Biological Sciences",70195,BIO,132,931,"Introduction to Nutrition",36,36,,,10,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Tran
+"Fall 2026","Biological Sciences",70196,BIO,134,001,"Nutrition for Health Sciences",27,70,,,0,10,Lec,TR,1110,1230,STEM,102,Ocean,8/31/2026,12/22/2026,Tran
+"Fall 2026","Biological Sciences",74232,BIO,134,003,"Nutrition for Health Sciences",32,32,,,0,10,Lec,MW,1010,1125,STEM,218,Ocean,8/18/2026,12/22/2026,Siekmann
+"Fall 2026","Biological Sciences",74344,BIO,134,005,"Nutrition for Health Sciences",12,36,,,0,10,Lec,M,1310,1600,CHNB,504,"Chinatown/North Beach",8/18/2026,12/22/2026,Siekmann
+"Fall 2026","Biological Sciences",70198,BIO,134,631,"Nutrition for Health Sciences",20,36,,,0,10,Lec,T,1810,2100,CHNB,504,"Chinatown/North Beach",8/18/2026,12/22/2026,Siekmann
+"Fall 2026","Biological Sciences",70200,BIO,134,932,"Nutrition for Health Sciences",36,36,,,10,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Tran
+"Fall 2026","Biological Sciences",73011,BIO,134,933,"Nutrition for Health Sciences",36,36,,,10,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Tran
+"Fall 2026",Chemistry,73466,CHEM,"  C",101,"Problem Solving in Chemistry",6,28,,,0,10,Lec,TBA,TBA,TBA,STEM,416,Ocean,8/31/2026,12/22/2026,Glenn
+"Fall 2026",Chemistry,74027,CHEM," 32",201,"Intro to Med Chem",28,28,,,31,30,L/L,"MW; W","1210; 1410","1325; 1700","STEM; STEM","104; 402",Ocean,8/18/2026,12/22/2026,"Wong; Wong"
+"Fall 2026",Chemistry,72304,CHEM," 32",861,"Intro to Med Chem",0,0,,,0,0,Hyb,"T; TBA; TBA; R; F; TBA","0840; TBA; TBA; 1000; 1330; TBA","1130; TBA; TBA; 1130; 1620; TBA","TBA; TBA; TBA; TBA; TBA; TBA",,Ocean,8/18/2026,12/22/2026,"Hurt; Staff; Hurt; Staff; Staff; Staff"
+"Fall 2026",Chemistry,74028,CHEM," 32",862,"Intro to Med Chem",0,0,,,0,0,Hyb,"TBA; T; T; R; F; TBA","TBA; 1240; 1000; 1000; 1330; TBA","TBA; 1530; 1130; 1130; 1620; TBA","TBA; TBA; TBA; TBA; TBA; TBA",,Ocean,8/18/2026,12/22/2026,"Hurt; Hurt; Staff; Staff; Staff; Staff"
+"Fall 2026",Chemistry,73071,CHEM," 32",863,"Intro to Med Chem",0,0,,,0,0,Hyb,"R; T; TBA; F; TBA","0840; 1000; TBA; 1330; TBA","1130; 1130; TBA; 1620; TBA","TBA; TBA; TBA; TBA; TBA",,Ocean,8/18/2026,12/22/2026,"Hurt; Staff; Hurt; Staff; Staff"
+"Fall 2026",Chemistry,73057,CHEM," 32",864,"Intro to Med Chem",0,0,,,0,0,Hyb,"R; T; TBA; R; F","1240; 1000; TBA; 1000; 1330","1530; 1130; TBA; 1130; 1620","TBA; TBA; TBA; TBA; TBA",,Ocean,8/18/2026,12/22/2026,"Hurt; Staff; Hurt; Staff; Staff"
+"Fall 2026",Chemistry,71767,CHEM," 40",863,"Intro to Chemical Principles",28,28,,,20,20,Hyb,"R; R; R; TBA","1410; 1310; 1010; TBA","1525; 1400; 1300; TBA","STEM; STEM; STEM; TBA","104; 403; 403",Ocean,8/18/2026,12/22/2026,"Zumwalt; Zumwalt; Zumwalt; Zumwalt"
+"Fall 2026",Chemistry,70352,CHEM," 40",865,"Intro to Chemical Principles",28,28,,,20,20,Hyb,"TBA; W; W; R","TBA; 1310; 1010; 1410","TBA; 1400; 1300; 1525","TBA; STEM; STEM; STEM","403; 403; 104",Ocean,8/18/2026,12/22/2026,"Zumwalt; Zumwalt; Zumwalt; Zumwalt"
+"Fall 2026",Chemistry,70353,CHEM," 40",866,"Intro to Chemical Principles",28,28,,,20,20,Hyb,"T; T; R; TBA","1310; 1010; 1410; TBA","1400; 1300; 1525; TBA","STEM; STEM; STEM; TBA","403; 403; 104",Ocean,8/18/2026,12/22/2026,"Zumwalt; Zumwalt; Zumwalt; Zumwalt"
+"Fall 2026",Chemistry,70331,CHEM,101A,101,"General College Chemistry",28,28,,,1,20,L/L,"MW; MW","1010; 1310","1200; 1600","STEM; STEM","104; 415",Ocean,8/18/2026,12/22/2026,"Stuart; Stuart"
+"Fall 2026",Chemistry,70332,CHEM,101A,102,"General College Chemistry",13,28,,,0,20,L/L,"MW; TR","1010; 1010","1200; 1300","STEM; STEM","104; 415",Ocean,8/18/2026,12/22/2026,"Stuart; Stuart"
+"Fall 2026",Chemistry,72211,CHEM,101A,861,"General College Chemistry",28,28,,,4,20,Hyb,"TBA; MW","TBA; 1010","TBA; 1300","TBA; STEM",416,Ocean,8/18/2026,12/22/2026,"Glenn; Glenn"
+"Fall 2026",Chemistry,70333,CHEM,101A,862,"General College Chemistry",28,28,,,14,20,Hyb,"TBA; TR","TBA; 1010","TBA; 1300","TBA; STEM",416,Ocean,8/18/2026,12/22/2026,"Glenn; Glenn"
+"Fall 2026",Chemistry,70336,CHEM,101B,201,"General College Chemistry II",28,28,,,8,10,L/L,"MW; MW","1210; 0910","1325; 1200","STEM; STEM","102; 418",Ocean,8/18/2026,12/22/2026,"Su; Su"
+"Fall 2026",Chemistry,70337,CHEM,101B,202,"General College Chemistry II",24,28,,,0,10,L/L,"TR; MW","0910; 1210","1200; 1325","STEM; STEM","418; 102",Ocean,8/18/2026,12/22/2026,"Su; Su"
+"Fall 2026",Chemistry,70340,CHEM,212A,101,"Organic Chemistry",24,24,,,4,10,L/L,"MW; MW","1010; 1310","1200; 1600","STEM; STEM","102; 406",Ocean,8/18/2026,12/22/2026,"Solow; Solow"
+"Fall 2026",Chemistry,70341,CHEM,212A,102,"Organic Chemistry",18,24,,,0,10,L/L,"MW; TR","1010; 1410","1200; 1700","STEM; STEM","102; 406",Ocean,8/18/2026,12/22/2026,"Solow; Solow"
+"Fall 2026","Computer Networking & InfoTech",71432,CNIT,100,931,"Intro to Computers Using PCs",27,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Bornstein
+"Fall 2026","Computer Networking & InfoTech",73198,CNIT,100,932,"Intro to Computers Using PCs",8,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Bornstein
+"Fall 2026","Computer Networking & InfoTech",71431,CNIT,100,933,"Intro to Computers Using PCs",3,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Jones
+"Fall 2026","Computer Networking & InfoTech",71429,CNIT,100,934,"Intro to Computers Using PCs",7,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Jones
+"Fall 2026","Computer Networking & InfoTech",73878,CNIT,100,935,"Intro to Computers Using PCs",16,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Jones
+"Fall 2026","Computer Networking & InfoTech",74181,CNIT,102,931,"Operating Systems II-Command L",19,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Jones
+"Fall 2026","Computer Networking & InfoTech",72102,CNIT,103,931,"Computer Hardware",16,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Bornstein
+"Fall 2026","Computer Networking & InfoTech",74017,CNIT,103,932,"Computer Hardware",11,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Bornstein
+"Fall 2026","Computer Networking & InfoTech",73492,CNIT,103,933,"Computer Hardware",13,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Jones
+"Fall 2026","Computer Networking & InfoTech",71435,CNIT,104,931,"Operating Systems Technologies",30,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Taha
+"Fall 2026","Computer Networking & InfoTech",71440,CNIT,106,931,"Introduction to Networks",35,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Taha
+"Fall 2026","Computer Networking & InfoTech",74182,CNIT,106,934,"Introduction to Networks",33,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Wu
+"Fall 2026","Computer Networking & InfoTech",73199,CNIT,108,931,"Wireless Networks, Advanced",12,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Taha
+"Fall 2026","Computer Networking & InfoTech",71443,CNIT,120,931,"Network Security",35,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Taha
+"Fall 2026","Computer Networking & InfoTech",71442,CNIT,120,932,"Network Security",27,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Taha
+"Fall 2026","Computer Networking & InfoTech",72080,CNIT,121,931,"Computer Forensics",14,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Jones
+"Fall 2026","Computer Networking & InfoTech",74183,CNIT,121,932,"Computer Forensics",24,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Staff
+"Fall 2026","Computer Networking & InfoTech",71444,CNIT,122,931,Firewalls,35,35,,,8,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Taha
+"Fall 2026","Computer Networking & InfoTech",73880,CNIT,123,832,"Ethical Hacking & Network Defe",35,35,,,2,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Biddlecome
+"Fall 2026","Computer Networking & InfoTech",73201,CNIT,124,831,"Advanced Ethical Hacking",14,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Biddlecome
+"Fall 2026","Computer Networking & InfoTech",73495,CNIT,125,001,"Info Sec Professional (CISSP)",12,35,,,0,10,Lec,M,1810,2100,CLOU,218,Ocean,8/18/2026,12/22/2026,Bowne
+"Fall 2026","Computer Networking & InfoTech",73881,CNIT,128,001,"Hacking Mobile Devices",18,35,,,0,10,Lec,S,1010,1300,SCIE,037,Ocean,8/18/2026,12/22/2026,Bowne
+"Fall 2026","Computer Networking & InfoTech",73496,CNIT,129S,001,"Securing Web Applications",6,35,,,0,10,Lec,R,1510,1800,CLOU,218,Ocean,8/18/2026,12/22/2026,Bowne
+"Fall 2026","Computer Networking & InfoTech",73237,CNIT,131,001,"Internet Basics & Begin HTML",3,35,,,0,10,Lec,R,0910,1200,MIC,475,Mission,8/18/2026,12/22/2026,Devlin-Clancy
+"Fall 2026","Computer Networking & InfoTech",71449,CNIT,131,931,"Internet Basics & Begin HTML",17,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Devlin-Clancy
+"Fall 2026","Computer Networking & InfoTech",71450,CNIT,131,932,"Internet Basics & Begin HTML",12,35,,,0,10,Onl,"TBA; TBA","TBA; TBA","TBA; TBA","TBA; TBA",,Online,8/31/2026,12/22/2026,"Devlin-Clancy; Jones"
+"Fall 2026","Computer Networking & InfoTech",73202,CNIT,131,933,"Internet Basics & Begin HTML",17,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Jones
+"Fall 2026","Computer Networking & InfoTech",71453,CNIT,132,931,"Intermediate HTML and CSS",28,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Devlin-Clancy
+"Fall 2026","Computer Networking & InfoTech",71458,CNIT,133,832,"JavaScript, jQuery, AJAX",29,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Garcia
+"Fall 2026","Computer Networking & InfoTech",71459,CNIT,133A,831,"JavaScript Libs/Frameworks",2,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Garcia
+"Fall 2026","Computer Networking & InfoTech",74184,CNIT,133M,831,"Mobile Web w/HTML, CSS & JS",9,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Garcia
+"Fall 2026","Computer Networking & InfoTech",74185,CNIT,134,931,"Server Side Tech for the Web",9,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Devlin-Clancy
+"Fall 2026","Computer Networking & InfoTech",73883,CNIT,152,001,"Incident Response",8,35,,,0,10,Lec,R,1810,2100,CLOU,218,Ocean,8/18/2026,12/22/2026,Bowne
+"Fall 2026","Computer Networking & InfoTech",71463,CNIT,155,931,"AWS Cloud Practitioner",14,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Bornstein
+"Fall 2026","Computer Networking & InfoTech",73498,CNIT,170,931,"Intro to Cloud Computing",12,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Taha
+"Fall 2026","Computer Networking & InfoTech",71464,CNIT,197,W01,"Internship and Work Experience",7,35,,,0,10,Wrk,TBA,TBA,TBA,TBA,,Ocean,8/18/2026,12/22/2026,Bowne
+"Fall 2026","Computer Networking & InfoTech",71466,CNIT,201C,931,"Introduction to Cisco Networks",16,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,10/25/2026,Wu
+"Fall 2026","Computer Networking & InfoTech",71468,CNIT,202C,931,"Routing & Switching Essentials",13,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,10/26/2026,12/22/2026,Wu
+"Fall 2026","Computer Networking & InfoTech",74186,CNIT,203C,931,"Scaling Networks",12,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,10/25/2026,Wu
+"Fall 2026","Computer Networking & InfoTech",74187,CNIT,204C,931,"Connecting Networks",11,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,10/26/2026,12/22/2026,Wu
+"Fall 2026","Computer Networking & InfoTech",74188,CNIT,214,931,"Internet of Things",10,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Jones
+"Fall 2026","Computer Networking & InfoTech",71472,CNIT,420,931,"Microsoft Azure Administration",11,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Taha
+"Fall 2026","Computer Networking & InfoTech",74189,CNIT,430,001,"Intro to AI",26,35,,,0,10,L/L,"W; W","1710; 1810","1800; 2100","CLOU; CLOU","218; 218",Ocean,8/18/2026,12/22/2026,"Staff; Bowne"
+"Fall 2026","Computer Science",73014,CS,110A,001,"Intro to Programming and CS",15,35,,,0,10,Lec,MW,0910,1100,BATL,453,Ocean,8/18/2026,12/22/2026,Persiko
+"Fall 2026","Computer Science",73015,CS,110A,002,"Intro to Programming and CS",3,35,,,0,10,Lec,TR,1510,1700,BATL,301B,Ocean,8/18/2026,12/22/2026,Staff
+"Fall 2026","Computer Science",73016,CS,110A,003,"Intro to Programming and CS",2,35,,,0,10,Lec,TR,1310,1500,BATL,453,Ocean,8/18/2026,12/22/2026,Thoppay
+"Fall 2026","Computer Science",73017,CS,110A,004,"Intro to Programming and CS",4,35,,,0,10,Lec,TR,0910,1100,BATL,301B,Ocean,8/18/2026,12/22/2026,Walimuni
+"Fall 2026","Computer Science",73018,CS,110A,005,"Intro to Programming and CS",5,35,,,0,10,Lec,TR,1110,1300,BATL,301B,Ocean,8/18/2026,12/22/2026,Walimuni
+"Fall 2026","Computer Science",73019,CS,110A,831,"Intro to Programming and CS",21,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Strickland
+"Fall 2026","Computer Science",73020,CS,110A,832,"Intro to Programming and CS",5,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Strickland
+"Fall 2026","Computer Science",74195,CS,110A,833,"Intro to Programming and CS",25,35,,,5,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Conner
+"Fall 2026","Computer Science",73021,CS,110A,931,"Intro to Programming and CS",4,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,10/25/2026,Conner
+"Fall 2026","Computer Science",73022,CS,110A,932,"Intro to Programming and CS",7,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,10/25/2026,Conner
+"Fall 2026","Computer Science",73023,CS,110B,001,"Programming Fundamentals: C++",19,35,,,0,10,Lec,TR,0910,1100,BATL,413,Ocean,8/18/2026,12/22/2026,Luttrell
+"Fall 2026","Computer Science",73024,CS,110B,002,"Programming Fundamentals: C++",6,35,,,0,10,Lec,TR,1310,1500,BATL,301B,Ocean,8/18/2026,12/22/2026,Walimuni
+"Fall 2026","Computer Science",71513,CS,110B,831,"Programming Fundamentals: C++",8,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Ibrahim
+"Fall 2026","Computer Science",71512,CS,110B,832,"Programming Fundamentals: C++",30,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Luttrell
+"Fall 2026","Computer Science",71514,CS,110B,833,"Programming Fundamentals: C++",19,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Luttrell
+"Fall 2026","Computer Science",71516,CS,110C,001,"Data Structures & Algorit: C++",5,35,,,0,10,Lec,TR,1110,1300,BATL,413,Ocean,8/18/2026,12/22/2026,Huber
+"Fall 2026","Computer Science",71517,CS,110C,861,"Data Structures & Algorit: C++",16,35,,,0,10,Hyb,"TBA; W","TBA; 1030","TBA; 1220","TBA; BATL",413,Ocean,8/18/2026,12/22/2026,"Luttrell; Staff"
+"Fall 2026","Computer Science",71518,CS,111B,001,"Programming Fundamentals: Java",6,35,,,0,10,Lec,TR,1510,1700,BATL,453,Ocean,8/18/2026,12/22/2026,Johnson
+"Fall 2026","Computer Science",73026,CS,111B,861,"Programming Fundamentals: Java",8,35,,,0,10,Hyb,"TBA; F; F","TBA; 1040; 1040","TBA; 1230; 1230","TBA; BATL; BATL","453; 453",Ocean,8/18/2026,12/22/2026,"Potter; Staff; Staff"
+"Fall 2026","Computer Science",71520,CS,111B,931,"Programming Fundamentals: Java",18,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Schatz
+"Fall 2026","Computer Science",71521,CS,111B,932,"Programming Fundamentals: Java",4,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Schatz
+"Fall 2026","Computer Science",71522,CS,111B,933,"Programming Fundamentals: Java",2,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,10/26/2026,12/22/2026,Schatz
+"Fall 2026","Computer Science",74052,CS,111B,934,"Programming Fundamentals: Java",3,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,10/26/2026,12/22/2026,Schatz
+"Fall 2026","Computer Science",71526,CS,111C,931,"Data Structures & Algo: Java",11,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Masters
+"Fall 2026","Computer Science",71527,CS,111C,932,"Data Structures & Algo: Java",3,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Masters
+"Fall 2026","Computer Science",73027,CS,111C,933,"Data Structures & Algo: Java",17,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Masters
+"Fall 2026","Computer Science",74196,CS,131B,001,"Prog Fundamentals: Python",7,35,,,0,10,Lec,TR,1410,1600,BATL,301A,Ocean,8/18/2026,12/22/2026,Johnson
+"Fall 2026","Computer Science",73028,CS,131B,831,"Prog Fundamentals: Python",14,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Johnson
+"Fall 2026","Computer Science",73031,CS,131B,931,"Prog Fundamentals: Python",35,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Brick
+"Fall 2026","Computer Science",73030,CS,131B,932,"Prog Fundamentals: Python",6,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Brick
+"Fall 2026","Computer Science",73029,CS,131B,933,"Prog Fundamentals: Python",4,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Brick
+"Fall 2026","Computer Science",71536,CS,150A,931,"Intro to SQL Databases & NoSQL",9,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,O'Leary
+"Fall 2026","Computer Science",72107,CS,150A,932,"Intro to SQL Databases & NoSQL",4,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,O'Leary
+"Fall 2026","Computer Science",71534,CS,150A,933,"Intro to SQL Databases & NoSQL",11,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,O'Leary
+"Fall 2026","Computer Science",71535,CS,150A,934,"Intro to SQL Databases & NoSQL",3,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,O'Leary
+"Fall 2026","Computer Science",74197,CS,150A,935,"Intro to SQL Databases & NoSQL",18,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Ibrahim
+"Fall 2026","Computer Science",71537,CS,160A,931,"Introduction to Unix/Linux",15,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,10/25/2026,Conner
+"Fall 2026","Computer Science",71538,CS,160A,932,"Introduction to Unix/Linux",10,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,10/25/2026,Conner
+"Fall 2026","Computer Science",71539,CS,160A,933,"Introduction to Unix/Linux",4,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,10/25/2026,Harden
+"Fall 2026","Computer Science",72076,CS,160A,934,"Introduction to Unix/Linux",15,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,10/25/2026,Harden
+"Fall 2026","Computer Science",71540,CS,160B,931,"Unix/Linux Shell Scripting",8,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,10/26/2026,12/22/2026,Strickland
+"Fall 2026","Computer Science",73361,CS,160B,932,"Unix/Linux Shell Scripting",7,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,10/26/2026,12/22/2026,Mittal
+"Fall 2026","Computer Science",73032,CS,177,831,"Software Engineering",15,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Meade
+"Fall 2026","Computer Science",74198,CS,198,001,"Industry Internship",0,0,,,0,0,Wrk,TBA,TBA,TBA,TBA,,Ocean,8/18/2026,12/22/2026,Walimuni
+"Fall 2026","Computer Science",74199,CS,198,002,"Industry Internship",0,0,,,0,0,Wrk,TBA,TBA,TBA,TBA,,Ocean,8/18/2026,12/22/2026,Walimuni
+"Fall 2026","Computer Science",74200,CS,198,003,"Industry Internship",0,0,,,0,0,Wrk,TBA,TBA,TBA,TBA,,Ocean,8/18/2026,12/22/2026,Walimuni
+"Fall 2026","Computer Science",74201,CS,198,004,"Industry Internship",0,0,,,0,0,Wrk,TBA,TBA,TBA,TBA,,Ocean,8/18/2026,12/22/2026,Walimuni
+"Fall 2026","Computer Science",71542,CS,199,001,"Independent Study",0,0,,,0,0,Lab,TBA,TBA,TBA,TBA,,Ocean,8/18/2026,12/22/2026,Walimuni
+"Fall 2026","Computer Science",73932,CS,199,002,"Independent Study",0,0,,,0,0,Lab,TBA,TBA,TBA,TBA,,Ocean,8/18/2026,12/22/2026,Walimuni
+"Fall 2026","Computer Science",73933,CS,199,003,"Independent Study",0,0,,,0,0,Lab,TBA,TBA,TBA,TBA,,Ocean,8/18/2026,12/22/2026,Walimuni
+"Fall 2026","Computer Science",73033,CS,211D,931,"Android Programming",8,35,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Masters
+"Fall 2026","Computer Science",73035,CS,231,931,"Advanced Python for Analytics",35,35,,,4,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Brick
+"Fall 2026","Computer Science",73036,CS,256,931,"Data Visualization",35,35,,,4,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,O'Leary
+"Fall 2026","Computer Science",73037,CS,270,001,"Comp Architecture w/ Assembly",5,35,,,0,10,Lec,TR,1210,1400,BATL,301A,Ocean,8/18/2026,12/22/2026,Johnson
+"Fall 2026","Computer Science",72319,CS,270,831,"Comp Architecture w/ Assembly",35,35,,,5,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Johnson
+"Fall 2026","Computer Science",71545,CS,270,861,"Comp Architecture w/ Assembly",13,35,,,0,10,Hyb,"TBA; F; F","TBA; 1310; 1310","TBA; 1500; 1500","TBA; BATL; BATL","453; 453",Ocean,8/18/2026,12/22/2026,"Potter; Staff; Staff"
+"Fall 2026","Earth Sciences",73358,GEOG,"  1",001,"Physical Geography",52,70,,,0,10,Lec,MW,0910,1025,SCIE,005,Ocean,8/18/2026,12/22/2026,Duncan
+"Fall 2026","Earth Sciences",70560,GEOG,"  1",831,"Physical Geography",45,45,,,8,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Teale
+"Fall 2026","Earth Sciences",73359,GEOG,"  1",833,"Physical Geography",45,45,,,10,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Grandy
+"Fall 2026","Earth Sciences",70562,GEOG,"  1L",001,"Physical Geography Laboratory",14,30,,,0,10,Lab,W,1410,1700,SCIE,045,Ocean,8/18/2026,12/22/2026,Duncan
+"Fall 2026","Earth Sciences",73038,GEOG,"  1L",002,"Physical Geography Laboratory",30,30,,,1,10,Lab,F,1010,1300,SCIE,045,Ocean,8/18/2026,12/22/2026,Duncan
+"Fall 2026","Earth Sciences",73886,GEOG,"  3",001,"World Regional Geography",15,70,,,0,10,Lec,MW,1110,1240,SCIE,005,Ocean,8/31/2026,12/22/2026,Duncan
+"Fall 2026","Earth Sciences",72644,GEOG,110,931,"Introduction to GIS",35,35,,,1,10,Onl,"TBA; TBA","TBA; TBA","TBA; TBA","TBA; TBA",,Online,8/31/2026,12/22/2026,"Shatford; Staff"
+"Fall 2026","Earth Sciences",70561,GEOG,111,931,"GIS Analysis and Modeling",34,35,,,0,10,Onl,"TBA; TBA","TBA; TBA","TBA; TBA","TBA; TBA",,Online,8/31/2026,12/22/2026,"Shatford; Staff"
+"Fall 2026","Earth Sciences",70564,GEOL," 10",931,"Physical Geology",45,45,,,4,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Mendoza
+"Fall 2026","Earth Sciences",74022,GEOL," 10",981,"Physical Geology",35,45,,,0,10,Onl,"R; TBA","1730; TBA","1850; TBA","ZOOM; TBA",,Online,8/31/2026,12/22/2026,"Mendoza; Staff"
+"Fall 2026","Earth Sciences",72322,GEOL," 10L",961,"Physical Geology Lab",26,30,,,0,10,Hyb,"TBA; F","TBA; 1410","TBA; 1700","TBA; SCIE",045,Ocean,8/31/2026,12/22/2026,"Mendoza; Staff"
+"Fall 2026","Earth Sciences",70569,OCAN,"  1",831,Oceanography,39,45,,,10,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Mazzillo
+"Fall 2026","Earth Sciences",73062,OCAN,"  1L",831,"Oceanography Laboratory",22,30,,,0,10,Onl,"TBA; TBA","TBA; TBA","TBA; TBA","TBA; TBA",,Online,8/18/2026,12/22/2026,"Mazzillo; Staff"
+"Fall 2026","Engineering & Architecture",70037,ARCH," 20",001,"Architectural Graphics I",28,28,,,0,10,L/L,"MW; MW","1210; 1310","1300; 1500","BATL; BATL","241; 241",Ocean,8/18/2026,12/22/2026,"Ray; Ray"
+"Fall 2026","Engineering & Architecture",70040,ARCH," 22A",001,"Delineation & Rendering",20,28,,,0,10,L/L,"TR; TR","1310; 1410","1400; 1600","BATL; BATL","241; 241",Ocean,8/18/2026,12/22/2026,"Lin; Lin"
+"Fall 2026","Engineering & Architecture",71793,ARCH," 29A",001,"Freehand Drawing I",23,30,23,30,0,0,L/L,"F; F","0910; 1010","1000; 1100","BATL; BATL","246; 246",Ocean,8/18/2026,12/22/2026,"Kesler; Kesler"
+"Fall 2026","Engineering & Architecture",71792,ARCH," 29B",001,"Freehand Drawing II",7,30,23,30,0,0,L/L,"F; F","0910; 1010","1000; 1100","BATL; BATL","246; 246",Ocean,8/18/2026,12/22/2026,"Kesler; Kesler"
+"Fall 2026","Engineering & Architecture",70032,ARCH,100,001,"Intro to Architecture",28,28,,,10,10,Lec,F,1210,1400,BATL,246,Ocean,8/18/2026,12/22/2026,Lin
+"Fall 2026","Engineering & Architecture",73975,ARCH,101,542,"Architecture Design Studio I",25,28,,,0,10,L/L,"MW; MW","1710; 1810","1800; 2000","CHNB; CHNB","1103; 1103","Chinatown/North Beach",8/18/2026,12/22/2026,"Huang; Huang"
+"Fall 2026","Engineering & Architecture",70034,ARCH,102,001,"Architecture Design Studio II",17,28,,,0,10,L/L,"MW; MW","1210; 1310","1300; 1500","BATL; BATL","246; 246",Ocean,8/18/2026,12/22/2026,"Huang; Huang"
+"Fall 2026","Engineering & Architecture",72031,ARCH,120,001,"Fund. of Bldg. Construction",19,30,,,0,10,Lec,W,1310,1600,BATL,221,Ocean,8/18/2026,12/22/2026,Luzardo
+"Fall 2026","Engineering & Architecture",72998,ARCH,120,551,"Fund. of Bldg. Construction",27,30,,,0,10,Lec,T,1810,2100,MIC,254,Mission,8/18/2026,12/22/2026,Luzardo
+"Fall 2026","Engineering & Architecture",74247,ARCH,160,001,"Professional Practice",17,30,,,0,10,Lec,M,1310,1600,BATL,221,Ocean,8/18/2026,12/22/2026,Voutsadakis
+"Fall 2026","Engineering & Architecture",74248,ARCH,214,881,"AutoCAD I",30,30,,,4,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Ray
+"Fall 2026","Engineering & Architecture",73957,ARCH,218,501,"Rhino 3D Computer Modeling",17,28,,,0,10,L/L,"TR; TR","1730; 1830","1820; 2020","CHNB; CHNB","1103; 1103","Chinatown/North Beach",8/18/2026,12/22/2026,"Lin; Lin"
+"Fall 2026","Engineering & Architecture",74249,BTEC," 12A",G01,"GLP and GMP Principles",13,36,,,0,10,L/L,"T; T","1310; 1610","1600; 1700","SCIE; SCIE","200; 200",Ocean,9/28/2026,11/8/2026,"Zimmerman; Zimmerman"
+"Fall 2026","Engineering & Architecture",73051,BTEC," 14A",001,"Biotechnology Lab Techniques",13,20,,,0,10,L/L,"R; R","1310; 1610","1525; 1725","SCIE; SCIE","307; 307",Ocean,8/18/2026,12/22/2026,"Afshar; Afshar"
+"Fall 2026","Engineering & Architecture",74255,BTEC," 14B",981,"Internship Support",4,20,,,0,10,Hyb,"F; TBA","1310; TBA","1700; TBA","ZOOM; TBA",,Ocean,8/31/2026,12/22/2026,"Afshar; Staff"
+"Fall 2026","Engineering & Architecture",73214,BTEC," 15",981,"Career Exploration in Science",6,30,,,0,10,Onl,"F; TBA","1310; TBA","1700; TBA","ZOOM; TBA",,Online,9/28/2026,12/22/2026,"Leung; Staff"
+"Fall 2026","Engineering & Architecture",70579,BTEC," 20",001,"Mammalian Cell Culture",13,20,,,0,10,L/L,"MWF; MWF","0910; 1050","1040; 1140","SCIE; SCIE","003; 003",Ocean,8/18/2026,10/18/2026,"Zimmerman; Zimmerman"
+"Fall 2026","Engineering & Architecture",70581,BTEC," 21C",001,"Stem Cell Technology",0,20,,,0,10,L/L,"MWF; MWF","0910; 1050","1040; 1140","SCIE; SCIE","003; 003",Ocean,10/19/2026,12/22/2026,"Zimmerman; Zimmerman"
+"Fall 2026","Engineering & Architecture",74250,BTEC," 21D",G01,"Intro Stem Cell Intern Support",1,20,,,0,10,Lec,M,1610,2000,SCIE,200,Ocean,8/18/2026,12/22/2026,Zimmerman
+"Fall 2026","Engineering & Architecture",74074,BTEC," 22",001,"Immunoassay: ELISA",9,20,,,0,10,L/L,"W; W","1410; 1735","1725; 1925","MIC; MIC","318; 316",Mission,11/9/2026,12/22/2026,"Banks; Banks"
+"Fall 2026","Engineering & Architecture",74334,BTEC," 24",002,"Introduction to PCR",15,20,,,0,10,L/L,"T; T","1410; 1725","1715; 1845","SCIE; SCIE","307; 307",Ocean,8/18/2026,9/27/2026,"Banks; Banks"
+"Fall 2026","Engineering & Architecture",74300,BTEC," 93",W03,"Biotechnology Work experience",8,20,,,0,5,Wrk,TBA,TBA,TBA,TBA,,Ocean,8/18/2026,12/22/2026,Afshar
+"Fall 2026","Engineering & Architecture",72726,BTEC," 93",W08,"Biotechnology Work experience",1,20,,,0,5,Wrk,TBA,TBA,TBA,TBA,,Ocean,8/18/2026,12/22/2026,Zimmerman
+"Fall 2026","Engineering & Architecture",70574,BTEC,115,001,"Recombinant DNA Biotechnology",7,24,,,0,10,L/L,"MW; MW","1310; 1440","1425; 1730","SCIE; SCIE","307; 307",Ocean,8/18/2026,12/22/2026,"Selvarajah; Selvarajah"
+"Fall 2026","Engineering & Architecture",70043,CM," 10",001,"Intro to Construct Management",17,30,,,0,10,Lec,M,0910,1130,BATL,245,Ocean,11/9/2026,12/22/2026,Voutsadakis
+"Fall 2026","Engineering & Architecture",73001,CM," 10",531,"Intro to Construct Management",5,30,,,0,10,Lec,W,1810,2125,MIC,315,Mission,11/9/2026,12/22/2026,Smith
+"Fall 2026","Engineering & Architecture",73004,CM," 20",351,"Intro to Bldn Ind Projects",4,35,,,0,10,Lec,F,0910,1200,MIC,106,Mission,8/18/2026,9/27/2026,Voutsadakis
+"Fall 2026","Engineering & Architecture",73005,CM," 20",501,"Intro to Bldn Ind Projects",4,30,,,0,10,Lec,R,1810,2100,BATL,221,Ocean,9/28/2026,11/8/2026,Voutsadakis
+"Fall 2026","Engineering & Architecture",73002,CM,100,351,"Fundamentals of Constr Mgmnt",10,35,,,5,10,Lec,T,1310,1600,MIC,106,Mission,8/18/2026,12/22/2026,Luzardo
+"Fall 2026","Engineering & Architecture",70044,CM,100,501,"Fundamentals of Constr Mgmnt",15,30,,,0,10,Lec,M,1810,2100,BATL,203,Ocean,8/18/2026,12/22/2026,Luzardo
+"Fall 2026","Engineering & Architecture",73003,CM,110,501,"Construction Graphics",6,30,,,0,10,Lec,T,1810,2100,BATL,246,Ocean,8/18/2026,12/22/2026,Fernandez
+"Fall 2026","Engineering & Architecture",74252,CM,110,502,"Construction Graphics",10,30,,,0,10,Lec,"M; M","1810; 1810","2100; 2100","MIC; MIC","106; 106",Mission,8/18/2026,12/22/2026,"Smith; Watkins"
+"Fall 2026","Engineering & Architecture",73006,CM,240,551,"Construction Cost Estimating",13,30,,,0,10,Lec,M,1810,2100,MIC,471,Mission,8/18/2026,12/22/2026,Galarza
+"Fall 2026","Engineering & Architecture",70047,CM,244,501,"Construction Scheduling",27,28,,,0,10,Lec,W,1810,2100,BATL,241,Ocean,8/18/2026,12/22/2026,Luzardo
+"Fall 2026","Engineering & Architecture",70048,CM,248,501,"Construction Project Admin.",5,30,,,0,10,Lec,W,1810,2100,BATL,221,Ocean,8/18/2026,12/22/2026,Gary
+"Fall 2026","Engineering & Architecture",73898,CM,248,502,"Construction Project Admin.",5,30,,,2,10,Lec,R,1810,2100,MIC,229,Mission,8/18/2026,12/22/2026,Watkins
+"Fall 2026","Engineering & Architecture",73007,CM,250,351,"Building Ind. Communications",0,25,,,2,10,Lec,R,1310,1615,MIC,106,Mission,9/28/2026,12/22/2026,"Perez Hernandez"
+"Fall 2026","Engineering & Architecture",73008,CM,250,501,"Building Ind. Communications",2,30,,,0,10,Lec,R,1810,2115,BATL,203,Ocean,9/28/2026,12/22/2026,Galarza
+"Fall 2026","Engineering & Architecture",70591,ELEC,101,501,"Essentials of Electronics",30,30,,,9,10,L/L,"M; M","1810; 2010","2000; 2200","SCIE; SCIE","136; 047",Ocean,8/18/2026,12/22/2026,"Bryant; Bryant"
+"Fall 2026","Engineering & Architecture",70592,ELEC,102B,501,"Practical Digital Circuits",20,20,,,10,10,L/L,"T; T","1810; 2010","2000; 2200","SCIE; SCIE","049; 049",Ocean,8/18/2026,12/22/2026,"Godinez; Godinez"
+"Fall 2026","Engineering & Architecture",70593,ELEC,103A,501,"Building Audio Amp and more",13,20,,,0,10,L/L,"M; M","1810; 2010","2000; 2200","SCIE; SCIE","056; 056",Ocean,8/18/2026,12/22/2026,"Decker; Decker"
+"Fall 2026","Engineering & Architecture",70594,ELEC,104B,501,"Microcontroller Interfacing",15,20,,,0,10,L/L,"R; R","1810; 2010","2000; 2200","SCIE; SCIE","049; 049",Ocean,8/18/2026,12/22/2026,"Alphonso-Gibbs; Alphonso-Gibbs"
+"Fall 2026","Engineering & Architecture",70595,ENGN," 10A",001,"Intro to Engin: The Profession",80,80,,,4,10,Lec,R,1210,1400,SCIE,136,Ocean,8/18/2026,12/22/2026,Soneji
+"Fall 2026","Engineering & Architecture",70596,ENGN," 10B",001,IntroEngn:SoftwareTools&Design,40,40,,,2,10,L/L,"F; F","1310; 1410","1400; 1700","SCIE; SCIE","136; 136",Ocean,8/18/2026,12/22/2026,"Mueller; Mueller"
+"Fall 2026","Engineering & Architecture",73974,ENGN," 24",501,"Engineering Design Graphics",30,30,,,10,10,L/L,"MW; MW","1810; 1925","1915; 2055","CLOU; CLOU","203; 203",Ocean,8/31/2026,12/22/2026,"Jimenez; Jimenez"
+"Fall 2026","Engineering & Architecture",73555,ENGN," 36",002,"Engineering Mechanics-Statics",35,35,,,10,10,Lec,TR,1010,1125,SCIE,200,Ocean,8/18/2026,12/22/2026,Chang
+"Fall 2026","Engineering & Architecture",70601,ENGN," 38",001,"Intro Programming for Engrs",45,45,,,10,10,L/L,"TR; R","1440; 1610","1555; 1700","CLOU; CLOU","203; 203",Ocean,8/18/2026,12/22/2026,"Soneji; Soneji"
+"Fall 2026","Engineering & Architecture",73055,ENGN," 48L",001,"Engineering & Technology Lab",2,24,,,0,10,Lab,W,1530,1820,CHNB,1404,"Chinatown/North Beach",8/18/2026,12/22/2026,Soneji
+"Fall 2026","Engineering & Architecture",70602,ENRG,"  3",861,"Intro Clean & Renewable Energy",30,30,,,8,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Soneji
+"Fall 2026","Engineering & Architecture",72652,ENVS," 31",931,"Intro to Environmental Science",40,40,,,9,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Kumpf
+"Fall 2026","Engineering & Architecture",73999,ENVS," 31",932,"Intro to Environmental Science",40,40,,,6,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Kumpf
+"Fall 2026","Engineering & Architecture",73056,ENVS," 31L",001,"Environmental Science Lab",24,24,,,4,10,Hyb,"F; TBA","1310; TBA","1600; TBA","STEM; TBA",206,Ocean,8/31/2026,12/22/2026,"Woo; Soneji"
+"Fall 2026","Engineering & Architecture",72801,ENVS," 91",W01,"Appl Research Sustainability",3,10,,,0,5,Wrk,TBA,TBA,TBA,TBA,,Ocean,8/18/2026,12/22/2026,Soneji
+"Fall 2026","Engineering & Architecture",72802,ENVS," 91",W02,"Appl Research Sustainability",1,10,,,0,5,Wrk,TBA,TBA,TBA,TBA,,Ocean,8/18/2026,12/22/2026,Soneji
+"Fall 2026","Engineering & Architecture",72803,ENVS," 91",W04,"Appl Research Sustainability",0,10,,,0,5,Wrk,TBA,TBA,TBA,TBA,,Ocean,8/18/2026,12/22/2026,Soneji
+"Fall 2026","Engineering & Architecture",70604,ET,104,001,"Engn Drawing & Manufacturing",20,20,,,4,10,L/L,"M; W; MW","1510; 1510; 1610","1600; 1600; 1715","SCIE; SCIE; SCIE","143; 004; 004",Ocean,8/31/2026,12/22/2026,"Kimball; Kimball; Staff"
+"Fall 2026","Engineering & Architecture",70605,ET,130,501,"Applied Fluid Mechanics MET",32,40,,,5,10,Lec,T,1810,2100,SCIE,136,Ocean,8/18/2026,12/22/2026,Mueller
+"Fall 2026","Engineering & Architecture",70606,ET,136A,501,"HVAC System Fundamentals",30,40,,,2,10,L/L,"W; W","1810; 1940","1925; 2055","SCIE; SCIE","136; 133",Ocean,8/18/2026,12/22/2026,"Mueller; Mueller"
+"Fall 2026","Engineering & Architecture",74253,ET,139A,501,"Engineering Plumbing Systems",24,40,,,2,10,Lec,M,1810,2125,SCIE,108,Ocean,8/31/2026,12/22/2026,Harlan
+"Fall 2026","Engineering & Architecture",70049,INTD,100,881,"Intro Residen Interior Design",28,28,,,10,10,Onl,"TBA; TBA","TBA; TBA","TBA; TBA","TBA; TBA",,Online,8/18/2026,12/22/2026,"Huang; Staff"
+"Fall 2026","Engineering & Architecture",74254,INTD,138,001,"Global Hist of Interior Design",30,30,,,0,10,Lec,MW,0940,1055,BATL,203,Ocean,8/18/2026,12/22/2026,Ray
+"Fall 2026","Engineering & Architecture",73480,WELD,140,501,"Manufacturing Processes",24,24,,,10,10,L/L,"MW; MW","1810; 1910","1900; 2130","SCIE; SCIE","111; 004",Ocean,8/31/2026,12/22/2026,"Kimball; Kimball"
+"Fall 2026",Mathematics,74258,MATH," 65",001,"Math for Elementary Teachers",9,35,,,0,10,Lec,TR,1110,1225,JDVL,810,Ocean,8/18/2026,12/22/2026,Mohammadzadeh
+"Fall 2026",Mathematics,74321,MATH," 70",001,"Liberal Arts Math",35,35,,,1,10,Lec,TR,0910,1030,JDVL,804,Ocean,8/31/2026,12/22/2026,Fahey
+"Fall 2026",Mathematics,70994,MATH," 70",002,"Liberal Arts Math",35,35,,,0,10,Lec,MW,1010,1125,STEM,317,Ocean,8/18/2026,12/22/2026,Maxwell
+"Fall 2026",Mathematics,72457,MATH," 70",004,"Liberal Arts Math",3,35,,,0,10,Lec,T,1810,2100,CHNB,1405,"Chinatown/North Beach",8/18/2026,12/22/2026,Maoujoudi
+"Fall 2026",Mathematics,70998,MATH," 70",201,"Liberal Arts Math",10,35,,,0,10,Lec,T,1810,2100,JAD,100,"John Adams",8/18/2026,12/22/2026,Dadmehr
+"Fall 2026",Mathematics,74358,MATH," 70",301,"Liberal Arts Math",1,35,,,0,10,Lec,MW,1810,2015,MIC,162,Mission,9/28/2026,12/22/2026,Staff
+"Fall 2026",Mathematics,70997,MATH," 70",501,"Liberal Arts Math",24,35,,,0,10,Lec,TR,1640,1755,STEM,317,Ocean,8/18/2026,12/22/2026,Bradach
+"Fall 2026",Mathematics,72459,MATH," 70",502,"Liberal Arts Math",19,35,,,0,10,Lec,W,1710,2025,HC,214,Ocean,8/31/2026,12/22/2026,Fahey
+"Fall 2026",Mathematics,73842,MATH," 70",932,"Liberal Arts Math",37,40,,,10,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Vysotskiy
+"Fall 2026",Mathematics,73840,MATH," 70",935,"Liberal Arts Math",62,65,,,10,10,Onl,TBA,TBA,TBA,TBA,,Online,9/28/2026,12/22/2026,Riazati
+"Fall 2026",Mathematics,73841,MATH," 70",961,"Liberal Arts Math",27,35,,,0,10,Hyb,"TR; TBA","1210; TBA","1325; TBA","STEM; TBA",317,Ocean,8/31/2026,10/25/2026,"Lum; Staff"
+"Fall 2026",Mathematics,72731,MATH," 70",962,"Liberal Arts Math",13,35,,,0,10,Hyb,"TR; TBA","1210; TBA","1325; TBA","STEM; TBA",317,Ocean,10/26/2026,12/22/2026,"Lum; Lum"
+"Fall 2026",Mathematics,73043,MATH," 70",966,"Liberal Arts Math",25,35,,,0,10,Hyb,"S; TBA","1010; TBA","1200; TBA","CHNB; TBA",1405,"Chinatown/North Beach",9/28/2026,12/22/2026,"Riazati; Staff"
+"Fall 2026",Mathematics,71000,MATH," 75",961,"Math Analysis For Business",15,35,,,0,10,Hyb,"TBA; F","TBA; 1010","TBA; 1200","TBA; BATL",713,Ocean,8/31/2026,12/22/2026,"Saunders; Staff"
+"Fall 2026",Mathematics,71001,MATH," 75",962,"Math Analysis For Business",11,35,,,0,10,Hyb,"TBA; F","TBA; 1310","TBA; 1500","TBA; BATL",713,Ocean,8/31/2026,12/22/2026,"Saunders; Staff"
+"Fall 2026",Mathematics,73843,MATH," 75",S01,"Math Analysis For Business",15,35,,,0,10,Lec,TR,0840,0955,JDVL,806,Ocean,8/18/2026,12/22/2026,Dudum
+"Fall 2026",Mathematics,74319,MATH," 75",S62,"Math Analysis For Business",16,35,,,0,10,Hyb,"TR; TBA","1310; TBA","1400; TBA","BATL; TBA",713,Ocean,8/31/2026,12/22/2026,"Saunders; Staff"
+"Fall 2026",Mathematics,73844,MATH," 75S",S01,"Math Analysis Business Support",15,35,,,0,10,Lec,TR,1010,1100,JDVL,806,Ocean,8/18/2026,12/22/2026,Dudum
+"Fall 2026",Mathematics,74320,MATH," 75S",S62,"Math Analysis Business Support",16,35,,,0,10,Lec,TR,1410,1500,BATL,713,Ocean,8/31/2026,12/22/2026,Saunders
+"Fall 2026",Mathematics,71044,MATH," 90",S01,"Precalculus Algebra",13,35,,,0,10,Lec,MTWRF,0910,1000,HC,213,Ocean,8/18/2026,12/22/2026,Bravewoman
+"Fall 2026",Mathematics,71046,MATH," 90",S02,"Precalculus Algebra",20,35,,,0,10,Lec,TR,1010,1225,HBB,380,Ocean,8/18/2026,12/22/2026,Russakovskii
+"Fall 2026",Mathematics,74018,MATH," 90",S03,"Precalculus Algebra",35,35,,,2,10,Lec,MW,0940,1155,ART,312,Ocean,8/18/2026,12/22/2026,Wong
+"Fall 2026",Mathematics,71043,MATH," 90",S04,"Precalculus Algebra",5,35,,,0,10,Lec,MW,1610,1825,BATL,653,Ocean,8/18/2026,12/22/2026,Urman
+"Fall 2026",Mathematics,73049,MATH," 90",S31,"Precalculus Algebra",40,40,,,5,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Liu
+"Fall 2026",Mathematics,73966,MATH," 90",S61,"Precalculus Algebra",15,35,,,0,10,Lec,MW,1010,1225,HC,206,Ocean,8/18/2026,12/22/2026,Staff
+"Fall 2026",Mathematics,72480,MATH," 90",S62,"Precalculus Algebra",11,35,,,0,10,Lec,TR,1810,2025,JDVL,810,Ocean,8/18/2026,12/22/2026,Staff
+"Fall 2026",Mathematics,71048,MATH," 90S",S01,"Precalculus Algebra Support",13,35,,,0,10,Lec,TR,1010,1125,HC,213,Ocean,8/18/2026,12/22/2026,Bravewoman
+"Fall 2026",Mathematics,71050,MATH," 90S",S02,"Precalculus Algebra Support",20,35,,,0,10,Lec,TR,1240,1355,HBB,380,Ocean,8/18/2026,12/22/2026,Russakovskii
+"Fall 2026",Mathematics,74019,MATH," 90S",S03,"Precalculus Algebra Support",35,35,,,2,10,Lec,MW,1210,1325,ART,312,Ocean,8/18/2026,12/22/2026,Wong
+"Fall 2026",Mathematics,71918,MATH," 90S",S04,"Precalculus Algebra Support",5,35,,,0,10,Lec,MW,1910,2025,BATL,653,Ocean,8/18/2026,12/22/2026,Urman
+"Fall 2026",Mathematics,73050,MATH," 90S",S31,"Precalculus Algebra Support",40,40,,,5,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Liu
+"Fall 2026",Mathematics,73967,MATH," 90S",S61,"Precalculus Algebra Support",15,35,,,0,10,Lec,MW,1310,1425,HC,206,Ocean,8/18/2026,12/22/2026,Staff
+"Fall 2026",Mathematics,72482,MATH," 90S",S62,"Precalculus Algebra Support",11,35,,,0,10,Lec,TR,1640,1755,JDVL,810,Ocean,8/18/2026,12/22/2026,Staff
+"Fall 2026",Mathematics,73845,MATH," 95",001,Trigonometry,9,35,,,0,10,Lec,MW,1010,1125,HC,213,Ocean,8/18/2026,12/22/2026,Bravewoman
+"Fall 2026",Mathematics,73846,MATH," 95",861,Trigonometry,13,35,,,0,10,Hyb,"T; TBA","1540; TBA","1655; TBA","HC; TBA",213,Ocean,8/18/2026,12/22/2026,"Vo; Staff"
+"Fall 2026",Mathematics,73847,MATH," 95",961,Trigonometry,13,35,,,0,10,Hyb,"TBA; S","TBA; 1010","TBA; 1200","TBA; HBB",361,Ocean,8/31/2026,10/25/2026,"Staff; Fahey"
+"Fall 2026",Mathematics,73490,MATH," 98",001,"Precalculus & Trigonometry",12,35,,,0,10,Lec,MTWR,1210,1340,HC,213,Ocean,8/18/2026,12/22/2026,Bravewoman
+"Fall 2026",Mathematics,72486,MATH," 98",861,"Precalculus & Trigonometry",19,35,,,0,10,Hyb,"R; TBA","1710; TBA","2000; TBA","MIC; TBA",277,Mission,8/18/2026,12/22/2026,"Vo; Staff"
+"Fall 2026",Mathematics,74340,MATH," 98",863,"Precalculus & Trigonometry",17,40,,,0,10,Hyb,"TBA; S","TBA; 1210","TBA; 1400","TBA; HBB",240,Ocean,8/18/2026,12/22/2026,"Nguyen; Staff"
+"Fall 2026",Mathematics,74256,MATH,100A,001,"Short Calculus I",35,35,,,3,10,Lec,TR,1310,1515,HC,215,Ocean,9/28/2026,12/22/2026,Bradach
+"Fall 2026",Mathematics,70948,MATH,100A,501,"Short Calculus I",35,35,,,1,10,Lec,TR,1810,1925,CLOU,266,Ocean,8/18/2026,12/22/2026,Bradach
+"Fall 2026",Mathematics,70949,MATH,108,961,"Foundations of Data Science",8,35,,,0,10,Hyb,"R; TBA","1310; TBA","1525; TBA","JDVL; TBA",805,Ocean,8/31/2026,12/22/2026,"Staff; Mohammadzadeh"
+"Fall 2026",Mathematics,73040,MATH,108,962,"Foundations of Data Science",12,35,,,0,10,Hyb,"R; TBA","1810; TBA","2025; TBA","MIC; TBA",321,Mission,8/31/2026,12/22/2026,"Page II; Staff"
+"Fall 2026",Mathematics,70950,MATH,108,963,"Foundations of Data Science",10,35,,,0,10,Hyb,"W; TBA","1810; TBA","2025; TBA","CHNB; TBA",1405,"Chinatown/North Beach",8/31/2026,12/22/2026,"Wiggins; Wiggins"
+"Fall 2026",Mathematics,73486,MATH,108,964,"Foundations of Data Science",20,35,,,0,10,Hyb,"F; TBA","1010; TBA","1225; TBA","CLOU; TBA",202,Ocean,8/31/2026,12/22/2026,"Mohammadzadeh; Staff"
+"Fall 2026",Mathematics,74316,MATH,110A,002,"Calculus I",9,35,,,0,10,Lec,TR,0840,1055,STEM,317,Ocean,8/18/2026,12/22/2026,Stevens
+"Fall 2026",Mathematics,70953,MATH,110A,003,"Calculus I",16,35,,,0,10,Lec,MW,0840,1055,ART,310,Ocean,8/18/2026,12/22/2026,Dudum
+"Fall 2026",Mathematics,73825,MATH,110A,004,"Calculus I",4,35,,,0,10,Lec,MW,1810,2025,BATL,611,Ocean,8/18/2026,12/22/2026,Jeh
+"Fall 2026",Mathematics,70954,MATH,110A,005,"Calculus I",34,35,,,0,10,Lec,MW,1110,1325,ART,310,Ocean,8/18/2026,12/22/2026,Dudum
+"Fall 2026",Mathematics,70956,MATH,110A,006,"Calculus I",5,35,,,0,10,Lec,MTWRF,0810,0900,HC,213,Ocean,8/18/2026,12/22/2026,Bravewoman
+"Fall 2026",Mathematics,72084,MATH,110A,007,"Calculus I",3,35,,,0,10,Lec,TR,1010,1235,BATL,613,Ocean,8/31/2026,12/22/2026,Lee
+"Fall 2026",Mathematics,70959,MATH,110A,009,"Calculus I",1,35,,,0,10,Lec,S,0810,1300,HBB,250,Ocean,8/18/2026,12/22/2026,Jeh
+"Fall 2026",Mathematics,72213,MATH,110A,861,"Calculus I",11,35,,,0,10,Hyb,"T; TBA","1710; TBA","1925; TBA","HC; TBA",207,Ocean,8/18/2026,12/22/2026,"Vo; Staff"
+"Fall 2026",Mathematics,70957,MATH,110A,933,"Calculus I",21,40,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Liu
+"Fall 2026",Mathematics,70958,MATH,110A,934,"Calculus I",40,40,,,5,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Bertens
+"Fall 2026",Mathematics,70955,MATH,110A,962,"Calculus I",2,35,,,0,10,Hyb,"TBA; F; F; F; F; F","TBA; 1310; 1310; 1310; 1310; 1310","TBA; 1500; 1500; 1500; 1500; 1500","TBA; STEM; STEM; STEM; STEM; STEM","317; 317; 317; 317; 317",Ocean,9/28/2026,12/22/2026,"Bertens; Staff; Staff; Staff; Staff; Staff"
+"Fall 2026",Mathematics,70960,MATH,110A,965,"Calculus I",2,35,,,0,10,Hyb,"R; TBA","1210; TBA","1425; TBA","MIC; TBA",314,Mission,8/31/2026,12/22/2026,"Page II; Staff"
+"Fall 2026",Mathematics,73827,MATH,110A,S02,"Calculus I",33,33,,,4,10,Lec,TR,1310,1525,CLOU,260,Ocean,8/18/2026,12/22/2026,Dadmehr
+"Fall 2026",Mathematics,73826,MATH,110A,S31,"Calculus I",23,35,,,0,10,Hyb,"MW; TBA","1010; TBA","1100; TBA","CHNB; TBA",1405,"Chinatown/North Beach",8/18/2026,12/22/2026,"Lum; Staff"
+"Fall 2026",Mathematics,73828,MATH,110A,S61,"Calculus I",10,35,,,0,10,Hyb,"M; TBA","1710; TBA","1800; TBA","MIC; TBA",321,Mission,8/18/2026,12/22/2026,"Lockman; Staff"
+"Fall 2026",Mathematics,73829,MATH,110A,S62,"Calculus I",35,35,,,0,10,Hyb,"W; TBA","1310; TBA","1400; TBA","BATL; TBA",713,Ocean,8/18/2026,12/22/2026,"Lockman; Staff"
+"Fall 2026",Mathematics,74317,MATH,110A,S64,"Calculus I",35,35,,,9,10,Hyb,"TR; TBA","1010; TBA","1100; TBA","BATL; TBA",713,Ocean,8/31/2026,12/22/2026,"Saunders; Staff"
+"Fall 2026",Mathematics,70964,MATH,110B,002,"Calculus II",26,35,,,0,10,Lec,MW,1410,1625,BATL,611,Ocean,8/18/2026,12/22/2026,Lee
+"Fall 2026",Mathematics,72452,MATH,110B,003,"Calculus II",32,35,,,0,10,Lec,TR,1110,1335,HC,205,Ocean,8/31/2026,12/22/2026,Liu
+"Fall 2026",Mathematics,70965,MATH,110B,961,"Calculus II",35,35,,,10,10,Hyb,"W; TBA","0810; TBA","1025; TBA","JDVL; TBA",810,Ocean,8/31/2026,12/22/2026,"Bass; Staff"
+"Fall 2026",Mathematics,72453,MATH,110B,962,"Calculus II",14,35,,,0,10,Hyb,"T; TBA","1810; TBA","2025; TBA","CHNB; TBA",1305,"Chinatown/North Beach",8/31/2026,12/22/2026,"Bass; Staff"
+"Fall 2026",Mathematics,73831,MATH,110B,963,"Calculus II",18,35,,,0,10,Hyb,"T; TBA","1810; TBA","2025; TBA","MIC; TBA",319,Mission,8/31/2026,12/22/2026,"Fuchs; Staff"
+"Fall 2026",Mathematics,70963,MATH,110B,964,"Calculus II",35,35,,,0,10,Hyb,"T; TBA","1110; TBA","1325; TBA","HBB; TBA",370,Ocean,8/31/2026,12/22/2026,"Fuchs; Staff"
+"Fall 2026",Mathematics,74339,MATH,110B,966,"Calculus II",27,40,,,0,10,Hyb,"TBA; S","TBA; 0810","TBA; 1000","TBA; HBB",261,Ocean,8/31/2026,12/22/2026,"Nguyen; Staff"
+"Fall 2026",Mathematics,70968,MATH,110C,002,"Calculus III",7,35,,,0,10,Lec,TR,1110,1325,BATL,753,Ocean,8/18/2026,12/22/2026,Lee
+"Fall 2026",Mathematics,72454,MATH,110C,003,"Calculus III",28,35,,,0,10,Lec,TR,1410,1635,HC,205,Ocean,8/31/2026,12/22/2026,Liu
+"Fall 2026",Mathematics,74257,MATH,110C,501,"Calculus III",35,35,,,7,10,Lec,MW,1810,2025,HBB,380,Ocean,8/18/2026,12/22/2026,Rankenburg
+"Fall 2026",Mathematics,70972,MATH,110C,961,"Calculus III",35,35,,,6,10,Hyb,"TBA; F; F","TBA; 0810; 0810","TBA; 1000; 1000","TBA; HC; HC","202; 202",Ocean,8/31/2026,12/22/2026,"Bass; Staff; Staff"
+"Fall 2026",Mathematics,73833,MATH,110S,S02,"Support for Calculus I",33,33,,,4,10,Lec,TR,1210,1300,CLOU,260,Ocean,8/18/2026,12/22/2026,Dadmehr
+"Fall 2026",Mathematics,73832,MATH,110S,S31,"Support for Calculus I",23,35,,,0,10,Lec,MW,1110,1200,CHNB,1405,"Chinatown/North Beach",8/18/2026,12/22/2026,Lum
+"Fall 2026",Mathematics,73834,MATH,110S,S61,"Support for Calculus I",10,35,,,0,10,Lec,M,1810,2000,MIC,321,Mission,8/18/2026,12/22/2026,Lockman
+"Fall 2026",Mathematics,73835,MATH,110S,S62,"Support for Calculus I",35,35,,,0,10,Lec,W,1410,1600,BATL,713,Ocean,8/18/2026,12/22/2026,Lockman
+"Fall 2026",Mathematics,74318,MATH,110S,S64,"Support for Calculus I",35,35,,,9,10,Lec,TR,1110,1200,BATL,713,Ocean,8/31/2026,12/22/2026,Saunders
+"Fall 2026",Mathematics,70973,MATH,115,002,"Discrete Mathematics",27,35,,,0,10,Lec,"TR; TBA","0940; TBA","1055; TBA","ART; TBA",312,Ocean,8/18/2026,12/22/2026,"Mohammadzadeh; Mohammadzadeh"
+"Fall 2026",Mathematics,70975,MATH,115,501,"Discrete Mathematics",9,35,,,0,10,Lec,W,1710,2000,HC,204,Ocean,8/18/2026,12/22/2026,Rebouh
+"Fall 2026",Mathematics,72595,MATH,115,961,"Discrete Mathematics",20,65,,,0,10,Hyb,"TBA; S","TBA; 1010","TBA; 1200","TBA; JDVL",807,Ocean,8/31/2026,12/22/2026,"Nguyen; Staff"
+"Fall 2026",Mathematics,72456,MATH,120,501,"Linear Algebra",10,35,,,0,10,Lec,W,1710,2000,JDVL,805,Ocean,8/18/2026,12/22/2026,Ivanov
+"Fall 2026",Mathematics,73963,MATH,120,962,"Linear Algebra",16,35,,,0,10,Hyb,"TBA; S; S","TBA; 1010; 1010","TBA; 1200; 1200","TBA; HBB; HBB","261; 261",Ocean,8/31/2026,12/22/2026,"Rankenburg; Staff; Staff"
+"Fall 2026",Mathematics,73839,MATH,130,001,"Linear Alg & Diff Equations",12,35,,,0,10,Lec,TR,1410,1625,BATL,611,Ocean,8/18/2026,12/22/2026,Lee
+"Fall 2026",Mathematics,70977,MATH,130,501,"Linear Alg & Diff Equations",35,35,,,10,10,Lec,TR,1710,1925,HC,215,Ocean,8/18/2026,12/22/2026,Ivanov
+"Fall 2026",Mathematics,70979,MATH,130,961,"Linear Alg & Diff Equations",35,35,,,10,10,Hyb,"TBA; F; F","TBA; 1010; 1010","TBA; 1200; 1200","TBA; HC; HC","202; 202",Ocean,8/31/2026,12/22/2026,"Bass; Staff; Staff"
+"Fall 2026",Mathematics,73851,STAT,C1000,003,"Introduction to Statistics",21,35,,,0,10,Lec,MW,1810,2025,HBB,255,Ocean,8/18/2026,12/22/2026,Staff
+"Fall 2026",Mathematics,73850,STAT,C1000,004,"Introduction to Statistics",35,35,,,9,10,Lec,TR,0910,1125,HBB,255,Ocean,8/18/2026,12/22/2026,Lum
+"Fall 2026",Mathematics,73855,STAT,C1000,931,"Introduction to Statistics",40,40,,,10,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Bertens
+"Fall 2026",Mathematics,73856,STAT,C1000,961,"Introduction to Statistics",15,35,,,0,10,Hyb,"R; TBA","1510; TBA","1725; TBA","HBB; TBA",261,Ocean,8/31/2026,12/22/2026,"Staff; Aggarwal"
+"Fall 2026",Mathematics,74313,STAT,C1000,962,"Introduction to Statistics",19,35,,,0,10,Hyb,"T; TBA","1710; TBA","1925; TBA","HBB; TBA",255,Ocean,8/31/2026,12/22/2026,"Nguyen; Staff"
+"Fall 2026",Mathematics,73852,STAT,C1000,963,"Introduction to Statistics",14,35,,,0,10,Hyb,"R; TBA","1810; TBA","2000; TBA","JAD; TBA",333,"John Adams",8/31/2026,12/22/2026,"Aggarwal; Staff"
+"Fall 2026",Mathematics,73861,STAT,C1000,965,"Introduction to Statistics",35,35,,,6,10,Hyb,"F; TBA","1010; TBA","1200; TBA","HC; TBA",205,Ocean,8/31/2026,12/22/2026,"Stevens; Staff"
+"Fall 2026",Mathematics,73862,STAT,C1000,966,"Introduction to Statistics",35,35,,,5,10,Hyb,"F; TBA","1210; TBA","1400; TBA","HC; TBA",205,Ocean,8/31/2026,12/22/2026,"Stevens; Staff"
+"Fall 2026",Mathematics,73860,STAT,C1000,967,"Introduction to Statistics",35,35,,,0,10,Hyb,"TBA; F; F; F; F; F","TBA; 1110; 1110; 1110; 1110; 1110","TBA; 1300; 1300; 1300; 1300; 1300","TBA; STEM; STEM; STEM; STEM; STEM","317; 317; 317; 317; 317",Ocean,9/28/2026,12/22/2026,"Bertens; Staff; Staff; Staff; Staff; Staff"
+"Fall 2026",Mathematics,74015,STAT,C1000,968,"Introduction to Statistics",28,35,,,2,10,Hyb,"W; TBA","1210; TBA","1425; TBA","HBB; TBA",255,Ocean,8/31/2026,12/22/2026,"Page II; Staff"
+"Fall 2026",Mathematics,74021,STAT,C1000,969,"Introduction to Statistics",25,35,,,0,10,Hyb,"T; TBA","1310; TBA","1525; TBA","HBB; TBA",255,Ocean,8/31/2026,12/22/2026,"Nguyen; Staff"
+"Fall 2026",Mathematics,73864,STAT,C1000,S01,"Introduction to Statistics",23,35,,,0,10,Lec,MW,1310,1525,BATL,753,Ocean,8/18/2026,12/22/2026,Maoujoudi
+"Fall 2026",Mathematics,73865,STAT,C1000,S02,"Introduction to Statistics",34,35,,,0,10,Lec,MW,1110,1325,HC,205,Ocean,8/18/2026,12/22/2026,Vysotskiy
+"Fall 2026",Mathematics,73868,STAT,C1000,S31,"Introduction to Statistics",40,40,,,10,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Fredericks
+"Fall 2026",Mathematics,73867,STAT,C1000,S51,"Introduction to Statistics",21,35,,,0,10,Lec,TR,1810,2025,HC,206,Ocean,8/18/2026,12/22/2026,Rebouh
+"Fall 2026",Mathematics,74341,STAT,C1000,S61,"Introduction to Statistics",39,40,,,2,10,Hyb,"TBA; S","TBA; 1010","TBA; 1200","TBA; HBB",340,Ocean,8/18/2026,12/22/2026,"Page II; Staff"
+"Fall 2026",Mathematics,73871,STAT," 80S",S01,"Support for Statistics",23,35,,,0,10,Lec,MW,1210,1300,BATL,753,Ocean,8/18/2026,12/22/2026,Maoujoudi
+"Fall 2026",Mathematics,73872,STAT," 80S",S02,"Support for Statistics",34,35,,,0,10,Lec,MW,1410,1500,HC,205,Ocean,8/18/2026,12/22/2026,Vysotskiy
+"Fall 2026",Mathematics,73875,STAT," 80S",S31,"Support for Statistics",40,40,,,10,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Fredericks
+"Fall 2026",Mathematics,73874,STAT," 80S",S51,"Support for Statistics",21,35,,,0,10,Lec,TR,1710,1800,HC,206,Ocean,8/18/2026,12/22/2026,Rebouh
+"Fall 2026",Mathematics,74342,STAT," 80S",S61,"Support for Statistics",39,40,,,2,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,"Page II"
+"Fall 2026",Physics,71479,PHYC,"  2A",831,"Introductory Physics",35,35,,,10,10,Onl,"TBA; TBA","TBA; TBA","TBA; TBA","TBA; TBA",,Online,8/18/2026,12/22/2026,"Evans; Evans"
+"Fall 2026",Physics,71480,PHYC,"  2A",832,"Introductory Physics",35,35,,,10,10,Onl,"TBA; TBA","TBA; TBA","TBA; TBA","TBA; TBA",,Online,8/18/2026,12/22/2026,"Evans; Evans"
+"Fall 2026",Physics,72488,PHYC,"  2A",833,"Introductory Physics",35,35,,,9,10,Onl,"TBA; TBA","TBA; TBA","TBA; TBA","TBA; TBA",,Online,8/18/2026,12/22/2026,"Evans; Evans"
+"Fall 2026",Physics,71487,PHYC,"  4A",001,"Mechanics for Sci and Engn",35,35,,,2,10,L/L,"MWF; M","1110; 1010","1200; 1100","SCIE; SCIE","100; 108",Ocean,8/18/2026,12/22/2026,"King; King"
+"Fall 2026",Physics,71488,PHYC,"  4A",002,"Mechanics for Sci and Engn",35,35,,,5,10,L/L,"MWF; W","1110; 1210","1200; 1300","SCIE; SCIE","100; 108",Ocean,8/18/2026,12/22/2026,"King; King"
+"Fall 2026",Physics,71489,PHYC,"  4A",003,"Mechanics for Sci and Engn",34,35,,,1,10,L/L,"MWF; F","1110; 1210","1200; 1300","SCIE; SCIE","100; 108",Ocean,8/18/2026,12/22/2026,"King; King"
+"Fall 2026",Physics,71494,PHYC,"  4B",001,"Elec & Mag for Sci and Engn",34,35,,,0,10,L/L,"MWF; M","1310; 1210","1400; 1300","SCIE; SCIE","100; 113",Ocean,8/18/2026,12/22/2026,"Westerberg; Westerberg"
+"Fall 2026",Physics,71495,PHYC,"  4B",002,"Elec & Mag for Sci and Engn",28,35,,,0,10,L/L,"MWF; W","1310; 1210","1400; 1300","SCIE; SCIE","100; 113",Ocean,8/18/2026,12/22/2026,"Westerberg; Westerberg"
+"Fall 2026",Physics,71496,PHYC,"  4B",003,"Elec & Mag for Sci and Engn",34,35,,,0,10,L/L,"MWF; F","1310; 1210","1400; 1300","SCIE; SCIE","100; 113",Ocean,8/18/2026,12/22/2026,"Westerberg; Westerberg"
+"Fall 2026",Physics,71501,PHYC,"  4C",001,"Wave & Therm for Sci and Engn",43,48,,,0,10,L/L,"MWF; F","1410; 1510","1500; 1600","SCIE; SCIE","108; 108",Ocean,8/18/2026,12/22/2026,"Westerberg; Westerberg"
+"Fall 2026",Physics,72774,PHYC," 10",001,"Conceptual Physics",80,80,,,10,10,Lec,TR,1110,1225,SCIE,100,Ocean,8/18/2026,12/22/2026,Cauthen
+"Fall 2026",Physics,71474,PHYC," 10",831,"Conceptual Physics",110,110,,,10,10,Onl,TBA,TBA,TBA,TBA,,Online,8/18/2026,12/22/2026,Cauthen
+"Fall 2026",Physics,71475,PHYC," 10L",001,"Conceptual Physics Laboratory",24,24,,,10,10,Lab,T,0810,1100,SCIE,158,Ocean,8/18/2026,12/22/2026,Yadak
+"Fall 2026",Physics,74190,PHYC," 10L",002,"Conceptual Physics Laboratory",24,24,,,10,10,Lab,T,1110,1400,SCIE,158,Ocean,8/18/2026,12/22/2026,Yadak
+"Fall 2026",Physics,71476,PHYC," 10L",003,"Conceptual Physics Laboratory",24,24,,,10,10,Lab,T,1410,1700,SCIE,158,Ocean,8/18/2026,12/22/2026,Kaci
+"Fall 2026",Physics,71482,PHYC," 2AC",931,"Intro Phyc I Calc Sup",43,50,,,0,10,Onl,TBA,TBA,TBA,TBA,,Online,8/31/2026,12/22/2026,Pevyhouse
+"Fall 2026",Physics,71483,PHYC," 2AL",001,"Intro to Physics Laboratory I",24,24,,,10,10,Lab,T,1410,1700,SCIE,178,Ocean,8/18/2026,12/22/2026,Cauthen
+"Fall 2026",Physics,71484,PHYC," 2AL",002,"Intro to Physics Laboratory I",24,24,,,10,10,Lab,W,1410,1700,SCIE,178,Ocean,8/18/2026,12/22/2026,Cauthen
+"Fall 2026",Physics,72489,PHYC," 2AL",003,"Intro to Physics Laboratory I",24,24,,,10,10,Lab,R,1410,1700,SCIE,178,Ocean,8/18/2026,12/22/2026,Cauthen
+"Fall 2026",Physics,71486,PHYC," 41",001,"Preparatory Physics",21,50,,,0,10,Lec,T,1110,1400,SCIE,108,Ocean,8/18/2026,12/22/2026,Kaci
+"Fall 2026",Physics,71490,PHYC," 4AL",001,"Mech Lab For Sci & Eng",24,24,,,6,10,Lab,W,1410,1700,SCIE,179,Ocean,8/18/2026,12/22/2026,King
+"Fall 2026",Physics,71491,PHYC," 4AL",002,"Mech Lab For Sci & Eng",24,24,,,1,10,Lab,R,1110,1400,SCIE,179,Ocean,8/18/2026,12/22/2026,King
+"Fall 2026",Physics,74191,PHYC," 4AL",003,"Mech Lab For Sci & Eng",23,24,,,1,10,Lab,R,1410,1700,SCIE,179,Ocean,8/18/2026,12/22/2026,King
+"Fall 2026",Physics,74192,PHYC," 4AL",004,"Mech Lab For Sci & Eng",24,24,,,2,10,Lab,F,1410,1700,SCIE,179,Ocean,8/18/2026,12/22/2026,King
+"Fall 2026",Physics,71497,PHYC," 4BL",001,"E&M Lab For Sci & Eng",24,24,,,10,10,Lab,M,1410,1700,SCIE,158,Ocean,8/18/2026,12/22/2026,Bollinger
+"Fall 2026",Physics,71498,PHYC," 4BL",002,"E&M Lab For Sci & Eng",24,24,,,8,10,Lab,W,1410,1700,SCIE,158,Ocean,8/18/2026,12/22/2026,Bollinger
+"Fall 2026",Physics,71499,PHYC," 4BL",003,"E&M Lab For Sci & Eng",24,24,,,6,10,Lab,F,1410,1700,SCIE,158,Ocean,8/18/2026,12/22/2026,Bollinger
+"Fall 2026",Physics,71504,PHYC," 4CL",001,"Wave & Therm Lab For Sci & Eng",23,24,,,0,10,Lab,W,1510,1800,SCIE,159,Ocean,8/18/2026,12/22/2026,Yadak
+"Fall 2026",Physics,74359,PHYC," 4CL",002,"Wave & Therm Lab For Sci & Eng",16,24,,,0,10,Lab,"M; M","1510; 1510","1800; 1800","SCIE; SCIE","159; 159",Ocean,8/18/2026,12/22/2026,"Evans; Yadak"
