@@ -545,6 +545,7 @@ button { font-family: var(--sans); cursor: pointer; }
   background-size: 11px;
 }
 .filter-input { background-image: none; padding-right: 8px; min-width: 200px; }
+.filter-select.wide { min-width: 210px; }
 .filter-input:focus, .filter-select:focus { outline: none; border-bottom-color: var(--ink); }
 
 .view-toggle {
@@ -2705,6 +2706,7 @@ const state = {
     department: 'Mathematics',   // default focus on the Mathematics department
     mode: 'all',                 // 'all' | 'online' | 'hybrid' | 'inperson'
     center: 'all',               // 'all' | a center name (Ocean, Mission, ...)
+    pot: 'all',                  // 'all' | "StartDate|EndDate" of one session
     search: '',
     activeFlags: new Set(), // empty = show all
   },
@@ -3041,6 +3043,22 @@ function partOfTermLabel(startStr, endStr) {
   else if (weeks <= 0) label = range || 'TBA';
   else label = `${weeks}-wk`;
   return { label, range };
+}
+
+// Minimal HTML escaping for values interpolated into option markup.
+function esc(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// Stable key for one session (part of term). The CSV carries no session code,
+// so the start/end pair is the identity: two sections belong to the same part
+// of term exactly when they run over the same dates.
+function partOfTermKey(startStr, endStr) {
+  const s = String(startStr || '').trim();
+  const e = String(endStr || '').trim();
+  return (s && e) ? `${s}|${e}` : 'unknown';
 }
 
 /* ============================================================
@@ -3448,9 +3466,10 @@ function getDepartments(units) {
   return Array.from(set).sort();
 }
 
-/* ---- Mode + Center filters operate on the raw section rows, so that course
-   aggregates, trends and stats all recompute over just the matching sections. ---- */
-function rowMatchesModeCenter(r) {
+/* ---- Mode, Center and Part-of-term filters operate on the raw section rows,
+   so that course aggregates, trends and stats all recompute over just the
+   matching sections. ---- */
+function rowMatchesScope(r) {
   const f = state.filters;
   if (f.mode && f.mode !== 'all') {
     const m = r.ScheduleMethod || '';
@@ -3459,19 +3478,23 @@ function rowMatchesModeCenter(r) {
     if (f.mode === 'inperson' && (m === 'Onl' || m === 'Hyb')) return false;
   }
   if (f.center && f.center !== 'all' && (r.Center || '') !== f.center) return false;
+  if (f.pot && f.pot !== 'all' && partOfTermKey(r.StartDate, r.EndDate) !== f.pot) return false;
   return true;
 }
 
 // Returns the current semester's data with each snapshot pre-filtered by the
-// active mode/center filters. Returns the original object when both are 'all'.
+// active mode/center/part-of-term filters. Returns the original object when
+// all three are 'all'.
 function scopedSemesterData() {
   const base = state.semesters[state.currentSemester];
   if (!base) return base;
   const f = state.filters;
-  if ((!f.mode || f.mode === 'all') && (!f.center || f.center === 'all')) return base;
+  if ((!f.mode || f.mode === 'all')
+      && (!f.center || f.center === 'all')
+      && (!f.pot || f.pot === 'all')) return base;
   const snapshots = {};
   for (const d of Object.keys(base.snapshots)) {
-    snapshots[d] = base.snapshots[d].filter(rowMatchesModeCenter);
+    snapshots[d] = base.snapshots[d].filter(rowMatchesScope);
   }
   return { snapshots };
 }
@@ -3486,6 +3509,50 @@ function getCentersForCurrentSemester() {
   const set = new Set();
   for (const r of rows) if (r.Center) set.add(r.Center);
   return Array.from(set).sort();
+}
+
+// Every part of term running in the current semester, for the Part-of-term
+// dropdown and for the staleness guard in render().
+//
+// The list covers the whole term regardless of the other filters, so a
+// selection is only ever cleared when the semester genuinely has no such
+// session. `count` is narrowed to the selected department, because that is
+// the number the user is actually choosing between; `total` is the term-wide
+// figure. Ordered by size, which puts the full term at the top and the one-off
+// short sessions at the bottom.
+function getPartsOfTermForCurrentSemester() {
+  const base = state.semesters[state.currentSemester];
+  if (!base) return [];
+  const dates = Object.keys(base.snapshots).sort();
+  if (!dates.length) return [];
+  const dept = state.filters.department;
+  const byKey = new Map();
+  for (const r of base.snapshots[dates[dates.length - 1]]) {
+    const key = partOfTermKey(r.StartDate, r.EndDate);
+    let entry = byKey.get(key);
+    if (!entry) {
+      const pot = partOfTermLabel(r.StartDate, r.EndDate);
+      entry = {
+        key,
+        label: pot.label || 'TBA',
+        range: pot.range || '',
+        start: r.StartDate || '',
+        count: 0,
+        total: 0,
+      };
+      byKey.set(key, entry);
+    }
+    entry.total++;
+    if (dept === 'all' || r.Department === dept) entry.count++;
+  }
+  const parseDate = s => {
+    const m = String(s || '').match(/(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
+    if (!m) return Infinity;
+    let y = parseInt(m[3], 10); if (y < 100) y += 2000;
+    return new Date(y, parseInt(m[1], 10) - 1, parseInt(m[2], 10)).getTime();
+  };
+  return Array.from(byKey.values()).sort((a, b) =>
+    b.count - a.count || b.total - a.total || parseDate(a.start) - parseDate(b.start));
 }
 
 // Natural ordering for course / section cards:
@@ -4047,6 +4114,19 @@ function render() {
   subtitleEl.innerHTML = `Latest snapshot ${latestDate}`
     + (cov ? `<span class="daily-badge">Daily history &middot; ${cov.sections} sections &middot; ${cov.from} to ${cov.to}</span>` : '');
 
+  // Guards for the filters that scope the raw rows. These have to run BEFORE
+  // buildUnits(), because a selection left over from another semester matches
+  // nothing and would filter the whole term out of its own view.
+  const centersThisTerm = getCentersForCurrentSemester();
+  if (state.filters.center !== 'all' && !centersThisTerm.includes(state.filters.center)) {
+    state.filters.center = 'all';
+  }
+  // Sessions differ every semester, so a carried-over part of term is always stale.
+  if (state.filters.pot !== 'all'
+      && !getPartsOfTermForCurrentSemester().some(p => p.key === state.filters.pot)) {
+    state.filters.pot = 'all';
+  }
+
   // Build units for display
   const units = buildUnits();
 
@@ -4054,12 +4134,6 @@ function render() {
   const deptsThisTerm = getDepartments(units);
   if (state.filters.department !== 'all' && !deptsThisTerm.includes(state.filters.department)) {
     state.filters.department = 'all';
-  }
-
-  // Guard: if the selected center isn't present this term, fall back to All.
-  const centersThisTerm = getCentersForCurrentSemester();
-  if (state.filters.center !== 'all' && !centersThisTerm.includes(state.filters.center)) {
-    state.filters.center = 'all';
   }
 
   const filtered = filterUnits(units);
@@ -4279,11 +4353,13 @@ function buildFiltersBar(allUnits, filtered) {
 
   const departments = getDepartments(allUnits);
   const centers = getCentersForCurrentSemester();
+  const parts = getPartsOfTermForCurrentSemester();
   const f = state.filters;
   const modeOptions = [
     ['all', 'All'], ['inperson', 'In-person'], ['hybrid', 'Hybrid'], ['online', 'Online'],
   ];
-  const anyFilter = f.department !== 'all' || f.mode !== 'all' || f.center !== 'all' || f.search;
+  const anyFilter = f.department !== 'all' || f.mode !== 'all' || f.center !== 'all'
+    || f.pot !== 'all' || f.search;
 
   bar.innerHTML = `
     <div class="filter-group">
@@ -4307,6 +4383,16 @@ function buildFiltersBar(allUnits, filtered) {
       </select>
     </div>
     <div class="filter-group">
+      <span class="filter-label">Part of term</span>
+      <select class="filter-select wide" id="filter-pot">
+        <option value="all">All</option>
+        ${parts.filter(p => p.count > 0 || p.key === f.pot).map(p => {
+          const text = [p.label, p.range].filter(Boolean).join(' · ');
+          return `<option value="${esc(p.key)}" ${p.key === f.pot ? 'selected' : ''}>${esc(text)} (${p.count})</option>`;
+        }).join('')}
+      </select>
+    </div>
+    <div class="filter-group">
       <span class="filter-label">Search</span>
       <input class="filter-input" id="filter-search" placeholder="Course, title, instructor, CRN" value="${f.search.replace(/"/g, '&quot;')}">
     </div>
@@ -4327,11 +4413,16 @@ function buildFiltersBar(allUnits, filtered) {
     state.filters.center = e.target.value;
     render();
   });
+  bar.querySelector('#filter-pot').addEventListener('change', e => {
+    state.filters.pot = e.target.value;
+    render();
+  });
   const resetBtn = bar.querySelector('#filter-reset');
   if (resetBtn) resetBtn.addEventListener('click', () => {
     state.filters.department = 'all';
     state.filters.mode = 'all';
     state.filters.center = 'all';
+    state.filters.pot = 'all';
     state.filters.search = '';
     state.filters.activeFlags = new Set();
     render();
