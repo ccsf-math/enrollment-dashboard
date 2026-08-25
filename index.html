@@ -873,6 +873,221 @@ button { font-family: var(--sans); cursor: pointer; }
 .card-meta .cm-v { color: var(--ink-soft); }
 .card-meta .cm-wl-active { color: var(--waitlist); font-weight: 500; }
 
+/* ======== WEEKLY CALENDAR ======== */
+.cal-section {
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--white);
+  margin: 0 0 28px;
+  padding: 18px 22px 20px;
+}
+.cal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.cal-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.cal-meta {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--ink-mute);
+  letter-spacing: 0.05em;
+}
+.cal-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0 0 14px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.cal-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.cal-swatch { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+
+/* A busy hour needs one lane per concurrent section, and squeezing thirty of
+   them into a day column just makes an unreadable smear -- so the grid keeps a
+   readable lane width and scrolls sideways instead. */
+.cal-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+}
+.cal-grid {
+  --cal-hour-h: 50px;
+  display: grid;
+  gap: 0;
+  min-width: 100%;
+  width: max-content;
+}
+.cal-corner {
+  position: sticky;
+  left: 0;
+  z-index: 7;
+}
+.cal-gutter {
+  position: sticky;
+  left: 0;
+  z-index: 6;
+  background: var(--white);
+  border-right: 1px solid var(--rule);
+}
+.cal-corner, .cal-dayhead {
+  background: var(--paper-warm);
+  border-bottom: 1px solid var(--rule-strong);
+  padding: 7px 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  text-align: center;
+}
+.cal-dayhead { border-left: 1px solid var(--rule); }
+.cal-dayhead .cal-daycount { color: var(--ink-faint); letter-spacing: 0.04em; }
+
+/* The gutter keeps its sticky positioning from above; only the day columns
+   are plain relative boxes. Both share the grid's full height. */
+.cal-gutter, .cal-col {
+  height: calc(var(--cal-hours) * var(--cal-hour-h));
+}
+.cal-col {
+  position: relative;
+  border-left: 1px solid var(--rule);
+  background-image: repeating-linear-gradient(
+    to bottom, var(--rule) 0 1px, transparent 1px var(--cal-hour-h));
+}
+.cal-hourlabel {
+  position: absolute;
+  right: 7px;
+  transform: translateY(-50%);
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--ink-faint);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+/* The first and last labels would hang off the top and bottom edges. */
+.cal-hourlabel.first { transform: translateY(0); }
+.cal-hourlabel.last  { transform: translateY(-100%); }
+
+.cal-ev {
+  position: absolute;
+  overflow: hidden;
+  min-width: 0;
+  padding: 2px 4px 2px 5px;
+  border-radius: 4px;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--ink-faint);
+  background: var(--paper-warm);
+  cursor: pointer;
+  line-height: 1.25;
+  transition: box-shadow 0.12s, transform 0.12s;
+}
+.cal-ev:hover { box-shadow: 0 3px 12px rgba(26,26,26,0.16); transform: translateY(-1px); z-index: 5; }
+.cal-ev.m-lec { border-left-color: var(--terracotta); background: var(--terracotta-light); }
+.cal-ev.m-onl { border-left-color: var(--teal);       background: var(--teal-light); }
+.cal-ev.m-hyb { border-left-color: var(--purple);     background: var(--purple-light); }
+.cal-ev.m-lab, .cal-ev.m-l-l { border-left-color: var(--lcm); background: var(--lcm-bg); }
+.cal-ev.m-wrk { border-left-color: var(--ink-mute);   background: var(--cream-dark); }
+
+.cal-ev-code {
+  font-family: var(--sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.15;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+.cal-ev.short .cal-ev-code {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.cal-ev-line {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.01em;
+}
+.cal-ev-pot {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  padding: 0 3px;
+  margin-left: 4px;
+}
+.cal-ev.narrow .cal-ev-line { display: none; }
+.cal-ev.short .cal-ev-line { display: none; }
+.cal-ev.short .cal-ev-code { font-size: 9.5px; }
+
+.cal-untimed {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+}
+.cal-untimed h4 {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin: 0 0 8px;
+  font-weight: 500;
+}
+.cal-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.cal-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  background: var(--paper-warm);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--ink-faint);
+  border-radius: 5px;
+  padding: 3px 8px;
+  cursor: pointer;
+}
+.cal-chip:hover { background: var(--cream-dark); }
+.cal-chip.m-onl { border-left-color: var(--teal); }
+.cal-chip.m-hyb { border-left-color: var(--purple); }
+.cal-chip.m-lec { border-left-color: var(--terracotta); }
+.cal-chip .cc-code { font-family: var(--sans); font-weight: 600; font-size: 10.5px; color: var(--ink); }
+.cal-chip .cc-why { color: var(--ink-faint); }
+.cal-empty {
+  font-family: var(--serif);
+  color: var(--ink-mute);
+  text-align: center;
+  padding: 26px 0;
+  font-size: 15px;
+}
+
+@media (max-width: 900px) {
+  .cal-grid { --cal-hour-h: 44px; }
+  .cal-ev-line { display: none; }
+}
+
 /* ======== COURSE / PAIRING SUMMARY ======== */
 .summary-section {
   border-top: 1px solid var(--rule-strong);
@@ -3296,6 +3511,8 @@ function buildSimpleSectionUnit(row, dates, semesterData) {
     instructor: row.Instructor,
     method: row.ScheduleMethod,
     days: row.Days,
+    beginTime: row.BeginTime,
+    endTime: row.EndTime,
     location: [row.Bldg, row.Room].filter(x => x && x !== 'TBA').join(' '),
     room: formatRoom(row),
     meeting: formatMeeting(row),
@@ -3346,6 +3563,8 @@ function buildPairedUnit(primary, support, pairDef, dates, semesterData) {
     instructor: primary.Instructor,
     method: primary.ScheduleMethod,
     days: primary.Days,
+    beginTime: primary.BeginTime,
+    endTime: primary.EndTime,
     location: [primary.Bldg, primary.Room].filter(x => x && x !== 'TBA').join(' '),
     room: formatRoom(primary),
     meeting: formatMeeting(primary),
@@ -4333,6 +4552,7 @@ function render() {
   dash.appendChild(buildStatsStrip(scopedDisplay, scopedSection));
   dash.appendChild(buildFiltersBar(units, filtered));
   dash.appendChild(buildCourseSummarySection(courseFiltered));
+  dash.appendChild(buildCalendarSection(filtered));
   dash.appendChild(buildDeptList(filtered));
   dash.appendChild(buildSnapshotPanel(dates));
   dash.appendChild(buildFallComparison());
@@ -4443,6 +4663,297 @@ function buildStatsStrip(displayUnits, sectionUnits) {
     strip.appendChild(cell);
   }
   return strip;
+}
+
+/* ============================================================
+   WEEKLY CALENDAR
+   ============================================================ */
+/* Lays the filtered sections out on a Mon-Sun grid so simultaneous offerings
+   sit side by side and the empty hours are obvious. Anything with no meeting
+   time -- fully online, or TBA -- cannot be placed, so it is listed under the
+   grid rather than quietly dropped. */
+const CAL_DAYS = [
+  { key: 'M', label: 'Mon' },
+  { key: 'T', label: 'Tue' },
+  { key: 'W', label: 'Wed' },
+  { key: 'R', label: 'Thu' },
+  { key: 'F', label: 'Fri' },
+  { key: 'S', label: 'Sat' },
+  { key: 'U', label: 'Sun' },
+];
+
+function parseHHMM(s) {
+  const m = String(s || '').trim().match(/^(\d{1,2})(\d{2})$/);
+  if (!m) return null;
+  const h = parseInt(m[1], 10), min = parseInt(m[2], 10);
+  if (h > 23 || min > 59) return null;
+  return h * 60 + min;
+}
+
+function calClock(mins) {
+  let h = Math.floor(mins / 60);
+  const m = mins % 60;
+  const ampm = h >= 12 ? 'pm' : 'am';
+  h = h % 12; if (h === 0) h = 12;
+  return m === 0 ? `${h}${ampm}` : `${h}:${String(m).padStart(2, '0')}${ampm}`;
+}
+
+/* A section can carry more than one meeting pattern. Days, BeginTime and
+   EndTime are ";"-separated lists that line up index for index, so "T; TBA"
+   with "1810; TBA" is one timed evening meeting plus an asynchronous part. */
+function unitMeetings(unit) {
+  const days = String(unit.days || '').split(';');
+  const begins = String(unit.beginTime || '').split(';');
+  const ends = String(unit.endTime || '').split(';');
+  const meetings = [];
+  let untimed = false;
+  for (let i = 0; i < days.length; i++) {
+    const d = days[i].trim();
+    const start = parseHHMM(begins[i]);
+    const end = parseHHMM(ends[i]);
+    if (!d || d === 'TBA' || start === null || end === null || end <= start) {
+      untimed = true;
+      continue;
+    }
+    for (const ch of d) {
+      const idx = CAL_DAYS.findIndex(x => x.key === ch);
+      if (idx >= 0) meetings.push({ day: idx, start, end });
+    }
+  }
+  return { meetings, untimed };
+}
+
+/* Side-by-side placement for one day. Items are grouped into runs of
+   transitively overlapping meetings; within a run each gets its own lane and
+   they share the column's width, so nothing is ever hidden behind anything. */
+function calLayoutDay(items) {
+  items.sort((a, b) => a.start - b.start || a.end - b.end);
+  let run = [], runEnd = -1;
+  const settle = () => {
+    if (!run.length) return;
+    const laneEnds = [];
+    for (const it of run) {
+      let lane = laneEnds.findIndex(e => e <= it.start);
+      if (lane === -1) { lane = laneEnds.length; laneEnds.push(it.end); }
+      else laneEnds[lane] = it.end;
+      it.lane = lane;
+    }
+    for (const it of run) it.lanes = laneEnds.length;
+    run = []; runEnd = -1;
+  };
+  for (const it of items) {
+    if (run.length && it.start >= runEnd) settle();
+    run.push(it);
+    runEnd = Math.max(runEnd, it.end);
+  }
+  settle();
+  return items;
+}
+
+/* Blocks can get down to about eighty pixels wide, so a paired unit shows its
+   primary course rather than the full "MATH 110A + 110S". The tooltip and the
+   detail modal still carry the whole thing. */
+function calShortLabel(u) {
+  const code = String(u.code || '').split(' + ')[0];
+  return `${code}-${u.section}`;
+}
+
+function calMethodClass(method) {
+  return 'm-' + String(method || '').toLowerCase().replace(/[^a-z]/g, '-');
+}
+
+const CAL_LEGEND = [
+  ['m-lec', 'var(--terracotta)', 'Lecture'],
+  ['m-hyb', 'var(--purple)', 'Hybrid'],
+  ['m-lab', 'var(--lcm)', 'Lab'],
+  ['m-onl', 'var(--teal)', 'Online'],
+];
+
+function buildCalendarSection(units) {
+  const wrap = document.createElement('section');
+  wrap.className = 'cal-section';
+
+  // Split the filtered sections into placeable meetings and the rest. A hybrid
+  // with both a meeting day and async hours belongs on the grid; only sections
+  // with no scheduled time at all are listed underneath it.
+  const placed = [];
+  const offGrid = [];
+  const potCounts = new Map();
+  let withAsync = 0;
+  for (const u of units) {
+    if (u.type === 'course') continue;   // course rollups have no single meeting
+    const { meetings, untimed: hasUntimed } = unitMeetings(u);
+    const potKey = u.startDate && u.endDate ? partOfTermKey(u.startDate, u.endDate) : '';
+    if (meetings.length) {
+      potCounts.set(potKey, (potCounts.get(potKey) || 0) + 1);
+      if (hasUntimed) withAsync++;
+      for (const m of meetings) placed.push({ ...m, unit: u, potKey, async: hasUntimed });
+    } else {
+      offGrid.push(u);
+    }
+  }
+
+  // The session most of these sections run in. Anything on a different one is
+  // tagged, because two blocks in the same slot only really coincide when they
+  // also share dates.
+  let mainPot = '';
+  let best = -1;
+  for (const [k, n] of potCounts) if (n > best) { best = n; mainPot = k; }
+
+  const head = document.createElement('div');
+  head.className = 'cal-head';
+  const scope = selectionSummary('departments', 'All departments');
+  const sectionCount = new Set(placed.map(p => p.unit.id)).size;
+  const bits = [`${sectionCount} section${sectionCount !== 1 ? 's' : ''} on the grid`];
+  if (withAsync) bits.push(`${withAsync} also with async hours`);
+  if (offGrid.length) bits.push(`${offGrid.length} off the grid`);
+  head.innerHTML = `
+    <h2 class="cal-title">Weekly Calendar</h2>
+    <div class="cal-meta">${esc(scope)} &middot; ${bits.join(' &middot; ')}</div>`;
+  wrap.appendChild(head);
+
+  if (!placed.length) {
+    const empty = document.createElement('div');
+    empty.className = 'cal-empty';
+    empty.textContent = units.length
+      ? 'None of these sections has a scheduled meeting time.'
+      : 'No sections match the current filters.';
+    wrap.appendChild(empty);
+    if (offGrid.length) wrap.appendChild(buildCalendarOffGrid(offGrid));
+    return wrap;
+  }
+
+  const legend = document.createElement('div');
+  legend.className = 'cal-legend';
+  const methodsPresent = new Set(placed.map(p => calMethodClass(p.unit.method)));
+  legend.innerHTML = CAL_LEGEND.filter(([cls]) => methodsPresent.has(cls))
+    .map(([, color, label]) => `<span><i class="cal-swatch" style="background:${color}"></i>${label}</span>`).join('');
+  if (legend.innerHTML) wrap.appendChild(legend);
+
+  // Only draw the days and the hours actually in use.
+  const daysUsed = CAL_DAYS.map((d, i) => i).filter(i => placed.some(p => p.day === i));
+  const firstHour = Math.floor(Math.min(...placed.map(p => p.start)) / 60);
+  const lastHour = Math.ceil(Math.max(...placed.map(p => p.end)) / 60);
+  const hours = Math.max(1, lastHour - firstHour);
+  const originMin = firstHour * 60;
+
+  // Lay each day out first: its widest stack of concurrent sections decides how
+  // much room that column needs.
+  const LANE_W = 86;      // px per concurrent section
+  const DAY_MIN = 150;    // px, so a quiet day still reads as a column
+  const byDay = new Map();
+  for (const di of daysUsed) {
+    const items = calLayoutDay(placed.filter(p => p.day === di));
+    const lanes = items.reduce((m, it) => Math.max(m, it.lanes || 1), 1);
+    byDay.set(di, { items, lanes, width: Math.max(DAY_MIN, lanes * LANE_W) });
+  }
+
+  const scroller = document.createElement('div');
+  scroller.className = 'cal-scroll';
+  const grid = document.createElement('div');
+  grid.className = 'cal-grid';
+  grid.style.setProperty('--cal-hours', hours);
+  grid.style.gridTemplateColumns =
+    `54px ${daysUsed.map(di => byDay.get(di).width + 'px').join(' ')}`;
+
+  const corner = document.createElement('div');
+  corner.className = 'cal-corner';
+  grid.appendChild(corner);
+  for (const di of daysUsed) {
+    const n = new Set(placed.filter(p => p.day === di).map(p => p.unit.id)).size;
+    const h = document.createElement('div');
+    h.className = 'cal-dayhead';
+    h.innerHTML = `${CAL_DAYS[di].label} <span class="cal-daycount">${n}</span>`;
+    grid.appendChild(h);
+  }
+
+  const gutter = document.createElement('div');
+  gutter.className = 'cal-gutter';
+  for (let h = firstHour; h <= lastHour; h++) {
+    const lab = document.createElement('div');
+    lab.className = 'cal-hourlabel'
+      + (h === firstHour ? ' first' : '') + (h === lastHour ? ' last' : '');
+    lab.style.top = `calc(${h - firstHour} * var(--cal-hour-h))`;
+    lab.textContent = calClock(h * 60);
+    gutter.appendChild(lab);
+  }
+  grid.appendChild(gutter);
+
+  for (const di of daysUsed) {
+    const { items, width } = byDay.get(di);
+    const col = document.createElement('div');
+    col.className = 'cal-col';
+    for (const it of items) col.appendChild(buildCalendarEvent(it, originMin, mainPot, width));
+    grid.appendChild(col);
+  }
+
+  scroller.appendChild(grid);
+  wrap.appendChild(scroller);
+  if (offGrid.length) wrap.appendChild(buildCalendarOffGrid(offGrid));
+  return wrap;
+}
+
+function buildCalendarEvent(it, originMin, mainPot, colWidth) {
+  const u = it.unit;
+  const laneW = colWidth / it.lanes;
+  const minutes = it.end - it.start;
+
+  const ev = document.createElement('div');
+  ev.className = 'cal-ev ' + calMethodClass(u.method)
+    + (laneW < 132 ? ' narrow' : '')     // too thin for the detail lines
+    + (minutes < 40 ? ' short' : '');    // too shallow for a second line
+
+  const pct = 100 / it.lanes;
+  ev.style.top = `calc(${(it.start - originMin) / 60} * var(--cal-hour-h))`;
+  ev.style.height = `calc(${minutes / 60} * var(--cal-hour-h) - 2px)`;
+  ev.style.left = `calc(${it.lane * pct}% + 2px)`;
+  ev.style.width = `calc(${pct}% - 4px)`;
+
+  const pot = u.partOfTerm || {};
+  const potTag = (it.potKey && it.potKey !== mainPot && pot.label)
+    ? `<span class="cal-ev-pot">${esc(pot.label)}</span>` : '';
+  const room = u.room && u.room !== 'TBA' ? u.room : '';
+
+  ev.innerHTML = `
+    <div class="cal-ev-code">${esc(calShortLabel(u))}${potTag}</div>
+    <div class="cal-ev-line">${esc(calClock(it.start))}\u2013${esc(calClock(it.end))}</div>
+    ${room ? `<div class="cal-ev-line">${esc(room)}</div>` : ''}
+    ${u.instructor ? `<div class="cal-ev-line">${esc(u.instructor)}</div>` : ''}`;
+
+  ev.title = [
+    `${u.code}-${u.section}${u.title ? ' \u00b7 ' + u.title : ''}`,
+    `${CAL_DAYS[it.day].label} ${calClock(it.start)}\u2013${calClock(it.end)}`,
+    it.async ? 'plus asynchronous hours' : null,
+    room ? `Room ${room}` : null,
+    u.instructor || null,
+    [pot.label, pot.range].filter(Boolean).join(' \u00b7 ') || null,
+    `${u.enrolled} of ${u.capacity} enrolled`,
+  ].filter(Boolean).join('\n');
+
+  ev.addEventListener('click', () => openModal(u));
+  return ev;
+}
+
+function buildCalendarOffGrid(list) {
+  const box = document.createElement('div');
+  box.className = 'cal-untimed';
+  const h = document.createElement('h4');
+  h.textContent = `No scheduled meeting time \u00b7 ${list.length} section${list.length !== 1 ? 's' : ''}`;
+  box.appendChild(h);
+
+  const chips = document.createElement('div');
+  chips.className = 'cal-chips';
+  for (const unit of list.slice().sort(naturalCourseCompare)) {
+    const chip = document.createElement('div');
+    chip.className = 'cal-chip ' + calMethodClass(unit.method);
+    const why = unit.method === 'Onl' ? 'online / async' : 'time TBA';
+    chip.innerHTML = `<span class="cc-code">${esc(calShortLabel(unit))}</span><span class="cc-why">${esc(why)}</span>`;
+    chip.title = `${unit.code}-${unit.section}${unit.title ? ' \u00b7 ' + unit.title : ''}\n${unit.instructor || ''}`;
+    chip.addEventListener('click', () => openModal(unit));
+    chips.appendChild(chip);
+  }
+  box.appendChild(chips);
+  return box;
 }
 
 function buildCourseSummarySection(courseUnits) {
