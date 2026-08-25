@@ -511,7 +511,7 @@ button { font-family: var(--sans); cursor: pointer; }
 /* ======== FILTERS BAR ======== */
 .filters {
   display: flex;
-  gap: 16px;
+  gap: 14px;
   align-items: center;
   flex-wrap: wrap;
   padding: 12px 0 18px;
@@ -520,6 +520,7 @@ button { font-family: var(--sans); cursor: pointer; }
 }
 
 .filter-group { display: flex; align-items: center; gap: 8px; }
+.filter-group .filter-label { white-space: nowrap; }
 
 .filter-label {
   font-family: var(--mono);
@@ -546,6 +547,107 @@ button { font-family: var(--sans); cursor: pointer; }
 }
 .filter-input { background-image: none; padding-right: 8px; min-width: 200px; }
 .filter-select.wide { min-width: 210px; }
+
+/* ======== MULTI-SELECT FILTER MENUS ======== */
+.ms { position: relative; }
+.ms-toggle {
+  display: block;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  text-align: left;
+  background: var(--white);
+  border: 1px solid var(--rule-strong);
+  border-radius: 6px;
+  padding: 7px 26px 7px 10px;
+  color: var(--ink);
+  min-width: 116px;
+  max-width: 190px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M3 4.5l3 3 3-3' stroke='%231a2138' fill='none' stroke-width='1.4'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 11px;
+}
+.ms-toggle:focus-visible { outline: none; border-color: var(--terracotta); }
+.ms.open .ms-toggle { border-color: var(--terracotta); }
+/* A menu that is actually narrowing the view reads a shade stronger than one
+   sitting on "All", so the bar shows at a glance what is being filtered. */
+.ms.sel .ms-toggle { border-color: var(--terracotta-mid); background-color: var(--paper-warm); }
+.ms-summary.on { font-weight: 500; }
+
+.ms-panel {
+  display: none;
+  position: absolute;
+  z-index: 60;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: max(100%, 200px);
+  max-width: 320px;
+  max-height: 300px;
+  overflow-y: auto;
+  background: var(--white);
+  border: 1px solid var(--rule-strong);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(26, 26, 26, 0.14);
+  padding: 6px;
+}
+.ms.open .ms-panel { display: block; }
+
+.ms-bulk {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  padding: 2px 6px 6px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 4px;
+}
+.ms-bulk .ms-hint {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+.ms-bulk button {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  background: transparent;
+  border: none;
+  padding: 2px 4px;
+  border-radius: 4px;
+  flex: none;
+}
+.ms-bulk button:hover { background: var(--terracotta-light); }
+
+.ms-opt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 7px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+.ms-opt:hover { background: var(--cream); }
+.ms-opt input { accent-color: var(--terracotta); margin: 0; flex: none; }
+.ms-opt .ms-text { flex: 1; overflow: hidden; text-overflow: ellipsis; }
+.ms-opt .ms-count {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-faint);
+  flex: none;
+  font-variant-numeric: tabular-nums;
+}
+.ms-opt.ms-zero .ms-text, .ms-opt.ms-zero .ms-count { color: var(--ink-faint); }
+.ms-empty { padding: 8px 7px; font-size: 12px; color: var(--ink-mute); }
 .filter-input:focus, .filter-select:focus { outline: none; border-bottom-color: var(--ink); }
 
 .view-toggle {
@@ -2702,11 +2804,13 @@ const state = {
   semesters: {},
   currentSemester: null,
   view: 'section',          // 'section' or 'course'
+  // Each menu filter holds a list of selected values. An EMPTY list means
+  // "All" -- no narrowing at all -- so there is no separate sentinel value.
   filters: {
-    department: 'Mathematics',   // default focus on the Mathematics department
-    mode: 'all',                 // 'all' | 'online' | 'hybrid' | 'inperson'
-    center: 'all',               // 'all' | a center name (Ocean, Mission, ...)
-    pot: 'all',                  // 'all' | "StartDate|EndDate" of one session
+    departments: ['Mathematics'],  // default focus on the Mathematics department
+    modes: [],                     // 'online' | 'hybrid' | 'inperson'
+    centers: [],                   // center names (Ocean, Mission, ...)
+    pots: [],                      // "StartDate|EndDate" of a session
     search: '',
     activeFlags: new Set(), // empty = show all
   },
@@ -2956,6 +3060,26 @@ function rowKey(r) {
   return `${r.Subject}|${r.Course}|${r.Section}`;
 }
 
+/* rowKey -> row lookup for one snapshot, memoized against the snapshot array.
+   Every unit's trend walks every snapshot date looking for its own row, so
+   without an index each of those lookups is a linear scan and a re-render --
+   which is what one filter click costs -- goes quadratic in sections.
+   First row wins on a duplicate key, matching the Array#find it replaces. */
+const snapshotIndexCache = new WeakMap();
+function snapshotIndex(snap) {
+  if (!snap) return null;
+  let idx = snapshotIndexCache.get(snap);
+  if (!idx) {
+    idx = new Map();
+    for (const r of snap) {
+      const k = rowKey(r);
+      if (!idx.has(k)) idx.set(k, r);
+    }
+    snapshotIndexCache.set(snap, idx);
+  }
+  return idx;
+}
+
 function findPair(subject, course) {
   for (const p of PAIRS) {
     if (p.primary.subject === subject && p.primary.course === course) {
@@ -3121,9 +3245,7 @@ function buildSectionUnits(latestRows, dates, semesterData) {
       // Look for the partner row in this snapshot (same section, partner course)
       const partnerCourse = found.role === 'primary' ? found.def.support.course : found.def.primary.course;
       const partnerSubject = found.role === 'primary' ? found.def.support.subject : found.def.primary.subject;
-      const partner = latestRows.find(r =>
-        r.Subject === partnerSubject && r.Course === partnerCourse && r.Section === row.Section
-      );
+      const partner = snapshotIndex(latestRows).get(`${partnerSubject}|${partnerCourse}|${row.Section}`);
 
       if (partner) {
         // Both halves present: build a paired unit
@@ -3146,9 +3268,10 @@ function buildSectionUnits(latestRows, dates, semesterData) {
 }
 
 function buildSimpleSectionUnit(row, dates, semesterData) {
+  const key = rowKey(row);
   const trend = dates.map(d => {
-    const snap = semesterData.snapshots[d];
-    const match = snap.find(r => rowKey(r) === rowKey(row));
+    const idx = snapshotIndex(semesterData.snapshots[d]);
+    const match = idx && idx.get(key);
     return {
       date: d,
       enrolled: match ? Number(match.CurrentEnrollment) || 0 : null,
@@ -3192,12 +3315,11 @@ function buildSimpleSectionUnit(row, dates, semesterData) {
 
 function buildPairedUnit(primary, support, pairDef, dates, semesterData) {
   // Paired courses share enrollment (same students). Use the primary's enrollment.
+  const pKey = `${pairDef.primary.subject}|${pairDef.primary.course}|${primary.Section}`;
+  const sKey = `${pairDef.support.subject}|${pairDef.support.course}|${primary.Section}`;
   const trend = dates.map(d => {
-    const snap = semesterData.snapshots[d];
-    const pMatch = snap.find(r => r.Subject === pairDef.primary.subject && r.Course === pairDef.primary.course && r.Section === primary.Section);
-    const sMatch = snap.find(r => r.Subject === pairDef.support.subject && r.Course === pairDef.support.course && r.Section === primary.Section);
-
-    const ref = pMatch || sMatch;
+    const idx = snapshotIndex(semesterData.snapshots[d]);
+    const ref = (idx && idx.get(pKey)) || (idx && idx.get(sKey));
     return {
       date: d,
       enrolled: ref ? Number(ref.CurrentEnrollment) || 0 : null,
@@ -3252,11 +3374,8 @@ function buildCourseUnits(latestRows, dates, semesterData) {
     if (!found) continue;
     const partnerSubject = found.role === 'primary' ? found.def.support.subject : found.def.primary.subject;
     const partnerCourse  = found.role === 'primary' ? found.def.support.course  : found.def.primary.course;
-    const partner = latestRows.find(r =>
-      r.Subject === partnerSubject && r.Course === partnerCourse && r.Section === row.Section
-    );
-    if (partner) {
-      pairedSectionKeys.add(`${row.Subject}|${row.Course}|${row.Section}`);
+    if (snapshotIndex(latestRows).has(`${partnerSubject}|${partnerCourse}|${row.Section}`)) {
+      pairedSectionKeys.add(rowKey(row));
     }
   }
 
@@ -3301,18 +3420,32 @@ function buildCourseUnits(latestRows, dates, semesterData) {
 }
 
 // Identifies which sections in a given snapshot are paired (partner exists for same SEC).
+//
+// buildCourseUnitFromGroup asks this the same question once per course group
+// per snapshot date -- roughly a hundred groups times thirty-odd dates -- and
+// the old body scanned every row for every row on each call. Two changes:
+// the partner lookup is a Set membership test rather than a linear find, and
+// the answer is memoized against the snapshot array itself. Same result, and
+// it takes a full re-render (which is what every filter click costs) from
+// seconds down to a fraction of one.
+const pairedKeysCache = new WeakMap();
 function getPairedSectionKeysForSnapshot(snap) {
+  if (!snap) return new Set();
+  const cached = pairedKeysCache.get(snap);
+  if (cached) return cached;
+
+  const present = snapshotIndex(snap);
   const keys = new Set();
   for (const row of snap) {
     const found = findPair(row.Subject, row.Course);
     if (!found) continue;
     const partnerSubject = found.role === 'primary' ? found.def.support.subject : found.def.primary.subject;
     const partnerCourse  = found.role === 'primary' ? found.def.support.course  : found.def.primary.course;
-    const partner = snap.find(r =>
-      r.Subject === partnerSubject && r.Course === partnerCourse && r.Section === row.Section
-    );
-    if (partner) keys.add(`${row.Subject}|${row.Course}|${row.Section}`);
+    if (present.has(`${partnerSubject}|${partnerCourse}|${row.Section}`)) {
+      keys.add(rowKey(row));
+    }
   }
+  pairedKeysCache.set(snap, keys);
   return keys;
 }
 
@@ -3425,10 +3558,121 @@ function buildCourseUnitFromGroup(group, dates, semesterData) {
 /* ============================================================
    FILTERING
    ============================================================ */
+/* Every menu filter is multi-select and follows the same shape: a list of
+   chosen values, where an empty list means "All". One table describes all of
+   them, so the row predicate, the option lists, the counts and the staleness
+   guards are each written once instead of four times. */
+const MODE_LABELS = { inperson: 'In-person', hybrid: 'Hybrid', online: 'Online' };
+const MODE_ORDER = ['inperson', 'hybrid', 'online'];
+
+function rowMode(r) {
+  const m = r.ScheduleMethod || '';
+  if (m === 'Onl') return 'online';
+  if (m === 'Hyb') return 'hybrid';
+  return 'inperson';
+}
+
+const FILTER_DIMS = {
+  departments: {
+    label: 'Department',
+    plural: 'departments',
+    of: r => r.Department || '',
+    text: v => v,
+    sort: (a, b) => a.text.localeCompare(b.text),
+  },
+  modes: {
+    label: 'Mode',
+    plural: 'modes',
+    of: rowMode,
+    text: v => MODE_LABELS[v] || v,
+    sort: (a, b) => MODE_ORDER.indexOf(a.value) - MODE_ORDER.indexOf(b.value),
+  },
+  centers: {
+    label: 'Center',
+    plural: 'centers',
+    of: r => r.Center || '',
+    text: v => v,
+    sort: (a, b) => a.text.localeCompare(b.text),
+  },
+  pots: {
+    label: 'Part of term',
+    plural: 'parts of term',
+    of: r => partOfTermKey(r.StartDate, r.EndDate),
+    text: (v, row) => {
+      const pot = partOfTermLabel(row.StartDate, row.EndDate);
+      return [pot.label, pot.range].filter(Boolean).join(' \u00b7 ') || 'TBA';
+    },
+    // Biggest session first, so the full term leads and the one-off short
+    // sessions fall to the bottom.
+    sort: (a, b) => b.count - a.count || b.total - a.total || a.start - b.start,
+  },
+};
+const FILTER_DIM_KEYS = Object.keys(FILTER_DIMS);
+
+// Does this section row survive every menu filter except `exclude`?
+// Passing a dimension's own name is what makes the option counts behave like
+// proper facets: each menu counts what you would get by adding that value to
+// whatever else is already selected.
+function rowMatchesFilters(r, exclude) {
+  for (const dim of FILTER_DIM_KEYS) {
+    if (dim === exclude) continue;
+    const sel = state.filters[dim];
+    if (sel && sel.length && !sel.includes(FILTER_DIMS[dim].of(r))) return false;
+  }
+  return true;
+}
+
+// The latest snapshot's rows for the current semester, unfiltered.
+function latestRowsForCurrentSemester() {
+  const base = state.semesters[state.currentSemester];
+  if (!base) return [];
+  const dates = Object.keys(base.snapshots).sort();
+  if (!dates.length) return [];
+  return base.snapshots[dates[dates.length - 1]] || [];
+}
+
+/**
+ * Options for one menu: every value present in the current semester, each
+ * carrying `count` (sections it would add under the other active filters) and
+ * `total` (sections in the term regardless of them). Values with a zero count
+ * are still returned; the menu hides them unless they are already selected,
+ * so a selection is never silently dropped out of view.
+ */
+function filterOptions(dim) {
+  const def = FILTER_DIMS[dim];
+  const byValue = new Map();
+  for (const r of latestRowsForCurrentSemester()) {
+    const value = def.of(r);
+    if (value === '' || value == null) continue;
+    let entry = byValue.get(value);
+    if (!entry) {
+      entry = { value, text: def.text(value, r), count: 0, total: 0, start: dateValue(r.StartDate) };
+      byValue.set(value, entry);
+    }
+    entry.total++;
+    if (rowMatchesFilters(r, dim)) entry.count++;
+  }
+  return Array.from(byValue.values()).sort(def.sort);
+}
+
+// "8/31/2026" -> sortable timestamp.
+function dateValue(s) {
+  const m = String(s || '').match(/(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
+  if (!m) return Infinity;
+  let y = parseInt(m[3], 10); if (y < 100) y += 2000;
+  return new Date(y, parseInt(m[1], 10) - 1, parseInt(m[2], 10)).getTime();
+}
+
+// True when this unit's department is one of the selected ones (or none are).
+function matchesDepartment(u) {
+  const sel = state.filters.departments;
+  return !sel.length || sel.includes(u.department);
+}
+
 function filterUnits(units) {
   const f = state.filters;
   return units.filter(u => {
-    if (f.department !== 'all' && u.department !== f.department) return false;
+    if (!matchesDepartment(u)) return false;
     if (f.search) {
       const q = f.search.toLowerCase();
       const hay = [u.code, u.title, u.section || '', u.crn || '', u.instructor || '']
@@ -3449,7 +3693,7 @@ function filterUnits(units) {
 function filterScope(units) {
   const f = state.filters;
   return units.filter(u => {
-    if (f.department !== 'all' && u.department !== f.department) return false;
+    if (!matchesDepartment(u)) return false;
     if (f.search) {
       const q = f.search.toLowerCase();
       const hay = [u.code, u.title, u.section || '', u.crn || '', u.instructor || '']
@@ -3460,99 +3704,27 @@ function filterScope(units) {
   });
 }
 
-function getDepartments(units) {
-  const set = new Set();
-  for (const u of units) if (u.department) set.add(u.department);
-  return Array.from(set).sort();
-}
-
 /* ---- Mode, Center and Part-of-term filters operate on the raw section rows,
    so that course aggregates, trends and stats all recompute over just the
-   matching sections. ---- */
+   matching sections. Department stays a unit-level filter, which is why it is
+   the dimension excluded here. ---- */
 function rowMatchesScope(r) {
-  const f = state.filters;
-  if (f.mode && f.mode !== 'all') {
-    const m = r.ScheduleMethod || '';
-    if (f.mode === 'online'   && m !== 'Onl') return false;
-    if (f.mode === 'hybrid'   && m !== 'Hyb') return false;
-    if (f.mode === 'inperson' && (m === 'Onl' || m === 'Hyb')) return false;
-  }
-  if (f.center && f.center !== 'all' && (r.Center || '') !== f.center) return false;
-  if (f.pot && f.pot !== 'all' && partOfTermKey(r.StartDate, r.EndDate) !== f.pot) return false;
-  return true;
+  return rowMatchesFilters(r, 'departments');
 }
 
 // Returns the current semester's data with each snapshot pre-filtered by the
-// active mode/center/part-of-term filters. Returns the original object when
-// all three are 'all'.
+// active mode/center/part-of-term selections. Returns the original object when
+// none of them narrow anything.
+const ROW_SCOPE_DIMS = FILTER_DIM_KEYS.filter(d => d !== 'departments');
 function scopedSemesterData() {
   const base = state.semesters[state.currentSemester];
   if (!base) return base;
-  const f = state.filters;
-  if ((!f.mode || f.mode === 'all')
-      && (!f.center || f.center === 'all')
-      && (!f.pot || f.pot === 'all')) return base;
+  if (ROW_SCOPE_DIMS.every(d => !(state.filters[d] || []).length)) return base;
   const snapshots = {};
   for (const d of Object.keys(base.snapshots)) {
     snapshots[d] = base.snapshots[d].filter(rowMatchesScope);
   }
   return { snapshots };
-}
-
-// All centers present in the current semester (unfiltered), for the Center dropdown.
-function getCentersForCurrentSemester() {
-  const base = state.semesters[state.currentSemester];
-  if (!base) return [];
-  const dates = Object.keys(base.snapshots).sort();
-  if (!dates.length) return [];
-  const rows = base.snapshots[dates[dates.length - 1]];
-  const set = new Set();
-  for (const r of rows) if (r.Center) set.add(r.Center);
-  return Array.from(set).sort();
-}
-
-// Every part of term running in the current semester, for the Part-of-term
-// dropdown and for the staleness guard in render().
-//
-// The list covers the whole term regardless of the other filters, so a
-// selection is only ever cleared when the semester genuinely has no such
-// session. `count` is narrowed to the selected department, because that is
-// the number the user is actually choosing between; `total` is the term-wide
-// figure. Ordered by size, which puts the full term at the top and the one-off
-// short sessions at the bottom.
-function getPartsOfTermForCurrentSemester() {
-  const base = state.semesters[state.currentSemester];
-  if (!base) return [];
-  const dates = Object.keys(base.snapshots).sort();
-  if (!dates.length) return [];
-  const dept = state.filters.department;
-  const byKey = new Map();
-  for (const r of base.snapshots[dates[dates.length - 1]]) {
-    const key = partOfTermKey(r.StartDate, r.EndDate);
-    let entry = byKey.get(key);
-    if (!entry) {
-      const pot = partOfTermLabel(r.StartDate, r.EndDate);
-      entry = {
-        key,
-        label: pot.label || 'TBA',
-        range: pot.range || '',
-        start: r.StartDate || '',
-        count: 0,
-        total: 0,
-      };
-      byKey.set(key, entry);
-    }
-    entry.total++;
-    if (dept === 'all' || r.Department === dept) entry.count++;
-  }
-  const parseDate = s => {
-    const m = String(s || '').match(/(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
-    if (!m) return Infinity;
-    let y = parseInt(m[3], 10); if (y < 100) y += 2000;
-    return new Date(y, parseInt(m[1], 10) - 1, parseInt(m[2], 10)).getTime();
-  };
-  return Array.from(byKey.values()).sort((a, b) =>
-    b.count - a.count || b.total - a.total || parseDate(a.start) - parseDate(b.start));
 }
 
 // Natural ordering for course / section cards:
@@ -4114,27 +4286,23 @@ function render() {
   subtitleEl.innerHTML = `Latest snapshot ${latestDate}`
     + (cov ? `<span class="daily-badge">Daily history &middot; ${cov.sections} sections &middot; ${cov.from} to ${cov.to}</span>` : '');
 
-  // Guards for the filters that scope the raw rows. These have to run BEFORE
-  // buildUnits(), because a selection left over from another semester matches
-  // nothing and would filter the whole term out of its own view.
-  const centersThisTerm = getCentersForCurrentSemester();
-  if (state.filters.center !== 'all' && !centersThisTerm.includes(state.filters.center)) {
-    state.filters.center = 'all';
-  }
-  // Sessions differ every semester, so a carried-over part of term is always stale.
-  if (state.filters.pot !== 'all'
-      && !getPartsOfTermForCurrentSemester().some(p => p.key === state.filters.pot)) {
-    state.filters.pot = 'all';
+  // Guard: drop selections that do not exist in this semester at all. Sessions
+  // in particular are keyed by their dates, so none of them survive a semester
+  // change. This has to run BEFORE buildUnits(), because a stale selection
+  // matches no row and would filter the whole term out of its own view.
+  // Values that do exist but happen to be empty under the *other* filters are
+  // deliberately kept: the menus show them sitting at zero rather than
+  // silently discarding what was picked.
+  for (const dim of FILTER_DIM_KEYS) {
+    const sel = state.filters[dim];
+    if (!sel || !sel.length) continue;
+    const present = new Set(filterOptions(dim).map(o => o.value));
+    const kept = sel.filter(v => present.has(v));
+    if (kept.length !== sel.length) state.filters[dim] = kept;
   }
 
   // Build units for display
   const units = buildUnits();
-
-  // Guard: if the selected department isn't present this term, fall back to All.
-  const deptsThisTerm = getDepartments(units);
-  if (state.filters.department !== 'all' && !deptsThisTerm.includes(state.filters.department)) {
-    state.filters.department = 'all';
-  }
 
   const filtered = filterUnits(units);
 
@@ -4283,7 +4451,7 @@ function buildCourseSummarySection(courseUnits) {
 
   const totalEnr = courseUnits.reduce((s, u) => s + (u.enrolled || 0), 0);
   const totalCap = courseUnits.reduce((s, u) => s + (u.capacity || 0), 0);
-  const scopeLabel = state.filters.department !== 'all' ? state.filters.department : 'All departments';
+  const scopeLabel = selectionSummary('departments', 'All departments');
   const n = courseUnits.length;
 
   wrap.innerHTML = `
@@ -4347,84 +4515,195 @@ function buildSummaryCard(unit) {
   return card;
 }
 
+/* ============================================================
+   MULTI-SELECT FILTER MENUS
+   ============================================================ */
+/* A checkbox menu per filter dimension. Toggling a box re-renders the whole
+   dashboard, which throws this bar away and rebuilds it, so the menu that was
+   open (and where it was scrolled) is remembered here and restored on the way
+   back -- otherwise the menu would snap shut after every single click. */
+let openFilterMenu = null;
+let openFilterScroll = 0;
+
+/* Ticking several boxes in a row is the normal way to use these menus, and a
+   full re-render is not free, so the render is deferred just long enough to
+   collect a burst of clicks. The checkbox itself is native, so it responds
+   instantly either way; only the counts and the cards wait. Anything that
+   needs the dashboard up to date right now flushes the pending render first. */
+let filterRenderTimer = null;
+
+function scheduleFilterRender() {
+  clearTimeout(filterRenderTimer);
+  filterRenderTimer = setTimeout(() => { filterRenderTimer = null; render(); }, 160);
+}
+
+// Runs a deferred render immediately. Returns true if there was one, in which
+// case the caller's own DOM fiddling is redundant -- render() rebuilt the bar.
+function flushFilterRender() {
+  if (!filterRenderTimer) return false;
+  clearTimeout(filterRenderTimer);
+  filterRenderTimer = null;
+  render();
+  return true;
+}
+
+function cancelFilterRender() {
+  clearTimeout(filterRenderTimer);
+  filterRenderTimer = null;
+}
+
+function closeFilterMenus() {
+  const wasOpen = openFilterMenu;
+  openFilterMenu = null;
+  openFilterScroll = 0;
+  if (flushFilterRender()) return;
+  if (!wasOpen) return;
+  document.querySelectorAll('.ms.open').forEach(el => {
+    el.classList.remove('open');
+    const toggle = el.querySelector('.ms-toggle');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  });
+}
+
+/**
+ * Label for the current selection: "All" when nothing is picked, the single
+ * value's own label when one is, and a count once there are several -- the
+ * individual labels are far too long to list on the button.
+ */
+function selectionSummary(dim, allLabel) {
+  const sel = state.filters[dim] || [];
+  if (!sel.length) return allLabel;
+  if (sel.length === 1) {
+    const hit = filterOptions(dim).find(o => o.value === sel[0]);
+    return hit ? hit.text : sel[0];
+  }
+  return `${sel.length} ${FILTER_DIMS[dim].plural}`;
+}
+
+function buildFilterMenu(dim) {
+  const def = FILTER_DIMS[dim];
+  const selected = state.filters[dim] || [];
+  const options = filterOptions(dim);
+  // Hide values that nothing would match under the other filters, but never
+  // hide one the user has already picked -- seeing it sit at 0 is how you work
+  // out why the view is empty.
+  const visible = options.filter(o => o.count > 0 || selected.includes(o.value));
+
+  const wrap = document.createElement('div');
+  wrap.className = 'ms' + (openFilterMenu === dim ? ' open' : '') + (selected.length ? ' sel' : '');
+  wrap.dataset.dim = dim;
+  wrap.innerHTML = `
+    <button type="button" class="ms-toggle" aria-haspopup="true" aria-expanded="${openFilterMenu === dim}">
+      <span class="ms-summary${selected.length ? ' on' : ''}">${esc(selectionSummary(dim, 'All'))}</span>
+    </button>
+    <div class="ms-panel" role="group" aria-label="${esc(def.label)}">
+      <div class="ms-bulk">
+        <span class="ms-hint">Sections</span>
+        ${selected.length ? '<button type="button" data-act="clear">Clear</button>' : ''}
+      </div>
+      ${visible.length
+        ? visible.map(o => `
+        <label class="ms-opt${o.count ? '' : ' ms-zero'}">
+          <input type="checkbox" value="${esc(o.value)}"${selected.includes(o.value) ? ' checked' : ''}>
+          <span class="ms-text" title="${esc(o.text)}">${esc(o.text)}</span>
+          <span class="ms-count">${o.count}</span>
+        </label>`).join('')
+        : '<div class="ms-empty">Nothing here matches the other filters.</div>'}
+    </div>`;
+
+  const toggle = wrap.querySelector('.ms-toggle');
+  const panel = wrap.querySelector('.ms-panel');
+
+  toggle.addEventListener('click', e => {
+    e.stopPropagation();
+    const opening = openFilterMenu !== dim;
+    openFilterMenu = opening ? dim : null;
+    openFilterScroll = 0;
+    // A pending render rebuilds the bar in the right state by itself.
+    if (flushFilterRender()) return;
+    document.querySelectorAll('.ms.open').forEach(el => {
+      el.classList.remove('open');
+      const t = el.querySelector('.ms-toggle');
+      if (t) t.setAttribute('aria-expanded', 'false');
+    });
+    if (opening) {
+      wrap.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  // Keep clicks inside the panel from reaching the document handler that
+  // closes every menu.
+  panel.addEventListener('click', e => e.stopPropagation());
+
+  const reopen = () => {
+    openFilterMenu = dim;
+    openFilterScroll = panel.scrollTop;
+    scheduleFilterRender();
+  };
+
+  panel.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const next = new Set(state.filters[dim] || []);
+      if (cb.checked) next.add(cb.value); else next.delete(cb.value);
+      state.filters[dim] = Array.from(next);
+      reopen();
+    });
+  });
+
+  const clearBtn = panel.querySelector('[data-act="clear"]');
+  if (clearBtn) clearBtn.addEventListener('click', () => {
+    state.filters[dim] = [];
+    reopen();
+  });
+
+  return wrap;
+}
+
 function buildFiltersBar(allUnits, filtered) {
   const bar = document.createElement('div');
   bar.className = 'filters';
 
-  const departments = getDepartments(allUnits);
-  const centers = getCentersForCurrentSemester();
-  const parts = getPartsOfTermForCurrentSemester();
   const f = state.filters;
-  const modeOptions = [
-    ['all', 'All'], ['inperson', 'In-person'], ['hybrid', 'Hybrid'], ['online', 'Online'],
-  ];
-  const anyFilter = f.department !== 'all' || f.mode !== 'all' || f.center !== 'all'
-    || f.pot !== 'all' || f.search;
+  const anyFilter = FILTER_DIM_KEYS.some(d => (f[d] || []).length) || f.search;
 
-  bar.innerHTML = `
-    <div class="filter-group">
-      <span class="filter-label">Department</span>
-      <select class="filter-select" id="filter-dept">
-        <option value="all">All</option>
-        ${departments.map(d => `<option value="${d}" ${d === f.department ? 'selected' : ''}>${d}</option>`).join('')}
-      </select>
-    </div>
-    <div class="filter-group">
-      <span class="filter-label">Mode</span>
-      <select class="filter-select" id="filter-mode">
-        ${modeOptions.map(([v, l]) => `<option value="${v}" ${v === f.mode ? 'selected' : ''}>${l}</option>`).join('')}
-      </select>
-    </div>
-    <div class="filter-group">
-      <span class="filter-label">Center</span>
-      <select class="filter-select" id="filter-center">
-        <option value="all">All</option>
-        ${centers.map(c => `<option value="${c}" ${c === f.center ? 'selected' : ''}>${c}</option>`).join('')}
-      </select>
-    </div>
-    <div class="filter-group">
-      <span class="filter-label">Part of term</span>
-      <select class="filter-select wide" id="filter-pot">
-        <option value="all">All</option>
-        ${parts.filter(p => p.count > 0 || p.key === f.pot).map(p => {
-          const text = [p.label, p.range].filter(Boolean).join(' · ');
-          return `<option value="${esc(p.key)}" ${p.key === f.pot ? 'selected' : ''}>${esc(text)} (${p.count})</option>`;
-        }).join('')}
-      </select>
-    </div>
+  for (const dim of FILTER_DIM_KEYS) {
+    const group = document.createElement('div');
+    group.className = 'filter-group';
+    const lab = document.createElement('span');
+    lab.className = 'filter-label';
+    lab.textContent = FILTER_DIMS[dim].label;
+    group.appendChild(lab);
+    group.appendChild(buildFilterMenu(dim));
+    bar.appendChild(group);
+  }
+
+  const rest = document.createElement('div');
+  rest.innerHTML = `
     <div class="filter-group">
       <span class="filter-label">Search</span>
       <input class="filter-input" id="filter-search" placeholder="Course, title, instructor, CRN" value="${f.search.replace(/"/g, '&quot;')}">
     </div>
     ${anyFilter ? `<button class="btn btn-ghost btn-small" id="filter-reset">Reset filters</button>` : ''}
     <div class="filters-spacer"></div>
-    <div class="results-count">${filtered.length} of ${allUnits.length} ${state.view === 'section' ? 'shown' : 'shown'}</div>
+    <div class="results-count">${filtered.length} of ${allUnits.length} shown</div>
   `;
+  while (rest.firstChild) bar.appendChild(rest.firstChild);
 
-  bar.querySelector('#filter-dept').addEventListener('change', e => {
-    state.filters.department = e.target.value;
-    render();
-  });
-  bar.querySelector('#filter-mode').addEventListener('change', e => {
-    state.filters.mode = e.target.value;
-    render();
-  });
-  bar.querySelector('#filter-center').addEventListener('change', e => {
-    state.filters.center = e.target.value;
-    render();
-  });
-  bar.querySelector('#filter-pot').addEventListener('change', e => {
-    state.filters.pot = e.target.value;
-    render();
-  });
+  if (openFilterMenu) {
+    requestAnimationFrame(() => {
+      const panel = document.querySelector(`.ms[data-dim="${openFilterMenu}"] .ms-panel`);
+      if (panel) panel.scrollTop = openFilterScroll;
+    });
+  }
+
   const resetBtn = bar.querySelector('#filter-reset');
   if (resetBtn) resetBtn.addEventListener('click', () => {
-    state.filters.department = 'all';
-    state.filters.mode = 'all';
-    state.filters.center = 'all';
-    state.filters.pot = 'all';
+    for (const dim of FILTER_DIM_KEYS) state.filters[dim] = [];
     state.filters.search = '';
     state.filters.activeFlags = new Set();
+    cancelFilterRender();
+    openFilterMenu = null;
     render();
   });
   const searchInput = bar.querySelector('#filter-search');
@@ -4847,8 +5126,13 @@ function setupEvents() {
     e.target.value = '';
   });
 
+  document.addEventListener('click', () => {
+    if (openFilterMenu) closeFilterMenus();
+  });
+
   window.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
+      if (openFilterMenu) closeFilterMenus();
       closeModal();
       closeBudgetModal();
     }
