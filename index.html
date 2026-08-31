@@ -82,51 +82,52 @@ button { font-family: var(--sans); cursor: pointer; }
   border-bottom: 1px solid var(--rule-strong);
   background: var(--paper-light);
   margin: 24px 0 0;
-  padding: 18px 22px 20px;
+  padding: 10px 22px 12px;
 }
 
 .budget-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 14px;
+  margin-bottom: 6px;
 }
 
 .budget-title {
-  font-family: var(--serif);
+  font-family: var(--mono);
   font-weight: 500;
-  font-size: 22px;
-  letter-spacing: -0.01em;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
   margin: 0;
 }
 
 .budget-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 1px;
-  background: var(--rule);
-  border: 1px solid var(--rule);
+  display: block;
 }
 
 .budget-card {
-  background: var(--paper);
-  padding: 16px 18px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  background: transparent;
+  padding: 0;
+}
+.budget-card + .budget-card {
+  border-top: 1px solid var(--rule);
+  margin-top: 8px;
+  padding-top: 8px;
 }
 
-.budget-card-head {
+.budget-row {
   display: flex;
-  justify-content: space-between;
   align-items: baseline;
-  gap: 12px;
+  gap: 14px;
+  flex-wrap: wrap;
 }
+.budget-row .budget-status { margin-left: auto; }
 
 .budget-dept {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: 18px;
+  font-size: 14px;
   letter-spacing: -0.01em;
   font-variation-settings: "opsz" 36;
 }
@@ -151,31 +152,32 @@ button { font-family: var(--sans); cursor: pointer; }
 .budget-cost {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: 30px;
+  font-size: 17px;
   line-height: 1;
   letter-spacing: -0.02em;
-  font-variation-settings: "opsz" 144;
-}
-.budget-divider {
-  font-family: var(--mono);
-  font-size: 14px;
-  color: var(--ink-mute);
+  font-variation-settings: "opsz" 36;
 }
 .budget-budget {
   font-family: var(--mono);
-  font-size: 14px;
+  font-size: 11.5px;
   color: var(--ink-mute);
 }
 .budget-remaining {
-  margin-left: auto;
   font-family: var(--mono);
   font-size: 11px;
   color: var(--ink-mute);
 }
+.budget-yoy-mini { font-family: var(--mono); font-size: 11px; font-weight: 600; }
+.budget-yoy-mini.up { color: var(--full); }
+.budget-yoy-mini.down { color: var(--critical); }
+.budget-yoy-mini.flat { color: var(--ink-mute); }
 .budget-remaining strong { color: var(--ink); font-weight: 500; }
 
 .budget-bar {
-  height: 6px;
+  height: 5px;
+  flex: 1 1 160px;
+  min-width: 120px;
+  align-self: center;
   background: var(--paper-warm);
   border: 1px solid var(--rule);
   position: relative;
@@ -1380,55 +1382,7 @@ button { font-family: var(--sans); cursor: pointer; }
   to   { transform: translateX(0); opacity: 1; }
 }
 
-/* ======== SNAPSHOT MANAGER PANEL (now at bottom) ======== */
-.snapshot-panel {
-  background: var(--paper-light);
-  border-top: 1px solid var(--rule-strong);
-  border-bottom: 1px solid var(--rule);
-  padding: 18px 22px 20px;
-  margin-top: 48px;
-}
-.snapshot-panel h3 {
-  font-family: var(--serif);
-  font-weight: 500;
-  font-size: 16px;
-  margin: 0 0 6px;
-}
-.snapshot-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
-}
-.snapshot-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.04em;
-  background: var(--paper);
-  border: 1px solid var(--rule-strong);
-  padding: 4px 4px 4px 10px;
-}
-.snapshot-pill .x {
-  background: transparent;
-  border: none;
-  color: var(--ink-mute);
-  font-size: 13px;
-  line-height: 1;
-  padding: 0 4px;
-  cursor: pointer;
-}
-.snapshot-pill .x:hover { color: var(--critical); }
-
-.snapshot-summary {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  color: var(--ink-mute);
-  letter-spacing: 0.04em;
-  margin-bottom: 4px;
-}
+/* (snapshot manager panel removed) */
 
 /* ======== HELPER ======== */
 .hidden { display: none !important; }
@@ -1541,12 +1495,12 @@ button { font-family: var(--sans); cursor: pointer; }
 .budget-bar-fill.over { background: var(--critical); }
 
 /* Card grids: gap layout with white rounded cards */
-.cards-grid, .summary-grid, .budget-cards {
+.cards-grid, .summary-grid {
   background: transparent;
   border: none;
   gap: 10px;
 }
-.card, .summary-card, .budget-card {
+.card, .summary-card {
   background: var(--white);
   border: 1px solid var(--rule);
   border-radius: 10px;
@@ -1591,9 +1545,8 @@ button { font-family: var(--sans); cursor: pointer; }
 .cap-bar { border-radius: 3px; }
 .cap-bar-fill { border-radius: 3px; }
 
-/* Modal + snapshot panel on white */
-.modal, .snapshot-panel { background: var(--white); }
-.snapshot-pill { border-radius: 6px; background: var(--white); }
+/* Modal on white */
+.modal { background: var(--white); }
 .toast { border-radius: 4px; }
 /* ======== DAILY HISTORY ADDITIONS ======== */
 .pip.stalled  { background: var(--terracotta); }
@@ -1779,6 +1732,14 @@ button { font-family: var(--sans); cursor: pointer; }
 .fy-num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 .fy-num.cur { font-weight: 600; }
 .fy-none { color: var(--ink-faint); }
+.fy-fill { color: var(--ink-mute); }
+.modal-meta-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-mute);
+  letter-spacing: 0.04em;
+  margin-top: 3px;
+}
 .fy-tag {
   font-family: var(--mono);
   font-size: 8.5px;
@@ -2516,6 +2477,21 @@ function ftefSeriesFromSections(term) {
   return { ftef, sections, enrolled };
 }
 
+/* Course-level capacity for a term we hold CSV snapshots for. The daily
+   workbooks carry enrollment only, so fill rates exist just for terms with
+   snapshots -- in practice, the current Fall. Cancelled sections are already
+   pruned from every loaded snapshot. */
+function courseCapacities(term) {
+  const latest = getLatestSnapshot(term);
+  if (!latest) return null;
+  const caps = {};
+  for (const r of latest.rows) {
+    const code = `${r.Subject} ${r.Course}`;
+    caps[code] = (caps[code] || 0) + (Number(r.Capacity) || 0);
+  }
+  return caps;
+}
+
 /* Every Fall we can compare, oldest first. Section-level data wins over the
    baked-in course-level history for the same term. */
 function fallYears() {
@@ -2764,11 +2740,16 @@ function buildFallCourseTable(years, dayIdx) {
   const codes = new Set();
   years.forEach(y => Object.keys(y.courses).forEach(c => codes.add(c)));
 
+  // Fill rate for the newest Fall only: prior years' workbooks carry no capacity.
+  const caps = courseCapacities(years[years.length - 1].term);
+
   const rows = Array.from(codes).map(code => {
     const vals = years.map(y => valueAt(y.courses[code], dayIdx));
     const cur = vals[vals.length - 1];
     const prev = vals.length > 1 ? vals[vals.length - 2] : null;
-    return { code, vals, cur, prev, diff: (cur === null || prev === null) ? null : cur - prev };
+    const cap = caps ? caps[code] || null : null;
+    const fill = (cap && cur !== null) ? Math.round((cur / cap) * 100) : null;
+    return { code, vals, cur, prev, cap, fill, diff: (cur === null || prev === null) ? null : cur - prev };
   });
 
   // Biggest movers first; courses absent this Fall sink to the bottom.
@@ -2785,6 +2766,7 @@ function buildFallCourseTable(years, dayIdx) {
         <th class="fy-th-course">Course</th>
         ${years.map((y, i) => `<th><span class="fy-swatch" style="background:${YEAR_RAMP[i % YEAR_RAMP.length]}"></span>${y.year}</th>`).join('')}
         <th>vs ${years[years.length - 2].year}</th>
+        <th title="${years[years.length - 1].term} enrolled over capacity, latest snapshot">Fill</th>
         <th class="fy-th-spark">Period</th>
       </tr>
     </thead>
@@ -2799,8 +2781,9 @@ function buildFallCourseTable(years, dayIdx) {
       <td class="fy-course">${r.code}${support ? '<span class="fy-tag">support</span>' : ''}</td>
       ${r.vals.map((v, i) => `<td class="fy-num${i === r.vals.length - 1 ? ' cur' : ''}">${v === null ? '<span class="fy-none">—</span>' : v}</td>`).join('')}
       <td class="fy-num">${deltaHtml(r.cur, r.prev, true)}</td>
+      <td class="fy-num fy-fill">${r.fill === null ? '<span class="fy-none">—</span>' : r.fill + '%'}</td>
       <td class="fy-spark"></td>`;
-    renderCourseYearSpark(years, r.code, tr.querySelector('.fy-spark'), dayIdx);
+    renderCourseYearSpark(years, r.code, tr.querySelector('.fy-spark'), dayIdx, r.cap);
     tr.addEventListener('click', () => openFallCourseModal(years, r.code, dayIdx));
     tbody.appendChild(tr);
   }
@@ -2836,7 +2819,7 @@ function renderYearChart(series, container, opts) {
   const innerH = H - pad.t - pad.b;
 
   const maxDay = Math.max(...series.map(s => s.values.length - 1), 1);
-  const maxVal = Math.max(...series.flatMap(s => s.values.filter(v => v !== null && v !== undefined)), 1);
+  const maxVal = Math.max(...series.flatMap(s => s.values.filter(v => v !== null && v !== undefined)), opts.capacity || 0, 1);
 
   // Nice round axis whatever the scale: headcount in thousands, FTEF in tens,
   // a ratio in the low hundreds.
@@ -2868,6 +2851,15 @@ function renderYearChart(series, container, opts) {
     marker = `<line x1="${x}" x2="${x}" y1="${pad.t}" y2="${H - pad.b}" stroke="var(--ink-faint)" stroke-width="1" stroke-dasharray="3 3"/>`;
   }
 
+  // Capacity reference (dashed: a threshold, not a gridline). Only the newest
+  // Fall has one -- capacity comes from the CSV snapshots, not the workbooks.
+  let capLine = '';
+  if (opts.capacity > 0) {
+    const cy = yAt(opts.capacity);
+    capLine = `<line x1="${pad.l}" x2="${W - pad.r}" y1="${cy}" y2="${cy}" stroke="var(--full)" stroke-width="1" stroke-dasharray="2 3" opacity="0.7"/>`
+            + `<text x="${W - pad.r - 4}" y="${cy - 5}" font-size="9" fill="var(--full)" text-anchor="end">CAP ${opts.capacity}</text>`;
+  }
+
   // Lines, then end labels decluttered so close endpoints stay legible.
   let paths = '';
   const labels = [];
@@ -2893,6 +2885,7 @@ function renderYearChart(series, container, opts) {
   container.innerHTML = `<svg class="fy-chart-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">
     ${grid}
     ${marker}
+    ${capLine}
     ${paths}
     ${labelSvg}
     ${xTicks}
@@ -2905,10 +2898,10 @@ function renderYearChart(series, container, opts) {
     <rect class="fy-hit" x="${pad.l}" y="${pad.t}" width="${innerW}" height="${innerH}" fill="transparent"/>
   </svg>`;
 
-  attachYearCrosshair(container.querySelector('svg'), series, xAt, maxDay, pad, W, opts.metric);
+  attachYearCrosshair(container.querySelector('svg'), series, xAt, maxDay, pad, W, opts.metric, opts.capacity);
 }
 
-function attachYearCrosshair(svg, series, xAt, maxDay, pad, W, metric) {
+function attachYearCrosshair(svg, series, xAt, maxDay, pad, W, metric, capacity) {
   const fmt = (metric && metric.fmt) || (v => Math.round(v));
   const hit = svg.querySelector('.fy-hit');
   const group = svg.querySelector('.fy-crosshair');
@@ -2932,6 +2925,11 @@ function attachYearCrosshair(svg, series, xAt, maxDay, pad, W, metric) {
       const v = valueAt(s.values, Math.min(day, s.values.length - 1));
       return (day < s.values.length && v !== null) ? `${s.label} ${fmt(v)}` : null;
     }).filter(Boolean);
+    if (capacity > 0) {
+      const cs = series.find(s => s.emphasis);
+      const cv = cs ? valueAt(cs.values, Math.min(day, cs.values.length - 1)) : null;
+      if (cv !== null) parts.push(`${Math.round((cv / capacity) * 100)}% full`);
+    }
 
     const px = xAt(day);
     line.setAttribute('x1', px);
@@ -2945,14 +2943,14 @@ function attachYearCrosshair(svg, series, xAt, maxDay, pad, W, metric) {
 }
 
 /* Row sparkline: all years overlaid for one course, tiny. */
-function renderCourseYearSpark(years, code, container, dayIdx) {
+function renderCourseYearSpark(years, code, container, dayIdx, capacity) {
   const W = 130, H = 28, pad = 2;
   const sets = years.map((y, i) => ({ values: y.courses[code] || [], color: YEAR_RAMP[i % YEAR_RAMP.length], emphasis: i === years.length - 1 }))
                     .filter(s => s.values.some(v => v !== null && v !== undefined));
   if (!sets.length) { container.innerHTML = ''; return; }
 
   const maxDay = Math.max(...sets.map(s => s.values.length - 1), 1);
-  const maxVal = Math.max(...sets.flatMap(s => s.values.filter(v => v !== null)), 1);
+  const maxVal = Math.max(...sets.flatMap(s => s.values.filter(v => v !== null)), capacity || 0, 1);
   const xAt = (i) => pad + (i / maxDay) * (W - pad * 2);
   const yAt = (v) => H - pad - (v / maxVal) * (H - pad * 2);
 
@@ -2964,7 +2962,13 @@ function renderCourseYearSpark(years, code, container, dayIdx) {
       fill="none" stroke="${s.color}" stroke-width="${s.emphasis ? 1.6 : 1.1}" stroke-linejoin="round"/>`;
   }).join('');
 
-  container.innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" class="fy-spark-svg">${paths}</svg>`;
+  let capLine = '';
+  if (capacity > 0) {
+    const cy = yAt(capacity);
+    capLine = `<line x1="${pad}" x2="${W - pad}" y1="${cy.toFixed(1)}" y2="${cy.toFixed(1)}" stroke="var(--full)" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.55"/>`;
+  }
+
+  container.innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" class="fy-spark-svg">${capLine}${paths}</svg>`;
 }
 
 /* Course detail: all Falls overlaid, full size, in the existing modal. */
@@ -2977,6 +2981,9 @@ function openFallCourseModal(years, code, dayIdx) {
   const body = document.getElementById('modal-body');
   body.innerHTML = '';
 
+  const caps = courseCapacities(years[years.length - 1].term);
+  const cap = caps ? caps[code] || null : null;
+
   const meta = document.createElement('div');
   meta.className = 'modal-meta-grid';
   years.forEach((y, i) => {
@@ -2984,8 +2991,10 @@ function openFallCourseModal(years, code, dayIdx) {
     const prev = i > 0 ? valueAt(years[i - 1].courses[code], dayIdx) : null;
     const cell = document.createElement('div');
     cell.className = 'modal-meta-cell';
+    const fillNote = (i === years.length - 1 && cap && val !== null)
+      ? `<div class="modal-meta-sub">of ${cap} seats &middot; ${Math.round((val / cap) * 100)}% full</div>` : '';
     cell.innerHTML = `<div class="modal-meta-label"><span class="fy-swatch" style="background:${YEAR_RAMP[i % YEAR_RAMP.length]}"></span>${y.term}</div>
-      <div class="modal-meta-value">${val === null ? '—' : val}${i > 0 ? ` <span class="fy-inline-delta">${deltaHtml(val, prev, false)}</span>` : ''}</div>`;
+      <div class="modal-meta-value">${val === null ? '—' : val}${i > 0 ? ` <span class="fy-inline-delta">${deltaHtml(val, prev, false)}</span>` : ''}</div>${fillNote}`;
     meta.appendChild(cell);
   });
   body.appendChild(meta);
@@ -3003,7 +3012,7 @@ function openFallCourseModal(years, code, dayIdx) {
       emphasis: i === years.length - 1,
     })).filter(s => s.values.length),
     chartArea.querySelector('.fy-chart-host'),
-    { markerDay: dayIdx }
+    { markerDay: dayIdx, capacity: cap }
   );
 
   document.getElementById('modal-overlay').classList.add('open');
@@ -4307,7 +4316,7 @@ function buildBudgetSection() {
   if (deptsWithBudgets.length === 0) {
     wrap.innerHTML = `
       <div class="budget-header">
-        <h2 class="budget-title">Budget Summary</h2>
+        <h2 class="budget-title">Budget</h2>
         <button class="btn btn-ghost btn-small" id="budget-config-link">Configure budget</button>
       </div>
       <div class="budget-empty">No budget configured. Click "Configure budget" to set department budgets and course units.</div>
@@ -4318,7 +4327,7 @@ function buildBudgetSection() {
 
   wrap.innerHTML = `
     <div class="budget-header">
-      <h2 class="budget-title">Budget Summary</h2>
+      <h2 class="budget-title">Budget</h2>
       <button class="btn btn-ghost btn-small" id="budget-config-link">Edit</button>
     </div>
     <div class="budget-cards" id="budget-cards"></div>
@@ -4349,41 +4358,51 @@ function buildBudgetCard(dept, info) {
     else if (cost / budget >= 0.9) { status = 'near'; statusLabel = 'Near limit'; }
   }
 
-  const costStr = (Math.round(cost * 10000) / 10000).toFixed(4);
-  const budgetStr = hasBudget ? budget : '—';
-  const remainingStr = remaining !== null ? (remaining >= 0 ? remaining.toFixed(4) : `(${Math.abs(remaining).toFixed(4)} over)`) : '—';
+  const costStr = (Math.round(cost * 100) / 100).toFixed(2);
+  const costFull = (Math.round(cost * 10000) / 10000).toFixed(4);
+  const budgetStr = hasBudget ? budget : '\u2014';
+  const remainingStr = remaining !== null
+    ? (remaining >= 0 ? `${remaining.toFixed(2)} remaining` : `${Math.abs(remaining).toFixed(2)} over`)
+    : '';
 
   const termLabel = info.termType ? `${info.termType} budget` : 'Budget';
+
+  // The card is a single line now; the arithmetic lives in the hover tooltip.
+  let tip = `${info.sectionCount} section${info.sectionCount !== 1 ? 's' : ''} \u00B7 ${info.pairedCount} paired \u00B7 `
+    + `${info.lcmCount} with LCM (1.5\u00D7) \u00B7 ${info.totalUnits} base units \u00B7 `
+    + `${info.weightedUnits} weighted units \u00F7 15 = ${costFull} FTEF`;
+
+  // Condensed year-over-year; the full sentence joins the tooltip.
+  const yoy = ftefYearOverYear(cost);
+  let yoyHtml = '';
+  if (yoy) {
+    const cls = yoy.delta > 0 ? 'up' : yoy.delta < 0 ? 'down' : 'flat';
+    const sign = yoy.delta > 0 ? '+' : yoy.delta < 0 ? '\u2212' : '';
+    yoyHtml = `<span class="budget-yoy-mini ${cls}">${sign}${Math.abs(yoy.delta).toFixed(2)} vs ${yoy.priorTerm}</span>`;
+    tip += `\n${yoy.priorTerm} stood at ${yoy.priorValue.toFixed(2)} on day ${yoy.dayIdx} of its registration period (${prettyDate(yoy.priorDate)}).`;
+  }
 
   let warning = '';
   if (info.missingUnits.length > 0) {
     const list = info.missingUnits.map(m => `${m.subject} ${m.course}`).join(', ');
-    warning = `<div class="budget-warning">Missing units for: ${list}. Cost factor below excludes these courses.</div>`;
+    warning = `<div class="budget-warning">Missing units for: ${list}. Cost factor excludes these courses.</div>`;
   }
   if (!hasBudget) {
     warning += `<div class="budget-warning">No ${info.termType || 'this term'} budget set for ${dept}.</div>`;
   }
 
+  card.title = tip;
   card.innerHTML = `
-    <div class="budget-card-head">
-      <div class="budget-dept">${dept}</div>
+    <div class="budget-row">
+      <span class="budget-dept">${dept}</span>
+      <span class="budget-figures">
+        <span class="budget-cost">${costStr}</span>
+        <span class="budget-budget">/ ${budgetStr} FTEF</span>
+      </span>
+      <div class="budget-bar"><div class="budget-bar-fill ${status}" style="width:${pct}%"></div></div>
+      <span class="budget-remaining">${termLabel}${remainingStr ? ' \u00B7 <strong>' + remainingStr + '</strong>' : ''}</span>
+      ${yoyHtml}
       ${hasBudget ? `<span class="budget-status ${status}">${statusLabel}</span>` : ''}
-    </div>
-    <div class="budget-figures">
-      <span class="budget-cost">${costStr}</span>
-      <span class="budget-divider">of</span>
-      <span class="budget-budget">${budgetStr}</span>
-      <span class="budget-remaining">${termLabel} &middot; <strong>${remainingStr}</strong> remaining</span>
-    </div>
-    <div class="budget-bar"><div class="budget-bar-fill ${status}" style="width:${pct}%"></div></div>
-    ${ftefYoYHtml(cost)}
-    <div class="budget-breakdown">
-      <span><strong>${info.sectionCount}</strong> section${info.sectionCount !== 1 ? 's' : ''}</span>
-      <span><strong>${info.pairedCount}</strong> paired</span>
-      <span><strong>${info.lcmCount}</strong> with LCM (1.5&times;)</span>
-      <span><strong>${info.totalUnits}</strong> base units</span>
-      <span><strong>${info.weightedUnits}</strong> weighted units</span>
-      <span>&divide; 15 = <strong>${costStr}</strong></span>
     </div>
     ${warning}
   `;
@@ -4554,7 +4573,6 @@ function render() {
   dash.appendChild(buildCourseSummarySection(courseFiltered));
   dash.appendChild(buildCalendarSection(filtered));
   dash.appendChild(buildDeptList(filtered));
-  dash.appendChild(buildSnapshotPanel(dates));
   dash.appendChild(buildFallComparison());
 }
 
@@ -4569,32 +4587,6 @@ function buildEmptyState() {
     <p class="empty-state-files">Expected: <span class="muted">enrollment_&lt;Term&gt;_YYYY-MM-DD.csv</span> or <span class="muted">&lt;Term&gt; Enrollment.xlsx</span></p>
   `;
   return div;
-}
-
-function buildSnapshotPanel(dates) {
-  const panel = document.createElement('div');
-  panel.className = 'snapshot-panel';
-
-  const range = dates.length > 1 ? `${dates[0]} to ${dates[dates.length - 1]}` : dates[0];
-
-  panel.innerHTML = `
-    <h3>Snapshots loaded</h3>
-    <div class="snapshot-summary">${dates.length} snapshot${dates.length !== 1 ? 's' : ''}, range ${range}</div>
-    <div class="snapshot-list" id="snapshot-list"></div>
-  `;
-
-  const list = panel.querySelector('#snapshot-list');
-  for (const d of dates) {
-    const pill = document.createElement('span');
-    pill.className = 'snapshot-pill';
-    pill.innerHTML = `${d} <button class="x" title="Remove this snapshot">&times;</button>`;
-    pill.querySelector('.x').addEventListener('click', (e) => {
-      e.stopPropagation();
-      removeSnapshot(state.currentSemester, d);
-    });
-    list.appendChild(pill);
-  }
-  return panel;
 }
 
 function buildStatsStrip(displayUnits, sectionUnits) {
