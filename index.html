@@ -638,6 +638,23 @@ button { font-family: var(--sans); cursor: pointer; }
   font-size: 12.5px;
   white-space: nowrap;
 }
+.ms-find {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--sans);
+  font-size: 12px;
+  padding: 5px 8px;
+  margin: 0 0 5px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 5px;
+  background: var(--white);
+  color: var(--ink);
+}
+.ms-find:focus { outline: none; border-color: var(--terracotta); }
+.ms-find::placeholder { color: var(--ink-faint); }
+
+.ms-opt[hidden] { display: none; }
 .ms-opt:hover { background: var(--cream); }
 .ms-opt input { accent-color: var(--terracotta); margin: 0; flex: none; }
 .ms-opt .ms-text { flex: 1; overflow: hidden; text-overflow: ellipsis; }
@@ -3032,6 +3049,8 @@ const state = {
   // "All" -- no narrowing at all -- so there is no separate sentinel value.
   filters: {
     departments: ['Mathematics'],  // default focus on the Mathematics department
+    courses: [],                   // "MATH 110A" style course codes
+    instructors: [],               // instructor surnames as they appear in the CSV
     modes: [],                     // 'online' | 'hybrid' | 'inperson'
     centers: [],                   // center names (Ocean, Mission, ...)
     pots: [],                      // "StartDate|EndDate" of a session
@@ -3800,6 +3819,48 @@ function rowMode(r) {
   return 'inperson';
 }
 
+// Course as one value: "MATH 110A", "STAT C1000".
+function courseValue(r) {
+  return `${r.Subject || ''} ${String(r.Course || '').trim()}`.trim();
+}
+
+// "MATH 110A" -> ["MATH", 110, "A"], so 65 sorts before 100A and 100A before 110A
+// instead of the string order that puts 100A first.
+function courseSortParts(v) {
+  const m = String(v).match(/^(\S+)\s+(\d*)(.*)$/);
+  return m ? [m[1], m[2] === '' ? Infinity : parseInt(m[2], 10), m[3]]
+           : [String(v), Infinity, ''];
+}
+
+function compareCourseValues(a, b) {
+  const A = courseSortParts(a), B = courseSortParts(b);
+  return A[0].localeCompare(B[0]) || A[1] - B[1] || A[2].localeCompare(B[2]);
+}
+
+/* The Instructor cell repeats a name once per meeting block and pads the rest
+   with "Staff", so one section arrives as "Nguyen; Staff" or
+   "Bertens; Staff; Staff; Staff". Split it, drop the duplicates, and keep the
+   Staff filler only when it is all there is -- otherwise every menu would be
+   dominated by "Staff" variants and a section taught by one person would not
+   be findable under that person's name. A section can genuinely have two
+   instructors, which is why this returns a list rather than one name. */
+const PLACEHOLDER_INSTRUCTORS = new Set(['staff', 'tba', 'unassigned']);
+
+function instructorNames(r) {
+  const seen = [];
+  for (const part of String(r.Instructor || '').split(';')) {
+    const name = part.trim();
+    if (name && !seen.includes(name)) seen.push(name);
+  }
+  const named = seen.filter(n => !PLACEHOLDER_INSTRUCTORS.has(n.toLowerCase()));
+  if (named.length) return named;
+  return seen.length ? seen : ['TBA'];
+}
+
+function instructorRank(v) {
+  return PLACEHOLDER_INSTRUCTORS.has(String(v).toLowerCase()) ? 1 : 0;
+}
+
 const FILTER_DIMS = {
   departments: {
     label: 'Department',
@@ -3807,6 +3868,27 @@ const FILTER_DIMS = {
     of: r => r.Department || '',
     text: v => v,
     sort: (a, b) => a.text.localeCompare(b.text),
+  },
+  courses: {
+    label: 'Course',
+    plural: 'courses',
+    of: courseValue,
+    text: v => v,
+    findable: true,
+    sort: (a, b) => compareCourseValues(a.value, b.value),
+  },
+  instructors: {
+    label: 'Instructor',
+    plural: 'instructors',
+    // `values` is what the filter actually uses; `of` is the single-value
+    // fallback the rest of the table assumes.
+    values: instructorNames,
+    of: r => instructorNames(r)[0],
+    text: v => v,
+    findable: true,
+    // Real names alphabetically, with the Staff/TBA catch-alls last.
+    sort: (a, b) => instructorRank(a.value) - instructorRank(b.value)
+                    || a.text.localeCompare(b.text),
   },
   modes: {
     label: 'Mode',
@@ -3841,11 +3923,43 @@ const FILTER_DIM_KEYS = Object.keys(FILTER_DIMS);
 // Passing a dimension's own name is what makes the option counts behave like
 // proper facets: each menu counts what you would get by adding that value to
 // whatever else is already selected.
+// Every value a row carries on one dimension. Most dimensions are
+// single-valued; instructors is not, and a row matches if any of its names is
+// selected.
+function dimValues(dim, r) {
+  const def = FILTER_DIMS[dim];
+  return def.values ? def.values(r) : [def.of(r)];
+}
+
+/* Picking a primary course keeps its support course as well, so a paired unit
+   (MATH 110A + 110S) stays whole rather than losing half of itself and
+   quietly changing the FTEF the budget card reports. Picking the support
+   course on its own is left alone -- that is someone deliberately looking at
+   the support sections. */
+let courseSelectionCache = { key: null, expanded: null };
+function expandCourseSelection(sel) {
+  const key = sel.join('\u0000');
+  if (courseSelectionCache.key === key) return courseSelectionCache.expanded;
+  const out = sel.slice();
+  for (const v of sel) {
+    const m = String(v).match(/^(\S+)\s+(.+)$/);
+    if (!m) continue;
+    const found = findPair(m[1], m[2]);
+    if (!found || found.role !== 'primary') continue;
+    const partner = `${found.def.support.subject} ${found.def.support.course}`;
+    if (!out.includes(partner)) out.push(partner);
+  }
+  courseSelectionCache = { key, expanded: out };
+  return out;
+}
+
 function rowMatchesFilters(r, exclude) {
   for (const dim of FILTER_DIM_KEYS) {
     if (dim === exclude) continue;
-    const sel = state.filters[dim];
-    if (sel && sel.length && !sel.includes(FILTER_DIMS[dim].of(r))) return false;
+    let sel = state.filters[dim];
+    if (!sel || !sel.length) continue;
+    if (dim === 'courses') sel = expandCourseSelection(sel);
+    if (!dimValues(dim, r).some(v => sel.includes(v))) return false;
   }
   return true;
 }
@@ -3870,15 +3984,17 @@ function filterOptions(dim) {
   const def = FILTER_DIMS[dim];
   const byValue = new Map();
   for (const r of latestRowsForCurrentSemester()) {
-    const value = def.of(r);
-    if (value === '' || value == null) continue;
-    let entry = byValue.get(value);
-    if (!entry) {
-      entry = { value, text: def.text(value, r), count: 0, total: 0, start: dateValue(r.StartDate) };
-      byValue.set(value, entry);
+    const matches = rowMatchesFilters(r, dim);
+    for (const value of dimValues(dim, r)) {
+      if (value === '' || value == null) continue;
+      let entry = byValue.get(value);
+      if (!entry) {
+        entry = { value, text: def.text(value, r), count: 0, total: 0, start: dateValue(r.StartDate) };
+        byValue.set(value, entry);
+      }
+      entry.total++;
+      if (matches) entry.count++;
     }
-    entry.total++;
-    if (rowMatchesFilters(r, dim)) entry.count++;
   }
   return Array.from(byValue.values()).sort(def.sort);
 }
@@ -5028,6 +5144,11 @@ function buildSummaryCard(unit) {
 let openFilterMenu = null;
 let openFilterScroll = 0;
 
+/* The Course and Instructor menus run to dozens of entries, so those carry a
+   type-to-find box. What was typed lives out here for the same reason the
+   scroll position does: a checkbox click rebuilds the bar underneath it. */
+const filterMenuQuery = {};
+
 /* Ticking several boxes in a row is the normal way to use these menus, and a
    full re-render is not free, so the render is deferred just long enough to
    collect a burst of clicks. The checkbox itself is native, so it responds
@@ -5057,6 +5178,9 @@ function cancelFilterRender() {
 
 function closeFilterMenus() {
   const wasOpen = openFilterMenu;
+  // A menu that is actually closing forgets what was typed into its find box,
+  // so it does not reopen later still showing a narrowed list.
+  if (wasOpen) filterMenuQuery[wasOpen] = '';
   openFilterMenu = null;
   openFilterScroll = 0;
   if (flushFilterRender()) return;
@@ -5091,6 +5215,7 @@ function buildFilterMenu(dim) {
   // hide one the user has already picked -- seeing it sit at 0 is how you work
   // out why the view is empty.
   const visible = options.filter(o => o.count > 0 || selected.includes(o.value));
+  const query = def.findable ? (filterMenuQuery[dim] || '') : '';
 
   const wrap = document.createElement('div');
   wrap.className = 'ms' + (openFilterMenu === dim ? ' open' : '') + (selected.length ? ' sel' : '');
@@ -5104,14 +5229,18 @@ function buildFilterMenu(dim) {
         <span class="ms-hint">Sections</span>
         ${selected.length ? '<button type="button" data-act="clear">Clear</button>' : ''}
       </div>
+      ${def.findable
+        ? `<input type="text" class="ms-find" placeholder="Find ${esc(def.label.toLowerCase())}" value="${esc(query)}" autocomplete="off">`
+        : ''}
       ${visible.length
         ? visible.map(o => `
-        <label class="ms-opt${o.count ? '' : ' ms-zero'}">
+        <label class="ms-opt${o.count ? '' : ' ms-zero'}" data-text="${esc(o.text.toLowerCase())}">
           <input type="checkbox" value="${esc(o.value)}"${selected.includes(o.value) ? ' checked' : ''}>
           <span class="ms-text" title="${esc(o.text)}">${esc(o.text)}</span>
           <span class="ms-count">${o.count}</span>
         </label>`).join('')
         : '<div class="ms-empty">Nothing here matches the other filters.</div>'}
+      ${def.findable ? '<div class="ms-empty ms-empty-find" hidden>Nothing by that name.</div>' : ''}
     </div>`;
 
   const toggle = wrap.querySelector('.ms-toggle');
@@ -5120,6 +5249,7 @@ function buildFilterMenu(dim) {
   toggle.addEventListener('click', e => {
     e.stopPropagation();
     const opening = openFilterMenu !== dim;
+    if (openFilterMenu) filterMenuQuery[openFilterMenu] = '';
     openFilterMenu = opening ? dim : null;
     openFilterScroll = 0;
     // A pending render rebuilds the bar in the right state by itself.
@@ -5139,6 +5269,37 @@ function buildFilterMenu(dim) {
   // closes every menu.
   panel.addEventListener('click', e => e.stopPropagation());
 
+  /* Typing narrows the list by hiding options rather than rebuilding the menu,
+     which is both cheaper than a render and the only way the box keeps focus
+     between keystrokes. */
+  const findBox = panel.querySelector('.ms-find');
+  if (findBox) {
+    const opts = Array.from(panel.querySelectorAll('.ms-opt'));
+    const noMatch = panel.querySelector('.ms-empty-find');
+    const applyQuery = () => {
+      const q = (filterMenuQuery[dim] || '').trim().toLowerCase();
+      let shown = 0;
+      for (const el of opts) {
+        const hit = !q || (el.dataset.text || '').includes(q);
+        el.hidden = !hit;
+        if (hit) shown++;
+      }
+      if (noMatch) noMatch.hidden = !(q && shown === 0 && opts.length);
+    };
+    findBox.addEventListener('input', () => {
+      filterMenuQuery[dim] = findBox.value;
+      applyQuery();
+    });
+    findBox.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      e.stopPropagation();
+      filterMenuQuery[dim] = '';
+      findBox.value = '';
+      applyQuery();
+    });
+    applyQuery();
+  }
+
   const reopen = () => {
     openFilterMenu = dim;
     openFilterScroll = panel.scrollTop;
@@ -5157,6 +5318,7 @@ function buildFilterMenu(dim) {
   const clearBtn = panel.querySelector('[data-act="clear"]');
   if (clearBtn) clearBtn.addEventListener('click', () => {
     state.filters[dim] = [];
+    filterMenuQuery[dim] = '';
     reopen();
   });
 
@@ -5194,15 +5356,27 @@ function buildFiltersBar(allUnits, filtered) {
   while (rest.firstChild) bar.appendChild(rest.firstChild);
 
   if (openFilterMenu) {
+    const dim = openFilterMenu;
     requestAnimationFrame(() => {
-      const panel = document.querySelector(`.ms[data-dim="${openFilterMenu}"] .ms-panel`);
-      if (panel) panel.scrollTop = openFilterScroll;
+      const panel = document.querySelector(`.ms[data-dim="${dim}"] .ms-panel`);
+      if (!panel) return;
+      panel.scrollTop = openFilterScroll;
+      // Someone mid-search was typing when the click rebuilt the bar; put them
+      // back in the box so the next keystroke goes where they expect.
+      const findBox = filterMenuQuery[dim] ? panel.querySelector('.ms-find') : null;
+      if (findBox) {
+        findBox.focus();
+        findBox.setSelectionRange(findBox.value.length, findBox.value.length);
+      }
     });
   }
 
   const resetBtn = bar.querySelector('#filter-reset');
   if (resetBtn) resetBtn.addEventListener('click', () => {
-    for (const dim of FILTER_DIM_KEYS) state.filters[dim] = [];
+    for (const dim of FILTER_DIM_KEYS) {
+      state.filters[dim] = [];
+      filterMenuQuery[dim] = '';
+    }
     state.filters.search = '';
     state.filters.activeFlags = new Set();
     cancelFilterRender();
