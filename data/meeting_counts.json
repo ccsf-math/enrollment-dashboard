@@ -1,0 +1,24 @@
+{
+  "_README": [
+    "Sections that meet on a few set dates rather than every week.",
+    "",
+    "The enrollment export repeats a section's day/time block once per scheduled",
+    "date, so the dashboard already spots a section that meets two or five times.",
+    "What it cannot spot is a section that meets exactly ONCE -- a single block",
+    "looks identical whether it is one final exam or fifteen weekly classes.",
+    "List those here.",
+    "",
+    "Key   the CRN, as a string.",
+    "Value the number of dates the section actually meets,",
+    "      or \"weekly\" to force a section back to a normal weekly pattern",
+    "      when the repeated blocks are misleading.",
+    "",
+    "Keys starting with an underscore are ignored, so this note is safe to keep.",
+    "Run  python3 refresh_dashboard.py  after editing to bake it into index.html.",
+    "",
+    "Example:",
+    "  \"72084\": 1,        MATH 110A-007 meets once, for the final",
+    "  \"70949\": 3,        MATH 108-961 meets three times",
+    "  \"73963\": \"weekly\"  MATH 120-962 really is weekly"
+  ]
+}

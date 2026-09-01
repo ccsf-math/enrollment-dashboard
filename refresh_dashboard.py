@@ -4,8 +4,10 @@
 Run this after you update "Fall 2026 Enrollment.xlsx" or drop a new CSV
 snapshot into data/. It rewrites index.html in place with:
 
-  * the daily enrollment history from the workbook, and
-  * every CSV snapshot in data/ (plus a matching data/manifest.json).
+  * the daily enrollment history from the workbook,
+  * every CSV snapshot in data/ (plus a matching data/manifest.json), and
+  * data/meeting_counts.json, which marks the sections that meet on a few set
+    dates rather than weekly.
 
 You do NOT need this just to see fresh trend lines: dragging the workbook
 onto the open dashboard updates the daily history straight in the browser.
@@ -38,8 +40,38 @@ DATA_START = "/* DAILY-DATA-START */"
 DATA_END = "/* DAILY-DATA-END */"
 FALL_START = "/* FALL-HISTORY-START */"
 FALL_END = "/* FALL-HISTORY-END */"
+MEET_START = "/* MEETING-COUNTS-START */"
+MEET_END = "/* MEETING-COUNTS-END */"
+
+MEETING_COUNTS_FILE = "meeting_counts.json"
 
 MAX_COMPARE_DAYS = 151   # registration open through roughly a month into the term
+
+MEETING_COUNTS_TEMPLATE = """{
+  "_README": [
+    "Sections that meet on a few set dates rather than every week.",
+    "",
+    "The enrollment export repeats a section's day/time block once per",
+    "scheduled date, so the dashboard already spots a section that meets two or",
+    "five times. What it cannot spot is a section that meets exactly ONCE -- a",
+    "single block looks identical whether it is one final exam or fifteen",
+    "weekly classes. List those here.",
+    "",
+    "Key   the CRN, as a string.",
+    "Value the number of dates the section actually meets,",
+    "      or \\"weekly\\" to force a section back to a normal weekly pattern",
+    "      when the repeated blocks are misleading.",
+    "",
+    "Keys starting with an underscore are ignored, so this note is safe to keep.",
+    "Run  python3 refresh_dashboard.py  after editing to bake it into index.html.",
+    "",
+    "Example:",
+    "  \\"72084\\": 1,        MATH 110A-007 meets once, for the final",
+    "  \\"70949\\": 3,        MATH 108-961 meets three times",
+    "  \\"73963\\": \\"weekly\\"  MATH 120-962 really is weekly"
+  ]
+}
+"""
 
 # Courses that have been renumbered, mapped onto the number in use today so a
 # course keeps one continuous line across terms. Statistics moved out of MATH
@@ -237,6 +269,49 @@ def course_history(path):
     }
 
 
+def read_meeting_counts():
+    """CRN -> meeting count for sections that do not meet weekly.
+
+    The export repeats a day/time block once per scheduled date, so a section
+    that meets twice is already visible in the data. A section that meets ONCE
+    is not: one block looks the same as a weekly class. This file carries those,
+    and can also push a section back to "weekly" when the repeats mislead.
+    Underscore keys are notes and are skipped.
+    """
+    path = DATA_DIR / MEETING_COUNTS_FILE
+    if not path.exists():
+        path.write_text(MEETING_COUNTS_TEMPLATE)
+        print(f"  wrote a starter data/{MEETING_COUNTS_FILE} (nothing listed yet)")
+        return {}
+
+    try:
+        raw = json.loads(path.read_text())
+    except json.JSONDecodeError as err:
+        sys.exit(f"data/{MEETING_COUNTS_FILE} is not valid JSON: {err}")
+    if not isinstance(raw, dict):
+        sys.exit(f"data/{MEETING_COUNTS_FILE} should be an object of CRN -> count")
+
+    counts = {}
+    for crn, value in raw.items():
+        crn = str(crn).strip()
+        if crn.startswith("_"):
+            continue    # a note, not a section
+        if isinstance(value, str) and value.strip().lower() == "weekly":
+            counts[crn] = "weekly"
+            continue
+        try:
+            n = int(value)
+        except (TypeError, ValueError):
+            print(f"  skipped CRN {crn} in {MEETING_COUNTS_FILE}: "
+                  f'expected a number or "weekly", got {value!r}')
+            continue
+        if n < 1:
+            print(f"  skipped CRN {crn} in {MEETING_COUNTS_FILE}: count must be 1 or more")
+            continue
+        counts[crn] = n
+    return counts
+
+
 def main():
     if not DASHBOARD.exists():
         sys.exit(f"{DASHBOARD.name} not found next to this script")
@@ -293,6 +368,22 @@ def main():
         )
     else:
         print("  no workbooks found in data/; daily history left as it was")
+
+    # ---- meeting counts for sections that do not meet weekly
+    if MEET_START in html:
+        counts = read_meeting_counts()
+        blob = json.dumps(counts, separators=(",", ":"), sort_keys=True)
+        html = re.sub(
+            re.escape(MEET_START) + ".*?" + re.escape(MEET_END),
+            lambda _: f"{MEET_START}\nwindow.EMBEDDED_MEETING_COUNTS = {blob};\n{MEET_END}",
+            html, flags=re.S,
+        )
+        if counts:
+            print(f"  {len(counts)} section{'' if len(counts) == 1 else 's'} "
+                  f"marked in {MEETING_COUNTS_FILE}")
+    else:
+        print(f"  no meeting-count block in {DASHBOARD.name}; "
+              f"{MEETING_COUNTS_FILE} not applied")
 
     # ---- CSV snapshots
     csvs = sorted(DATA_DIR.glob("*.csv"))
