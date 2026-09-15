@@ -7,7 +7,9 @@ snapshot into data/. It rewrites index.html in place with:
   * the daily enrollment history from the workbook,
   * every CSV snapshot in data/ (plus a matching data/manifest.json), and
   * data/meeting_counts.json, which marks the sections that meet on a few set
-    dates rather than weekly.
+    dates rather than weekly, and
+  * data/faculty_status.json, the full-time / part-time roster behind
+    evaluation committee planning.
 
 You do NOT need this just to see fresh trend lines: dragging the workbook
 onto the open dashboard updates the daily history straight in the browser.
@@ -42,8 +44,11 @@ FALL_START = "/* FALL-HISTORY-START */"
 FALL_END = "/* FALL-HISTORY-END */"
 MEET_START = "/* MEETING-COUNTS-START */"
 MEET_END = "/* MEETING-COUNTS-END */"
+FACULTY_START = "/* FACULTY-STATUS-START */"
+FACULTY_END = "/* FACULTY-STATUS-END */"
 
 MEETING_COUNTS_FILE = "meeting_counts.json"
+FACULTY_STATUS_FILE = "faculty_status.json"
 
 MAX_COMPARE_DAYS = 151   # registration open through roughly a month into the term
 
@@ -312,6 +317,73 @@ def read_meeting_counts():
     return counts
 
 
+def read_faculty_status():
+    """Appointment status per instructor: full-time or part-time.
+
+    The enrollment export says nothing about appointments, so this file is the
+    only source. It matters for evaluation planning, where a full-time
+    instructor needs three committee members and a part-time one needs two, and
+    only full-time faculty may serve.
+
+    A surname is not always a person: two people can share one. "split" carries
+    those, mapping CRNs to the individual who teaches them, so their schedules
+    do not merge into one impossible timetable. Underscore keys are notes.
+    """
+    path = DATA_DIR / FACULTY_STATUS_FILE
+    if not path.exists():
+        print(f"  no data/{FACULTY_STATUS_FILE}; faculty status left as it was")
+        return None
+
+    try:
+        raw = json.loads(path.read_text())
+    except json.JSONDecodeError as err:
+        sys.exit(f"data/{FACULTY_STATUS_FILE} is not valid JSON: {err}")
+    if not isinstance(raw, dict):
+        sys.exit(f"data/{FACULTY_STATUS_FILE} should be an object")
+
+    valid = {"full-time", "part-time"}
+    status = {}
+    for name, value in (raw.get("status") or {}).items():
+        name = str(name).strip()
+        if not name or name.startswith("_"):
+            continue
+        v = str(value).strip().lower()
+        if v not in valid:
+            print(f'  skipped {name!r} in {FACULTY_STATUS_FILE}: expected '
+                  f'"full-time" or "part-time", got {value!r}')
+            continue
+        status[name] = v
+
+    split = {}
+    for name, entries in (raw.get("split") or {}).items():
+        if not isinstance(entries, list):
+            print(f"  skipped split {name!r}: expected a list of people")
+            continue
+        people, catch_alls = [], 0
+        for e in entries:
+            if not isinstance(e, dict) or "status" not in e:
+                print(f"  skipped an entry under split {name!r}: needs a status")
+                continue
+            v = str(e["status"]).strip().lower()
+            if v not in valid:
+                print(f"  skipped an entry under split {name!r}: bad status {e['status']!r}")
+                continue
+            crns = [str(c).strip() for c in e.get("crns", [])]
+            if not crns:
+                catch_alls += 1
+            people.append({"name": str(e.get("name") or name),
+                           "status": v, "crns": crns})
+        if catch_alls > 1:
+            sys.exit(f"split {name!r} has {catch_alls} entries without CRNs; "
+                     f"at most one can be the catch-all")
+        if people:
+            split[name] = people
+
+    names = {str(k): str(v) for k, v in (raw.get("names") or {}).items()
+             if not str(k).startswith("_")}
+    return {"status": status, "split": split, "names": names}
+
+
 def main():
     if not DASHBOARD.exists():
         sys.exit(f"{DASHBOARD.name} not found next to this script")
@@ -384,6 +456,26 @@ def main():
     else:
         print(f"  no meeting-count block in {DASHBOARD.name}; "
               f"{MEETING_COUNTS_FILE} not applied")
+
+    # ---- full-time / part-time roster
+    if FACULTY_START in html:
+        roster = read_faculty_status()
+        if roster is not None:
+            blob = json.dumps(roster, separators=(",", ":"), sort_keys=True)
+            html = re.sub(
+                re.escape(FACULTY_START) + ".*?" + re.escape(FACULTY_END),
+                lambda _: f"{FACULTY_START}\nwindow.EMBEDDED_FACULTY_STATUS = {blob};\n{FACULTY_END}",
+                html, flags=re.S,
+            )
+            ft = sum(1 for v in roster["status"].values() if v == "full-time")
+            pt = len(roster["status"]) - ft
+            extra = (f", {len(roster['split'])} shared surname"
+                     f"{'' if len(roster['split']) == 1 else 's'}"
+                     if roster["split"] else "")
+            print(f"  faculty status: {ft} full-time, {pt} part-time{extra}")
+    else:
+        print(f"  no faculty-status block in {DASHBOARD.name}; "
+              f"{FACULTY_STATUS_FILE} not applied")
 
     # ---- CSV snapshots
     csvs = sorted(DATA_DIR.glob("*.csv"))
