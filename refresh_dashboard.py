@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 """Refresh the enrollment dashboard's baked-in data.
 
-Run this after you update "Fall 2026 Enrollment.xlsx" or drop a new CSV
-snapshot into data/. It rewrites index.html in place with:
+Run this after you update a term workbook (for example "Fall 2026
+Enrollment.xlsx", "Spring 2027 Enrollment.xlsx" or "Summer 2027
+Enrollment.xlsx") or drop a new CSV snapshot into data/. It rewrites
+index.html in place with:
 
-  * the daily enrollment history from the workbook,
+  * the daily enrollment history from each workbook,
+  * course-level history for every Fall, Spring and Summer workbook, which
+    drives the year-over-year comparison (Fall vs prior Falls, Spring vs
+    prior Springs, Summer vs prior Summers),
   * every CSV snapshot in data/ (plus a matching data/manifest.json), and
   * data/meeting_counts.json, which marks the sections that meet on a few set
     dates rather than weekly, and
@@ -40,8 +45,13 @@ DATA_DIR = HERE / "data"
 
 DATA_START = "/* DAILY-DATA-START */"
 DATA_END = "/* DAILY-DATA-END */"
-FALL_START = "/* FALL-HISTORY-START */"
-FALL_END = "/* FALL-HISTORY-END */"
+HIST_START = "/* TERM-HISTORY-START */"
+HIST_END = "/* TERM-HISTORY-END */"
+# Older dashboards carried Fall only, under these markers. They are upgraded
+# to the TERM markers the first time this script runs.
+LEGACY_FALL_START = "/* FALL-HISTORY-START */"
+LEGACY_FALL_END = "/* FALL-HISTORY-END */"
+SEASONS = ("Fall", "Spring", "Summer", "Winter")
 MEET_START = "/* MEETING-COUNTS-START */"
 MEET_END = "/* MEETING-COUNTS-END */"
 FACULTY_START = "/* FACULTY-STATUS-START */"
@@ -209,7 +219,7 @@ def read_workbook(path):
 
 
 def course_history(path):
-    """Course-level daily totals for the Fall-to-Fall comparison.
+    """Course-level daily totals for the year-over-year comparison.
 
     Readings are indexed by calendar days since registration opened rather than
     by column position, because the workbooks skip the odd day. Missing days
@@ -393,11 +403,11 @@ def main():
 
     # Terms the dashboard shows section cards for. Only these need section-level
     # daily detail; prior years are carried as course totals, which is all the
-    # Fall-to-Fall section uses and a fraction of the size.
+    # year-over-year section uses and a fraction of the size.
     live_terms = {t for t in (term_from_filename(p.name) for p in DATA_DIR.glob("*.csv")) if t}
 
     # ---- daily history from every workbook in data/
-    payload, fall_hist = {}, {}
+    payload, term_hist = {}, {}
     for xlsx in sorted(DATA_DIR.glob("*.xlsx")):
         if xlsx.name.startswith("~$"):
             continue    # Excel lock file
@@ -412,24 +422,34 @@ def main():
             print(f"  {term}: {len(parsed['series'])} sections, {len(parsed['dates'])} days "
                   f"({parsed['dates'][0]} to {parsed['dates'][-1]})")
 
-        if term.startswith("Fall "):
+        if term.split(" ")[0] in SEASONS:
             hist = course_history(xlsx)
             if hist:
-                fall_hist[term] = hist
+                term_hist[term] = hist
                 if term not in live_terms:
                     n = len(next(iter(hist["courses"].values())))
                     print(f"  {term}: {len(hist['courses'])} courses over {n} days "
                           f"from {hist['start']} (comparison only)")
 
-    # ---- course-level history behind the Fall-to-Fall section
-    if fall_hist and FALL_START in html:
-        fall_blob = json.dumps(fall_hist, separators=(",", ":"))
+    # ---- course-level history behind the year-over-year section
+    if HIST_START not in html and LEGACY_FALL_START in html:
         html = re.sub(
-            re.escape(FALL_START) + ".*?" + re.escape(FALL_END),
-            lambda _: f"{FALL_START}\nwindow.EMBEDDED_FALL_HISTORY = {fall_blob};\n{FALL_END}",
+            re.escape(LEGACY_FALL_START) + ".*?" + re.escape(LEGACY_FALL_END),
+            lambda _: f"{HIST_START}\nwindow.EMBEDDED_TERM_HISTORY = {{}};\n{HIST_END}",
             html, flags=re.S,
         )
-        print(f"  Fall-to-Fall comparison: {', '.join(sorted(fall_hist))}")
+    if term_hist and HIST_START in html:
+        hist_blob = json.dumps(term_hist, separators=(",", ":"))
+        html = re.sub(
+            re.escape(HIST_START) + ".*?" + re.escape(HIST_END),
+            lambda _: f"{HIST_START}\nwindow.EMBEDDED_TERM_HISTORY = {hist_blob};\n{HIST_END}",
+            html, flags=re.S,
+        )
+        for season in SEASONS:
+            terms = sorted((t for t in term_hist if t.startswith(season + " ")),
+                           key=lambda t: int(t.split(" ")[1]))
+            if terms:
+                print(f"  {season}-to-{season} comparison: {', '.join(terms)}")
 
     if payload:
         blob = json.dumps(payload, separators=(",", ":"))
